@@ -15,7 +15,7 @@ class LoginPresenter : BasePresenter<LoginView>{
     lateinit var fbCallbackManager: CallbackManager
 
 
-    fun login(){
+    fun loginWithFacebook(){
         loginView.let {
             it.getFacebookLoginButton()
             it.getFacebookLoginButton().registerCallback(fbCallbackManager, object : FacebookCallback<LoginResult> {

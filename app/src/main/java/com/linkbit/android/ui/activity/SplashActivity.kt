@@ -30,6 +30,7 @@ class SplashActivity : AppCompatActivity(), LoginView {
 
         presenter= LoginPresenter()
         presenter.addView(this)
+        fbLoginButton.setOnClickListener({presenter.loginWithFacebook()})
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
