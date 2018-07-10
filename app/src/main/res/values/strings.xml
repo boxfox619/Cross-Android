@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">LinkBitApplication</string>
 
-
+<string name="facebook_signin_button_text">페이스북으로 로그인</string>
     <string name="facebook_app_id">402524810151096</string>
     <string name="fb_login_protocol_scheme">fb402524810151096</string>
 </resources>

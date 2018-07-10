@@ -15,6 +15,7 @@ import com.linkbit.android.ui.view.LoginView
 class SplashActivity : AppCompatActivity(), LoginView {
 
     lateinit var presenter: LoginPresenter
+    lateinit var  mAuth : FirebaseAuth
     lateinit var fbLoginButton: LoginButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,7 @@ class SplashActivity : AppCompatActivity(), LoginView {
 
         fbLoginButton = LoginButton(this)
         fbLoginButton.setReadPermissions("email", "public_profile")
+        mAuth = FirebaseAuth.getInstance()
 
         presenter= LoginPresenter()
         presenter.addView(this)
@@ -36,7 +38,7 @@ class SplashActivity : AppCompatActivity(), LoginView {
     }
 
     override fun getFirebaseAuth(): FirebaseAuth {
-        return FirebaseAuth.getInstance()
+        return mAuth
     }
     override fun getContext(): Context {
         return this
