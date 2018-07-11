@@ -8,6 +8,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <android.support.constraint.Guideline
+            android:id="@+id/horizontal_guideline"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.03" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/vertical_guideline"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.03" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_coin_statistics"
         android:layout_width="0dp"
@@ -28,7 +42,7 @@
             android:textColor="#555555"
             app:layout_constraintBottom_toTopOf="@id/recyclerview_coin_statistics"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="@id/vertical_guideline"/>
 
         <TextView
             android:id="@+id/tv_linkbit_address"
@@ -38,7 +52,14 @@
             android:textSize="7pt"
             app:layout_constraintBottom_toTopOf="@id/tv_total_krw"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="@id/vertical_guideline"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintTop_toTopOf="@id/horizontal_guideline"
+            app:layout_constraintStart_toStartOf="@id/vertical_guideline" />
 
     </android.support.constraint.ConstraintLayout>
 
