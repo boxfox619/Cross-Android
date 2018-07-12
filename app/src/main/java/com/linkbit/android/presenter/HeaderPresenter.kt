@@ -1,5 +1,6 @@
 package com.linkbit.android.presenter
 
+import com.linkbit.android.ui.view.header.HeaderCardViewHolder
 import com.linkbit.android.ui.view.header.HeaderView
 
 
@@ -9,8 +10,7 @@ class HeaderPresenter : BasePresenter<HeaderView>{
 
     fun load() {
         headerView.let {
-
-            it.getRecyclerView().a
+            it.getRecyclerView().
         }
     }
 
