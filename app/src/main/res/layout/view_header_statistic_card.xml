@@ -56,6 +56,7 @@
             app:layout_constraintEnd_toEndOf="@id/end_guideline">
 
             <ImageView
+                android:id="@+id/iv_statistic_icon"
                 android:layout_margin="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -94,22 +95,22 @@
             android:textStyle="bold"
             android:textColor="#AAffffff"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
-            app:layout_constraintBottom_toTopOf="@id/tv_statistic_krw"
+            app:layout_constraintBottom_toTopOf="@id/tv_statistic_price"
             android:text="ETH"/>
 
         <TextView
-            android:id="@+id/tv_statistic_count"
+            android:id="@+id/tv_statistic_balance"
             android:textColor="@android:color/white"
             android:textSize="13dp"
             android:textStyle="bold"
             android:text="123"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/tv_statistic_krw"
-            app:layout_constraintBottom_toTopOf="@id/tv_statistic_krw"/>
+            app:layout_constraintStart_toStartOf="@id/tv_statistic_price"
+            app:layout_constraintBottom_toTopOf="@id/tv_statistic_price"/>
         
         <TextView
-            android:id="@+id/tv_statistic_krw"
+            android:id="@+id/tv_statistic_price"
             android:textColor="@android:color/white"
             android:textSize="13dp"
             android:textStyle="bold"
