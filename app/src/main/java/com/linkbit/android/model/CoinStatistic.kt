@@ -1,6 +1,6 @@
-package com.linkbit.android.ui.view.header;
+package com.linkbit.android.model;
 
-class HeaderCardViewModel {
+class CoinStatistic {
     var symbol : String
         get() = field
     var money : String
