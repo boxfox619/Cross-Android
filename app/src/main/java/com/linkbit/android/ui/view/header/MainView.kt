@@ -6,6 +6,7 @@ import com.linkbit.android.ui.base.BaseView
 
 interface MainView : BaseView{
     fun getStatisticRecyclerView() : RecyclerView
+    fun getWalletRecylcerView(): RecyclerView
     fun getAddressTextView(): TextView
     fun getTotalBalanceTextView(): TextView
 

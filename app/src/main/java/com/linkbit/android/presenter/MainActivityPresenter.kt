@@ -17,13 +17,16 @@ class MainActivityPresenter : BasePresenter<MainView>{
 
     fun load() {
         mainView.let {
+            walletAdapter = WalletAdapter(it.getContext())
             headerAdapter = HeaderCardAdapter(it.getContext())
+            it.getWalletRecylcerView().adapter = walletAdapter
             it.getStatisticRecyclerView().adapter = headerAdapter
             Connector(it.getContext()).walletAPI.getWalletList().enqueue((object: Response<List<Wallet>>(it.getContext()!!){
                 override fun setResponseData(code: Int, walletList: List<Wallet>?) {
                     var coinMap = HashMap<String, CoinStatistic>()
                     var totalExchangeBalace: Double = 0.toDouble()
                     walletList!!.forEach {
+                        walletAdapter.addItem(it)
                         totalExchangeBalace += it.krBalance
                         var statistic = coinMap.get(it.coinSymbol)
                         if (statistic == null) {

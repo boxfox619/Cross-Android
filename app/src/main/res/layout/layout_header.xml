@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent" />
         
         <TextView
-            android:id="@+id/tv_total_krw"
+            android:id="@+id/tv_total_exchange_balance"
             android:text="103,321,968.52"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="7pt"
-            app:layout_constraintBottom_toTopOf="@id/tv_total_krw"
+            app:layout_constraintBottom_toTopOf="@id/tv_total_exchange_balance"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/vertical_guideline"/>
 
