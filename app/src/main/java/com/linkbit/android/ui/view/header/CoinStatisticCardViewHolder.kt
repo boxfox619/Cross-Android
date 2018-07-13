@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.linkbit.android.R
 import java.text.DecimalFormat
 
-class HeaderCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class CoinStatisticCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     constructor(context: Context, parent: ViewGroup) : this(LayoutInflater.from(context).inflate(R.layout.view_header_statistic_card, parent, false))
 
@@ -35,7 +35,7 @@ class HeaderCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     fun setCoinIcon(symbol: String){
-        var url = String.format("%s/assets/%s.png", itemView.context.getString(R.string.host), symbol?.toUpperCase())
+        var url = String.format("%s/assets/%s.png", itemView.context.getString(R.string.server_host), symbol?.toUpperCase())
         Glide.with(itemView.context).load(url).into(itemView.findViewById(R.id.iv_statistic_icon))
     }
 }

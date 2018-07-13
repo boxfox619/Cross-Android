@@ -13,7 +13,7 @@ import retrofit2.converter.gson.*
  */
 class Connector(context: Context) {
 
-    val walletApi: WalletApi
+    val walletAPI: WalletApi
 
     init {
         val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -31,7 +31,7 @@ class Connector(context: Context) {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
-        walletApi = retrofit.create(WalletApi::class.java)
+        walletAPI = retrofit.create(WalletApi::class.java)
     }
 
 }

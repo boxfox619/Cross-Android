@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">LinkBitApplication</string>
-    <string name="host">http://ccshow.co.kr</string>
+    <string name="server_host">http://ccshow.co.kr</string>
 
 <string name="facebook_signin_button_text">페이스북으로 로그인</string>
     <string name="facebook_app_id">402524810151096</string>
