@@ -3,42 +3,37 @@ package com.linkbit.android.ui.activity
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
-import android.widget.TextView
 import com.linkbit.android.R
-import com.linkbit.android.presenter.MainActivityPresenter
-import com.linkbit.android.ui.view.header.MainView
-import kotlinx.android.synthetic.main.activity_main.*
+import com.linkbit.android.presenter.MainHeaderPresenter
+import com.linkbit.android.ui.view.header.HeaderCardAdapter
+import com.linkbit.android.ui.view.header.MainHeaderView
 import kotlinx.android.synthetic.main.layout_header.*
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : AppCompatActivity(), MainHeaderView {
 
-    lateinit var mainActivityPresenter: MainActivityPresenter
+    lateinit var mainHeaderPresenter: MainHeaderPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mainActivityPresenter = MainActivityPresenter()
-        mainActivityPresenter.addView(this)
+        mainHeaderPresenter = MainHeaderPresenter()
+        mainHeaderPresenter.addView(this)
     }
 
     override fun getContext(): Context {
         return this
     }
 
-    override fun getAddressTextView(): TextView {
-        return tv_linkbit_address
+    override fun setLinkbitAddress(address: String) {
+        tv_linkbit_address.text = address
     }
 
-    override fun getTotalBalanceTextView(): TextView {
-        return tv_total_exchange_balance
-    }
-    override fun getWalletRecylcerView(): RecyclerView {
-        return recyclerview_wallet
+    override fun setTotalExchangeBalance(balance: String) {
+        tv_total_exchange_balance.text = balance
     }
 
-    override fun getStatisticRecyclerView(): RecyclerView {
-        return recyclerview_coin_statistics
+    override fun setStatisticRecyclerAdapter(adapter: HeaderCardAdapter) {
+        recyclerview_coin_statistics.adapter = adapter
     }
 }
