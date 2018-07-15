@@ -9,7 +9,9 @@ import rx.subjects.BehaviorSubject
 
 class FriendService private constructor() {
 
-    private object Holder { val INSTANCE = FriendService() }
+    private object Holder {
+        val INSTANCE = FriendService()
+    }
 
     companion object {
         val instance: FriendService by lazy { Holder.INSTANCE }
@@ -17,14 +19,18 @@ class FriendService private constructor() {
 
     val friendList: BehaviorSubject<List<User>> = BehaviorSubject.create()
 
-    fun loadFriendList(ctx: Context) : Observable<List<User>> {
+    fun loadFriendList(ctx: Context): Observable<List<User>> {
         return Observable.create({
             val subscriber = it
             Connector(ctx).friendApi.friendList().enqueue((object : Response<List<User>>(ctx) {
                 override fun setResponseData(code: Int, loadedFriendList: List<User>?) {
-                    friendList.onNext(loadedFriendList)
-                    subscriber.onNext(loadedFriendList)
-                    subscriber.onComplete()
+                    if (isSuccess(code)) {
+                        friendList.onNext(loadedFriendList)
+                        subscriber.onNext(loadedFriendList)
+                        subscriber.onComplete()
+                    } else {
+                        subscriber.onError(null)
+                    }
                 }
             }))
         })

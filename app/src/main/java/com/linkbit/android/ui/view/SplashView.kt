@@ -6,8 +6,9 @@ import com.google.firebase.auth.FirebaseAuth
 
 
 interface SplashView : BaseView{
-    fun getFirebaseAuth() : FirebaseAuth
     fun getFacebookLoginButton() : LoginButton
     fun showProgress(): Unit
+    fun hideProgress(): Unit
+    fun showErrorMessage(msg: String): Unit
     fun finishSplash(): Unit
 }

@@ -15,7 +15,6 @@ import com.linkbit.android.ui.view.SplashView
 class SplashActivity : AppCompatActivity(), SplashView {
 
     lateinit var presenter: SplashPresenter
-    lateinit var  mAuth : FirebaseAuth
     lateinit var fbLoginButton: LoginButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,11 +25,11 @@ class SplashActivity : AppCompatActivity(), SplashView {
 
         fbLoginButton = LoginButton(this)
         fbLoginButton.setReadPermissions("email", "public_profile")
-        mAuth = FirebaseAuth.getInstance()
 
         presenter= SplashPresenter()
         presenter.addView(this)
         fbLoginButton.setOnClickListener({presenter.loginWithFacebook()})
+        presenter.init()
     }
 
     override fun showProgress() {
@@ -41,13 +40,17 @@ class SplashActivity : AppCompatActivity(), SplashView {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun hideProgress() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showErrorMessage(msg: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
         presenter.fbCallbackManager.onActivityResult(requestCode, resultCode, data)
-    }
-
-    override fun getFirebaseAuth(): FirebaseAuth {
-        return mAuth
     }
     override fun getContext(): Context {
         return this
