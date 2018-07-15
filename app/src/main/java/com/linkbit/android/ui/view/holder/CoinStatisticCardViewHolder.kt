@@ -1,4 +1,4 @@
-package com.linkbit.android.ui.view.header;
+package com.linkbit.android.ui.view.holder;
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

@@ -1,8 +1,6 @@
-package com.linkbit.android.ui.view.header;
+package com.linkbit.android.ui.view;
 
-import android.support.v7.widget.RecyclerView
-import android.widget.TabHost
-import android.widget.TextView
+import com.linkbit.android.adapter.HeaderCardAdapter
 import com.linkbit.android.ui.base.BaseView
 
 interface MainHeaderView : BaseView{

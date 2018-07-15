@@ -5,11 +5,18 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.linkbit.android.R
 import com.linkbit.android.presenter.MainHeaderPresenter
-import com.linkbit.android.ui.view.header.HeaderCardAdapter
-import com.linkbit.android.ui.view.header.MainHeaderView
+import com.linkbit.android.adapter.HeaderCardAdapter
+import com.linkbit.android.adapter.WalletAdapter
+import com.linkbit.android.ui.view.MainHeaderView
+import com.linkbit.android.ui.view.MainTabView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_header.*
+import android.R.attr.host
+import android.widget.TabHost
 
-class MainActivity : AppCompatActivity(), MainHeaderView {
+
+
+class MainActivity : AppCompatActivity(), MainHeaderView, MainTabView {
 
     lateinit var mainHeaderPresenter: MainHeaderPresenter
 
@@ -19,6 +26,17 @@ class MainActivity : AppCompatActivity(), MainHeaderView {
 
         mainHeaderPresenter = MainHeaderPresenter()
         mainHeaderPresenter.addView(this)
+    }
+
+    override fun setWalletListAdapter(adapter: WalletAdapter) {
+        recyclerview_wallet.adapter = adapter
+    }
+
+    override fun addTabSpec(tabName: String, contentId: Int, indicator: String) {
+        val spec = tab_host.newTabSpec(tabName)
+        spec.setContent(contentId)
+        spec.setIndicator(indicator)
+        tab_host.addTab(spec)
     }
 
     override fun getContext(): Context {

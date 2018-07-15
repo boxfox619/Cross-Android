@@ -1,4 +1,4 @@
-package com.linkbit.android.ui.view.header;
+package com.linkbit.android.ui.view.holder;
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.linkbit.android.R
-import org.w3c.dom.Text
 import java.text.DecimalFormat
 
 class WalletCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
