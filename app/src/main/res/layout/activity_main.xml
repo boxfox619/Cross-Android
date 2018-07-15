@@ -64,10 +64,10 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerview_transaction"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="This is tab 2" />
+                        android:layout_height="match_parent"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -76,10 +76,10 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerview_friend"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="This is tab 3" />
+                        android:layout_height="match_parent"/>
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>

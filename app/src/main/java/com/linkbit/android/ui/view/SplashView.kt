@@ -5,7 +5,9 @@ import com.linkbit.android.ui.base.BaseView
 import com.google.firebase.auth.FirebaseAuth
 
 
-interface LoginView : BaseView{
+interface SplashView : BaseView{
     fun getFirebaseAuth() : FirebaseAuth
     fun getFacebookLoginButton() : LoginButton
+    fun showProgress(): Unit
+    fun finishSplash(): Unit
 }

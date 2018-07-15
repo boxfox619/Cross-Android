@@ -9,12 +9,12 @@ import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.widget.LoginButton
 import com.google.firebase.auth.FirebaseAuth
 import com.linkbit.android.R
-import com.linkbit.android.presenter.LoginPresenter
-import com.linkbit.android.ui.view.LoginView
+import com.linkbit.android.presenter.SplashPresenter
+import com.linkbit.android.ui.view.SplashView
 
-class SplashActivity : AppCompatActivity(), LoginView {
+class SplashActivity : AppCompatActivity(), SplashView {
 
-    lateinit var presenter: LoginPresenter
+    lateinit var presenter: SplashPresenter
     lateinit var  mAuth : FirebaseAuth
     lateinit var fbLoginButton: LoginButton
 
@@ -28,9 +28,17 @@ class SplashActivity : AppCompatActivity(), LoginView {
         fbLoginButton.setReadPermissions("email", "public_profile")
         mAuth = FirebaseAuth.getInstance()
 
-        presenter= LoginPresenter()
+        presenter= SplashPresenter()
         presenter.addView(this)
         fbLoginButton.setOnClickListener({presenter.loginWithFacebook()})
+    }
+
+    override fun showProgress() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun finishSplash() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {

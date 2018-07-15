@@ -6,7 +6,7 @@ import com.linkbit.android.model.CoinStatistic
 import com.linkbit.android.ui.base.AbstractRecyclerAdapter
 import com.linkbit.android.ui.view.holder.CoinStatisticCardViewHolder
 
-class HeaderCardAdapter(context: Context) : AbstractRecyclerAdapter<CoinStatistic, CoinStatisticCardViewHolder>(context) {
+class CoinStatisticAdapter(context: Context) : AbstractRecyclerAdapter<CoinStatistic, CoinStatisticCardViewHolder>(context) {
     override fun onItemViewType(position: Int): Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinStatisticCardViewHolder {
