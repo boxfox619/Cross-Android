@@ -4,6 +4,7 @@ import android.content.Context
 import com.linkbit.android.model.Wallet
 import com.linkbit.android.network.Connector
 import com.linkbit.android.network.Response
+import rx.subjects.BehaviorSubject
 
 class WalletService private constructor() {
 
@@ -13,18 +14,13 @@ class WalletService private constructor() {
         val instance: WalletService by lazy { Holder.INSTANCE }
     }
 
-    lateinit var walletList: List<Wallet>
+    val walletList: BehaviorSubject<List<Wallet>> = BehaviorSubject.create()
 
-    fun getWalletList(ctx: Context, callback: (result: List<Wallet>) -> Unit) {
-        if(walletList==null || walletList.isEmpty()){
-            Connector(ctx).walletAPI.getWalletList().enqueue((object: Response<List<Wallet>>(ctx){
-                override fun setResponseData(code: Int, walletList: List<Wallet>?) {
-                    WalletService.instance.walletList = walletList!!
-                    callback(walletList)
-                }
-            }))
-        }else{
-            callback(walletList)
-        }
+    fun loadWalletList(ctx: Context) {
+        Connector(ctx).walletAPI.getWalletList().enqueue((object : Response<List<Wallet>>(ctx) {
+            override fun setResponseData(code: Int, newWalletList: List<Wallet>?) {
+                walletList.onNext(newWalletList)
+            }
+        }))
     }
 }
