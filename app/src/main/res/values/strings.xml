@@ -2,6 +2,8 @@
     <string name="app_name">LinkBitApplication</string>
     <string name="server_host">http://ccshow.co.kr</string>
 
+    <string name="activity_name_create_wallet">지갑 생성</string>
+
     <string name="facebook_signin_button_text">페이스북으로 로그인</string>
     <string name="facebook_app_id">402524810151096</string>
     <string name="fb_login_protocol_scheme">fb402524810151096</string>
@@ -12,4 +14,7 @@
 
     <string name="err_fail_login">로그인 실패</string>
     <string name="err_fail_load_init_data">초기 데이터 로드 실패</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

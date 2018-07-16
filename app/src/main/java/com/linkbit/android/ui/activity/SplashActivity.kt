@@ -1,16 +1,20 @@
 package com.linkbit.android.ui.activity
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.widget.LoginButton
-import com.google.firebase.auth.FirebaseAuth
 import com.linkbit.android.R
 import com.linkbit.android.presenter.SplashPresenter
+import com.linkbit.android.ui.fragment.CoinListFragment
 import com.linkbit.android.ui.view.SplashView
+import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity(), SplashView {
 
@@ -33,19 +37,23 @@ class SplashActivity : AppCompatActivity(), SplashView {
     }
 
     override fun showProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun finishSplash() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        tv_splash_error.visibility = INVISIBLE
+        progress_splash.visibility = VISIBLE
     }
 
     override fun hideProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        progress_splash.visibility = INVISIBLE
+    }
+
+    override fun finishSplash() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     override fun showErrorMessage(msg: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        hideProgress()
+        tv_splash_error.visibility = VISIBLE
+        tv_splash_error.text = msg
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {

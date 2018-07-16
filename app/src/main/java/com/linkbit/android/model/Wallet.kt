@@ -6,7 +6,8 @@ class Wallet {
     var owner: String? = null
     var ownerName: String? = null
     var name: String? = null
-    var coinSymbol: String? = null
+    lateinit var coinSymbol: String
+    var subCoinSymbolList: ArrayList<String> = ArrayList()
     var coinName: String? = null
     var description: String? = null
     var originalAddress: String? = null
