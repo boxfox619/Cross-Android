@@ -15,7 +15,6 @@ import com.linkbit.android.ui.view.MainTabView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_header.*
 
-
 class MainActivity : AppCompatActivity(), MainHeaderView, MainTabView {
 
     lateinit var mainHeaderPresenter: MainHeaderPresenter

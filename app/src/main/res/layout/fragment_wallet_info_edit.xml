@@ -205,7 +205,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/border_edittext_background"
-                    android:inputType="textPassword"
+                    android:inputType="numberPassword"
                     android:padding="7dp"
                     android:textSize="14dp" />
 
@@ -224,7 +224,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/border_edittext_background"
-                    android:inputType="textPassword"
+                    android:inputType="numberPassword"
                     android:padding="7dp"
                     android:textSize="14dp" />
             </LinearLayout>
