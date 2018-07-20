@@ -10,17 +10,25 @@ class CreateWalletPresenter : BasePresenter<CreateWalletView> {
     lateinit var createWalletView: CreateWalletView
     lateinit var wallet: Wallet
 
-    fun baseCoinAction(item: Coin){
+    fun baseCoinUpdate(item: Coin){
         wallet.coinSymbol = item.symbol
     }
 
-    fun subCoinAction(item: Coin){
+    fun subCoinUpdate(item: Coin){
         val subCoinList = wallet.subCoinSymbolList
         if(subCoinList.contains(item.symbol)){
             subCoinList.removeAt(subCoinList.indexOf(item.symbol))
         }else{
             subCoinList.add(item.symbol)
         }
+    }
+
+    fun walletUpdate(wallet: Wallet){
+        this.wallet = wallet
+    }
+
+    fun onNext(){
+        // @TODO
     }
 
     override fun addView(view: CreateWalletView) {

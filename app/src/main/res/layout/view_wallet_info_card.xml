@@ -72,29 +72,29 @@
 
     <ImageView
         android:id="@+id/iv_wallet_qr"
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:background="#ffffff"
+        android:src="@drawable/ic_qr_code_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline" />
 
     <ImageView
         android:id="@+id/iv_wallet_nfc"
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginRight="10dp"
-        android:background="#ffffff"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_nfc_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/iv_wallet_qr"
         app:layout_constraintTop_toBottomOf="@id/guideline" />
 
     <ImageView
         android:id="@+id/iv_wallet_address"
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginRight="10dp"
-        android:background="#ffffff"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_account_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/iv_wallet_nfc"
         app:layout_constraintTop_toBottomOf="@id/guideline" />

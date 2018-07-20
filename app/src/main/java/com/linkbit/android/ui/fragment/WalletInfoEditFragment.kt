@@ -13,6 +13,7 @@ import com.linkbit.android.presenter.WalletInfoEditPresenter
 import com.linkbit.android.ui.view.WalletInfoEditView
 
 class WalletInfoEditFragment : Fragment(), WalletInfoEditView {
+    lateinit var wallet: Wallet
     lateinit var confirmListener: (wallet: Wallet) -> Unit
     lateinit var walletInfoEditPresenter: WalletInfoEditPresenter
 
@@ -21,6 +22,7 @@ class WalletInfoEditFragment : Fragment(), WalletInfoEditView {
         val view = inflater.inflate(R.layout.fragment_wallet_info_edit, container, false)
         this.walletInfoEditPresenter = WalletInfoEditPresenter()
         this.walletInfoEditPresenter.addView(this)
+        this.walletInfoEditPresenter.wallet = wallet
         return view
     }
 
@@ -30,8 +32,9 @@ class WalletInfoEditFragment : Fragment(), WalletInfoEditView {
 
     companion object {
         @JvmStatic
-        fun newInstance(confirmListener: (wallet: Wallet) -> Unit) =
+        fun newInstance(wallet: Wallet, confirmListener: (Any) -> Unit) =
                 WalletInfoEditFragment().apply {
+                    this.wallet = wallet
                     this.confirmListener = confirmListener
                 }
     }
