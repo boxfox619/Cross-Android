@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
     android:orientation="vertical"
     tools:context=".ui.fragment.CreateWalletFinishFragment">
 
@@ -26,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
         </LinearLayout>
 
     </LinearLayout>
@@ -46,26 +48,25 @@
             android:textColor="@color/colorAccentDark" />
 
         <TextView
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="5dp"
-            android:textSize="15dp"
-            android:layout_weight="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cross 이더리움 지갑"/>
+            android:layout_marginBottom="5dp"
+            android:layout_weight="bold"
+            android:text="Cross 이더리움 지갑"
+            android:textColor="@android:color/black"
+            android:textSize="15dp" />
 
         <TextView
-            android:text="ICO 투자 목적으로 사용"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="ICO 투자 목적으로 사용" />
 
         <LinearLayout
-            android:layout_margin="30dp"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:background="@drawable/pouple_card_background">
-
+            android:layout_height="190dp">
+            <include layout="@layout/view_wallet_info_card"/>
         </LinearLayout>
+
 
     </LinearLayout>
 
