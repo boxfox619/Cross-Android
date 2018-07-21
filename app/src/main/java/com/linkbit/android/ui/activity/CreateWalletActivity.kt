@@ -24,7 +24,7 @@ class CreateWalletActivity : AppCompatActivity(), CreateWalletView {
         actionBar.title = getString(R.string.activity_name_create_wallet)
         presenter = CreateWalletPresenter()
         presenter.addView(this)
-        btn_createwallet_next.setOnClickListener{ presenter.onNext() }
+        btn_createwallet_next.setOnClickListener { presenter.onNext() }
     }
 
     override fun getContext(): Context {
@@ -36,7 +36,7 @@ class CreateWalletActivity : AppCompatActivity(), CreateWalletView {
         when (step) {
             0 -> fragment = CoinListFragment.newInstance { presenter.baseCoinUpdate(it) }
             1 -> fragment = CoinListFragment.newInstance { presenter.subCoinUpdate(it) }
-            2 -> fragment = WalletInfoEditFragment.newInstance(presenter.wallet, {presenter.walletUpdate(it as Wallet)})
+            2 -> fragment = WalletInfoEditFragment.newInstance(presenter.wallet, { presenter.walletUpdate(it as Wallet) })
         }
         if (fragment != null) {
             val ft = fragmentManager.beginTransaction()

@@ -7,37 +7,39 @@ import com.linkbit.android.ui.view.CreateWalletView
 
 class CreateWalletPresenter : BasePresenter<CreateWalletView> {
 
-    lateinit var createWalletView: CreateWalletView
+    lateinit var view: CreateWalletView
     lateinit var wallet: Wallet
+    var step: Int = 0
 
-    fun baseCoinUpdate(item: Coin){
+    fun baseCoinUpdate(item: Coin) {
         wallet.coinSymbol = item.symbol
     }
 
-    fun subCoinUpdate(item: Coin){
+    fun subCoinUpdate(item: Coin) {
         val subCoinList = wallet.subCoinSymbolList
-        if(subCoinList.contains(item.symbol)){
+        if (subCoinList.contains(item.symbol)) {
             subCoinList.removeAt(subCoinList.indexOf(item.symbol))
-        }else{
+        } else {
             subCoinList.add(item.symbol)
         }
     }
 
-    fun walletUpdate(wallet: Wallet){
+    fun walletUpdate(wallet: Wallet) {
         this.wallet = wallet
     }
 
-    fun onNext(){
-        // @TODO
+    fun onNext() {
+        step += 1
+        view.setStep(step)
     }
 
     override fun addView(view: CreateWalletView) {
-        this.createWalletView = view
+        this.view = view
         this.wallet = Wallet()
     }
 
     override fun removeView() {
-        this.createWalletView == null
+        this.view == null
     }
 }
 

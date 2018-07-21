@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">LinkBitApplication</string>
     <string name="server_host">http://ccshow.co.kr</string>
+    <string name="url_asset">/assets/=</string>
 
     <string name="activity_name_create_wallet">지갑 생성</string>
 

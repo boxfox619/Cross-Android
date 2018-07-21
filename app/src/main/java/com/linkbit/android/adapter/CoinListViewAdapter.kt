@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.linkbit.android.R
+import com.linkbit.android.helper.URLHelper
 import com.linkbit.android.model.Coin
 
 
 import com.linkbit.android.ui.fragment.CoinListFragment.OnListFragmentInteractionListener
 import com.linkbit.android.ui.view.holder.CoinListViewHolder
+import java.security.AccessController.getContext
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
@@ -39,7 +41,7 @@ class CoinListViewAdapter(
 
     override fun onBindViewHolder(holder: CoinListViewHolder, position: Int) {
         val item = mValues[position]
-        var url = String.format("%s/assets/%s.png", holder.mView.context.getString(R.string.server_host), item.symbol?.toUpperCase())
+        val url = URLHelper.createAssetUrl(holder.itemView.context, item.symbol)
         Glide.with(holder.mView).load(url).into(holder.iconView)
         holder.mContentView.text = item.name
 

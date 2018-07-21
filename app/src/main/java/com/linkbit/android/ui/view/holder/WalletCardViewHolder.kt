@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.linkbit.android.R
+import com.linkbit.android.helper.URLHelper
 import java.text.DecimalFormat
 
 class WalletCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -35,7 +36,7 @@ class WalletCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     fun setCoinIcon(symbol: String){
-        var url = String.format("%s/assets/%s.png", itemView.context.getString(R.string.server_host), symbol?.toUpperCase())
+        val url = URLHelper.createAssetUrl(itemView.context, symbol)
         Glide.with(itemView.context).load(url).into(itemView.findViewById(R.id.iv_wallet_icon))
     }
 }
