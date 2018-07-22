@@ -29,14 +29,15 @@ class WalletInfoEditFragment : Fragment(), WalletInfoEditView {
         this.walletInfoEditPresenter = WalletInfoEditPresenter()
         this.walletInfoEditPresenter.addView(this)
         this.walletInfoEditPresenter.wallet = wallet
+        et_wallet_info_edit_name
         this.initView()
         return view
     }
 
     fun initView(){
-        layout_createwallet_coin_list.addView(createCoinItem(wallet.coin))
+        layout_wallet_info_edit_coin_list.addView(createCoinItem(wallet.coin))
         wallet.subCoinList.forEach({
-            layout_createwallet_coin_list.addView(createCoinItem(it))
+            layout_wallet_info_edit_coin_list.addView(createCoinItem(it))
         })
         //@TODO wallet info editng function
     }

@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/layout_createwallet_coin_list"
+            android:id="@+id/layout_wallet_info_edit_coin_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -47,7 +47,7 @@
                 android:textSize="12dp" />
 
             <EditText
-                android:id="@+id/et_createwallet_name"
+                android:id="@+id/et_wallet_info_edit_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -64,7 +64,7 @@
                 android:textSize="12dp" />
 
             <EditText
-                android:id="@+id/et_createwallet_description"
+                android:id="@+id/et_wallet_info_edit_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -98,7 +98,7 @@
                 android:textSize="12dp" />
 
             <EditText
-                android:id="@+id/et_createwallet_password"
+                android:id="@+id/et_wallet_info_edit_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -116,7 +116,7 @@
                 android:textSize="12dp" />
 
             <EditText
-                android:id="@+id/et_createwallet_password_confirm"
+                android:id="@+id/et_wallet_info_edit_password_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -142,14 +142,14 @@
                 android:orientation="vertical">
 
                 <CheckBox
-                    android:id="@+id/checkbox_createwallet_wallet_info"
+                    android:id="@+id/checkbox_wallet_info_edit_wallet_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="지갑 정보 공개"
                     android:textSize="13dp" />
 
                 <CheckBox
-                    android:id="@+id/checkbox_createwallet_owner_info"
+                    android:id="@+id/checkbox_wallet_info_edit_owner_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="소유자 정보 공개"
@@ -175,7 +175,7 @@
                 android:textColor="@color/colorAccentDark" />
 
             <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/spinner_createwallet_secure"
+                android:id="@+id/spinner_wallet_info_edit_secure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -200,7 +200,7 @@
                     android:textSize="12dp" />
 
                 <EditText
-                    android:id="@+id/et_createwallet_pin"
+                    android:id="@+id/et_wallet_info_edit_pin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -219,7 +219,7 @@
                     android:textSize="12dp" />
 
                 <EditText
-                    android:id="@+id/et_createwallet_pin_confirm"
+                    android:id="@+id/et_cwallet_info_edit_pin_confirm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -230,7 +230,7 @@
             </LinearLayout>
         </LinearLayout>
         <Button
-            android:id="@+id/btn_createwallet"
+            android:id="@+id/btn_wallet_info_edit"
             android:layout_marginRight="10dp"
             android:text="지갑 생성하기"
             android:layout_width="wrap_content"
