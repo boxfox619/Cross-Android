@@ -4,21 +4,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 import com.linkbit.android.R
-import com.linkbit.android.helper.URLHelper
 import com.linkbit.android.model.Coin
 
 
-import com.linkbit.android.ui.fragment.CoinListFragment.OnListFragmentInteractionListener
 import com.linkbit.android.ui.view.holder.CoinListViewHolder
-import java.security.AccessController.getContext
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
- */
 class CoinListViewAdapter(
         private val mValues: List<Coin>,
         private val mListener: (item: Coin)->Unit?)
@@ -41,9 +32,8 @@ class CoinListViewAdapter(
 
     override fun onBindViewHolder(holder: CoinListViewHolder, position: Int) {
         val item = mValues[position]
-        val url = URLHelper.createAssetUrl(holder.itemView.context, item.symbol)
-        Glide.with(holder.mView).load(url).into(holder.iconView)
-        holder.mContentView.text = item.name
+        holder.setIcon(item.symbol)
+        holder.setCoinText(item.symbol, item.name)
 
         with(holder.mView) {
             tag = item

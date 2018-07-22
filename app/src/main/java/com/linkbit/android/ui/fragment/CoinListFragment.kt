@@ -23,8 +23,7 @@ class CoinListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_coin_list, container, false)
-
-        // Set the adapter
+        //@TODO item select event
         if (view is RecyclerView) {
             with(view) {
                 adapter = CoinListViewAdapter(items, listener)

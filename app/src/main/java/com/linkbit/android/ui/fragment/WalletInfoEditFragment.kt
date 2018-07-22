@@ -29,19 +29,21 @@ class WalletInfoEditFragment : Fragment(), WalletInfoEditView {
         this.walletInfoEditPresenter = WalletInfoEditPresenter()
         this.walletInfoEditPresenter.addView(this)
         this.walletInfoEditPresenter.wallet = wallet
+        this.initView()
         return view
     }
 
     fun initView(){
-        layout_createwallet_coin_list.addView(createCoinItem(wallet.coinSymbol))
-        wallet.subCoinSymbolList.forEach({
+        layout_createwallet_coin_list.addView(createCoinItem(wallet.coin))
+        wallet.subCoinList.forEach({
             layout_createwallet_coin_list.addView(createCoinItem(it))
         })
+        //@TODO wallet info editng function
     }
-    fun createCoinItem(symbol: String): View {
+    fun createCoinItem(coin: Coin): View {
         var view = LayoutInflater.from(getContext()).inflate(R.layout.view_wallet_info_card, null, false)
-        val url = URLHelper.createAssetUrl(getContext(), symbol)
-        //@TODO coin symbol & name
+        val url = URLHelper.createAssetUrl(getContext(), coin.symbol)
+        view.findViewById<TextView>(R.id.tv_coin_desc).text = String.format("%s - %s", coin.symbol, coin.name)
         Glide.with(getContext()).load(url).into(view.findViewById<ImageView>(R.id.iv_coin_icon))
         return view
     }
