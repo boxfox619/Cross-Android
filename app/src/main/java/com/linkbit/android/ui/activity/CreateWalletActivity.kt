@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.linkbit.android.R
 import com.linkbit.android.model.Wallet
+import com.linkbit.android.model.WalletEditModel
 import com.linkbit.android.presenter.CreateWalletPresenter
 import com.linkbit.android.ui.fragment.CoinListFragment
 import com.linkbit.android.ui.fragment.WalletInfoEditFragment
@@ -36,7 +37,7 @@ class CreateWalletActivity : AppCompatActivity(), CreateWalletView {
         when (step) {
             0 -> fragment = CoinListFragment.newInstance { presenter.baseCoinUpdate(it) }
             1 -> fragment = CoinListFragment.newInstance { presenter.subCoinUpdate(it) }
-            2 -> fragment = WalletInfoEditFragment.newInstance(presenter.wallet, { presenter.walletUpdate(it as Wallet) })
+            2 -> fragment = WalletInfoEditFragment.newInstance(presenter.wallet, { presenter.walletUpdate(it as WalletEditModel) })
         }
         if (fragment != null) {
             val ft = fragmentManager.beginTransaction()
