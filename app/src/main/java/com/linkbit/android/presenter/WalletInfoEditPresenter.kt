@@ -1,33 +1,33 @@
 package com.linkbit.android.presenter
 
-import com.linkbit.android.model.Wallet
+import com.linkbit.android.model.WalletEditModel
 import com.linkbit.android.ui.view.WalletInfoEditView
 
 
-class WalletInfoEditPresenter : BasePresenter<WalletInfoEditView> {
+class WalletInfoEditPresenter (wallet: WalletEditModel, confirmListener: (wallet: WalletEditModel) -> Unit) : BasePresenter<WalletInfoEditView> {
 
     lateinit var view: WalletInfoEditView
-    lateinit var wallet: Wallet
+    val wallet: WalletEditModel = wallet
+    private val confirmListener: (wallet: WalletEditModel) -> Unit = confirmListener
 
-    fun setWalletName(name: String){
+    fun setPassword(password: String): Boolean{
+        wallet.password = password
+        return true
+    }
+
+    fun setPasswordConfim(password: String): Boolean{
+        return this.wallet.password.equals(password)
+    }
+
+    fun onFinish(name: String, desc: String){
         wallet.name = name
-    }
-
-    fun setWalletDescription(desc: String){
         wallet.description = desc
-    }
-
-    fun setPassword(password: String){
-
-    }
-
-    fun setPasswordConfim(password: String){
-
+        confirmListener(wallet)
     }
 
     override fun addView(view: WalletInfoEditView) {
         this.view = view
-        this.wallet = Wallet()
+        this.view.initView(this.wallet)
     }
     override fun removeView() {
         this.view == null
