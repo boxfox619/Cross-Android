@@ -31,6 +31,10 @@ class CreateWalletPresenter : BasePresenter<CreateWalletView> {
         this.wallet = wallet
     }
 
+    fun canNext(state: Boolean){
+
+    }
+
     fun onNext() {
         step += 1
         view.setStep(step)

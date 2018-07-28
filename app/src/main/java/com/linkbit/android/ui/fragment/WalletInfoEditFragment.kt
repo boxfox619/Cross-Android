@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 
@@ -27,7 +26,6 @@ class WalletInfoEditFragment : Fragment(), WalletInfoEditView {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_wallet_info_edit, container, false)
         this.walletInfoEditPresenter.addView(this)
-        btn_wallet_info_edit.setOnClickListener({onFinish()})
         return view
     }
 
@@ -42,12 +40,8 @@ class WalletInfoEditFragment : Fragment(), WalletInfoEditView {
         })
         et_wallet_info_edit_password.addTextChangedListener(SimpleTextChangeListener({walletInfoEditPresenter.setPassword(it)}))
         et_wallet_info_edit_password_confirm.addTextChangedListener(SimpleTextChangeListener({walletInfoEditPresenter.setPasswordConfim(it)}))
-    }
-
-    fun onFinish() {
-        val name = et_wallet_info_edit_name.text.toString()
-        val desc = et_wallet_info_edit_description.text.toString()
-        walletInfoEditPresenter.onFinish(name, desc)
+        et_wallet_info_edit_name.addTextChangedListener(SimpleTextChangeListener{walletInfoEditPresenter.setName(it)})
+        et_wallet_info_edit_description.addTextChangedListener(SimpleTextChangeListener{walletInfoEditPresenter.setDescription(it)})
     }
 
     fun createCoinItem(coin: Coin): View {
@@ -64,9 +58,9 @@ class WalletInfoEditFragment : Fragment(), WalletInfoEditView {
 
     companion object {
         @JvmStatic
-        fun newInstance(wallet: WalletEditModel, confirmListener: (Any) -> Unit) =
+        fun newInstance(wallet: WalletEditModel, canNext: (state: Boolean) -> Unit) =
                 WalletInfoEditFragment().apply {
-                    walletInfoEditPresenter = WalletInfoEditPresenter(wallet, confirmListener)
+                    this.walletInfoEditPresenter = WalletInfoEditPresenter(wallet, canNext)
                 }
     }
 }

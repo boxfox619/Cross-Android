@@ -4,11 +4,12 @@ import com.linkbit.android.model.WalletEditModel
 import com.linkbit.android.ui.view.WalletInfoEditView
 
 
-class WalletInfoEditPresenter (wallet: WalletEditModel, confirmListener: (wallet: WalletEditModel) -> Unit) : BasePresenter<WalletInfoEditView> {
+class WalletInfoEditPresenter (wallet: WalletEditModel, canNext : (state:Boolean)->Unit) : BasePresenter<WalletInfoEditView> {
 
     lateinit var view: WalletInfoEditView
     val wallet: WalletEditModel = wallet
-    private val confirmListener: (wallet: WalletEditModel) -> Unit = confirmListener
+    var passwordConfirm: String = ""
+    val canNext: (state:Boolean) -> Unit = canNext
 
     fun setPassword(password: String): Boolean{
         wallet.password = password
@@ -16,13 +17,25 @@ class WalletInfoEditPresenter (wallet: WalletEditModel, confirmListener: (wallet
     }
 
     fun setPasswordConfim(password: String): Boolean{
-        return this.wallet.password.equals(password)
+        val equal = this.wallet.password.equals(password)
+        passwordConfirm = password
+        return equal
     }
 
-    fun onFinish(name: String, desc: String){
-        wallet.name = name
-        wallet.description = desc
-        confirmListener(wallet)
+    fun setName(name: String) {
+        this.wallet.name = name
+    }
+
+    fun setDescription(desc: String) {
+        this.wallet.description = desc
+    }
+
+    fun checkFormValidation(){
+        var vaild = false
+        if(wallet.password.equals(passwordConfirm)&&wallet.name.length > 0){
+            vaild = true
+        }
+        canNext(vaild)
     }
 
     override fun addView(view: WalletInfoEditView) {
