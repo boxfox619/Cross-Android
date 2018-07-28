@@ -2,7 +2,6 @@ package com.linkbit.android.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.LinearLayout
@@ -37,6 +36,7 @@ class CoinListViewAdapter(
 
     override fun onBindViewHolder(holder: CoinListViewHolder, position: Int) {
         val item = mValues[position]
+        holder.setSelected(selectedIndexList.contains(position))
         holder.setIcon(item.symbol)
         holder.setCoinText(item.symbol, item.name)
 

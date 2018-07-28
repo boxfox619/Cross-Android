@@ -2,8 +2,7 @@ package com.linkbit.android.ui.view.holder
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.bumptech.glide.Glide
 import com.linkbit.android.helper.URLHelper
 import kotlinx.android.synthetic.main.fragment_coin.view.*
@@ -14,6 +13,16 @@ class CoinListViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
 
     override fun toString(): String {
         return super.toString() + " '" + mContentView.text + "'"
+    }
+
+    fun setSelected(state: Boolean){
+        if(mContentView is LinearLayout){
+            val view = mContentView.getChildAt(0)
+            if(view is CheckBox)
+                view.isChecked = state
+            if(view is RadioButton)
+                view.isChecked = state
+        }
     }
 
     fun setIcon(symbol: String) {
