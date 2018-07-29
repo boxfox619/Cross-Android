@@ -15,10 +15,12 @@ class CoinListPresenter (wallet: WalletEditModel, isValid : (state:Boolean)->Uni
     val wallet: WalletEditModel = wallet
     val adapter: CoinListViewAdapter
     val isValid: (state:Boolean) -> Unit = isValid
+    var selectionMode: SelectionMode
     private var items = ArrayList<Coin>()
 
     init {
         adapter = CoinListViewAdapter(items, {itemSeleced(it)}, selectionMode)
+        this.selectionMode = selectionMode
     }
 
     fun load(){
@@ -33,6 +35,15 @@ class CoinListPresenter (wallet: WalletEditModel, isValid : (state:Boolean)->Uni
     }
 
     fun itemSeleced(item: Coin){
+        if(selectionMode == SelectionMode.SINGLE){
+            wallet.coin = item
+        }else{
+            if(wallet.subCoinList.contains(item)){
+                wallet.subCoinList.remove(item)
+            }else{
+                wallet.subCoinList.add(item)
+            }
+        }
     }
 
     override fun addView(view: CoinListView) {
