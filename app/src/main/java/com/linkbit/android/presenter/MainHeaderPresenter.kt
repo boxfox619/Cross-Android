@@ -22,10 +22,10 @@ class MainHeaderPresenter : BasePresenter<MainHeaderView> {
             var totalExchangeBalace: Double = 0.toDouble()
             walletList!!.forEach {
                 totalExchangeBalace += it.krBalance
-                var statistic = coinMap.get(it.coinSymbol)
+                var statistic = coinMap.get(it.coin)
                 if (statistic == null) {
-                    statistic = CoinStatistic(it.coinSymbol!!, "KRW", it.coinName!!, it.balance!!, it.krBalance.toLong())
-                    coinMap.put(it.coinSymbol!!, statistic)
+                    statistic = CoinStatistic(it.coin!!, "KRW", it.coinName!!, it.balance!!, it.krBalance.toLong())
+                    coinMap.put(it.coin!!, statistic)
                 } else {
                     statistic.balance = statistic.balance + it.balance!!
                     statistic.price = (statistic.price + it.krBalance).toLong()

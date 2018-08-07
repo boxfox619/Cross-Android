@@ -21,6 +21,7 @@ class CoinListPresenter (wallet: WalletEditModel, isValid : (state:Boolean)->Uni
     init {
         adapter = CoinListViewAdapter(items, {itemSeleced(it)}, selectionMode)
         this.selectionMode = selectionMode
+        isValid(false)
     }
 
     fun load(){
@@ -37,12 +38,14 @@ class CoinListPresenter (wallet: WalletEditModel, isValid : (state:Boolean)->Uni
     fun itemSeleced(item: Coin){
         if(selectionMode == SelectionMode.SINGLE){
             wallet.coin = item
+            isValid(true)
         }else{
             if(wallet.subCoinList.contains(item)){
                 wallet.subCoinList.remove(item)
             }else{
                 wallet.subCoinList.add(item)
             }
+            isValid(wallet.subCoinList.size > 0)
         }
     }
 

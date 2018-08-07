@@ -1,6 +1,5 @@
 package com.linkbit.android.ui.activity
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -12,8 +11,8 @@ import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.widget.LoginButton
 import com.linkbit.android.R
 import com.linkbit.android.presenter.SplashPresenter
-import com.linkbit.android.ui.fragment.CoinListFragment
 import com.linkbit.android.ui.view.SplashView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity(), SplashView {
@@ -33,7 +32,13 @@ class SplashActivity : AppCompatActivity(), SplashView {
         presenter= SplashPresenter()
         presenter.addView(this)
         fbLoginButton.setOnClickListener({presenter.loginWithFacebook()})
+
         presenter.init()
+        Picasso.get()
+                .load(R.drawable.ic_app_icon)
+                .resize(1600,1600)
+                .onlyScaleDown()
+                .into(iv_splash_logo)
     }
 
     override fun showProgress() {

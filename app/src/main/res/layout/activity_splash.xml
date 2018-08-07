@@ -36,9 +36,9 @@
         app:layout_constraintGuide_percent="0.5"  />
 
     <ImageView
+        android:id="@+id/iv_splash_logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_app_icon"
         app:layout_constraintDimensionRatio="H,5:1"
         app:layout_constraintBottom_toBottomOf="@id/center_guideline"
         app:layout_constraintLeft_toLeftOf="parent"

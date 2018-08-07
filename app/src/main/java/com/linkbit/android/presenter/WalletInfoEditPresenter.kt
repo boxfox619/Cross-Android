@@ -9,25 +9,29 @@ class WalletInfoEditPresenter (wallet: WalletEditModel, canNext : (state:Boolean
     lateinit var view: WalletInfoEditView
     val wallet: WalletEditModel = wallet
     var passwordConfirm: String = ""
-    val canNext: (state:Boolean) -> Unit = canNext
+    val isValid: (state:Boolean) -> Unit = canNext
 
     fun setPassword(password: String): Boolean{
         wallet.password = password
+        checkFormValidation()
         return true
     }
 
     fun setPasswordConfim(password: String): Boolean{
         val equal = this.wallet.password.equals(password)
         passwordConfirm = password
+        checkFormValidation()
         return equal
     }
 
     fun setName(name: String) {
         this.wallet.name = name
+        checkFormValidation()
     }
 
     fun setDescription(desc: String) {
         this.wallet.description = desc
+        checkFormValidation()
     }
 
     fun checkFormValidation(){
@@ -35,7 +39,7 @@ class WalletInfoEditPresenter (wallet: WalletEditModel, canNext : (state:Boolean
         if(wallet.password.equals(passwordConfirm)&&wallet.name.length > 0){
             vaild = true
         }
-        canNext(vaild)
+        isValid(vaild)
     }
 
     override fun addView(view: WalletInfoEditView) {

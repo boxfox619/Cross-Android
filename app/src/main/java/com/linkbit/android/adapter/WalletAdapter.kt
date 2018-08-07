@@ -16,10 +16,10 @@ class WalletAdapter(context: Context) : AbstractRecyclerAdapter<Wallet, WalletCa
     override fun onBindViewHolder(holder: WalletCardViewHolder, position: Int) {
         var model = getItem(position)
         holder.setName(model!!.name!!)
-        holder.setSymbol(model!!.coinSymbol!!)
+        holder.setSymbol(model!!.coin!!)
         holder.setMoney("KRW")
         holder.setBalance(model!!.balance!!)
         holder.setExchangeBalance(model!!.krBalance!!)
-        holder.setCoinIcon(model!!.coinSymbol!!)
+        holder.setCoinIcon(model!!.coin!!)
     }
 }

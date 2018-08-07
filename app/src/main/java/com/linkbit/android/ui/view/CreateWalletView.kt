@@ -5,4 +5,5 @@ import com.linkbit.android.ui.base.BaseView
 
 interface CreateWalletView : BaseView{
     fun setStep(step: Int)
+    fun nextButtonEnabled(state: Boolean)
 }

@@ -31,6 +31,10 @@ class CreateWalletActivity : AppCompatActivity(), CreateWalletView {
         return this
     }
 
+    override fun nextButtonEnabled(state: Boolean) {
+        btn_createwallet_next.isEnabled = state
+    }
+
     override fun setStep(step: Int) {
         var fragment: Fragment? = null
         when (step) {
