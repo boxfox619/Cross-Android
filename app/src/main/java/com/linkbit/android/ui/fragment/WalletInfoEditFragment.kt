@@ -58,9 +58,9 @@ class WalletInfoEditFragment : Fragment(), WalletInfoEditView {
 
     companion object {
         @JvmStatic
-        fun newInstance(wallet: WalletEditModel, canNext: (state: Boolean) -> Unit) =
+        fun newInstance(wallet: WalletEditModel, isValid: (state: Boolean) -> Unit) =
                 WalletInfoEditFragment().apply {
-                    this.walletInfoEditPresenter = WalletInfoEditPresenter(wallet, canNext)
+                    this.walletInfoEditPresenter = WalletInfoEditPresenter(wallet, isValid)
                 }
     }
 }

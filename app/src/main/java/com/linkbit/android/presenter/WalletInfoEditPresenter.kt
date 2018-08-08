@@ -4,22 +4,26 @@ import com.linkbit.android.model.WalletEditModel
 import com.linkbit.android.ui.view.WalletInfoEditView
 
 
-class WalletInfoEditPresenter (wallet: WalletEditModel, canNext : (state:Boolean)->Unit) : BasePresenter<WalletInfoEditView> {
+class WalletInfoEditPresenter (wallet: WalletEditModel, isValid : (state:Boolean)->Unit) : BasePresenter<WalletInfoEditView> {
 
     lateinit var view: WalletInfoEditView
     val wallet: WalletEditModel = wallet
-    var passwordConfirm: String = ""
-    val isValid: (state:Boolean) -> Unit = canNext
+    var password: String = ""
+    val isValid: (state:Boolean) -> Unit = isValid
 
     fun setPassword(password: String): Boolean{
-        wallet.password = password
+        this.password = password
         checkFormValidation()
         return true
     }
 
     fun setPasswordConfim(password: String): Boolean{
         val equal = this.wallet.password.equals(password)
-        passwordConfirm = password
+        if (this.password.equals(password) && this.password.length > 0) {
+            wallet.password = password
+        }else{
+            wallet.password = ""
+        }
         checkFormValidation()
         return equal
     }
@@ -35,16 +39,17 @@ class WalletInfoEditPresenter (wallet: WalletEditModel, canNext : (state:Boolean
     }
 
     fun checkFormValidation(){
-        var vaild = false
-        if(wallet.password.equals(passwordConfirm)&&wallet.name.length > 0){
-            vaild = true
-        }
-        isValid(vaild)
+        var valid = false
+        valid = valid && wallet.name.length > 0
+        valid = valid && wallet.description != null
+        valid = valid && wallet.password.length > 0
+        isValid(valid)
     }
 
     override fun addView(view: WalletInfoEditView) {
         this.view = view
         this.view.initView(this.wallet)
+        isValid(false)
     }
     override fun removeView() {
         this.view == null
