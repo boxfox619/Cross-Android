@@ -1,52 +1,51 @@
 package com.linkbit.android.data.network
 
-import com.linkbit.android.data.model.TransactionStatus
 import retrofit2.http.GET
-import com.linkbit.android.data.model.wallet.Wallet
 import retrofit2.http.POST
 import retrofit2.http.FormUrlEncoded
-import com.linkbit.android.data.model.coin.CoinObject
 import com.linkbit.android.data.model.wallet.WalletData
+import com.linkbit.android.data.model.coin.CoinNetworkObject
+import com.linkbit.android.data.model.transaction.TransactionNetworkObject
+import com.linkbit.android.data.model.wallet.WalletNetworkObject
 import retrofit2.Call
 import retrofit2.http.*
-import rx.Observable
 
 
 interface WalletApi{
-    @GET("support/wallet/list")
-    fun getSupportedCoins(): Call<List<CoinObject>>
+    @GET("support/walletModel/list")
+    fun getSupportedCoins(): Call<List<CoinNetworkObject>>
 
     @FormUrlEncoded
-    @POST("wallet/")
+    @POST("walletModel/")
     fun createWallet(@Path("symbol") symbol: String, @Field("name") name: String, @Field("description") description: String, @Field("password") password: String, @Field("major") major: Boolean, @Field("visible") visible: Boolean): Call<WalletData>
 
-    @GET("wallet/list")
-    fun getWalletList(): Call<List<Wallet>>
+    @GET("walletModel/list")
+    fun getWalletList(): Call<List<WalletNetworkObject>>
 
-    @GET("wallet/balance")
+    @GET("walletModel/balance")
     fun getBalance(@Query("address") address: String): Call<String>
 
-    @GET("wallet/price")
+    @GET("walletModel/price")
     fun getPrice(@Query("address") address: String): Call<String>
 
-    @GET("wallet/{symbol}/price/all")
+    @GET("walletModel/{symbol}/price/all")
     fun getTotalPrice(@Path("symbol") symbol: String): Call<String>
 
-    @GET("wallet/{symbol}/balance/all")
+    @GET("walletModel/{symbol}/balance/all")
     fun getTotalBalance(@Path("symbol") symbol: String): Call<String>
 
-    @GET("wallet")
-    fun getWalletInfo(@Query("address") address: String): Call<Wallet>
+    @GET("walletModel")
+    fun getWalletInfo(@Query("address") address: String): Call<WalletNetworkObject>
 
-    @GET("wallet/{symbol}/transaction")
-    fun getTransactionStatus(@Path("symbol") symbol: String, @Query("hash") hash: String): Call<TransactionStatus>
+    @GET("walletModel/{symbol}/transaction")
+    fun getTransactionStatus(@Path("symbol") symbol: String, @Query("hash") hash: String): Call<TransactionNetworkObject>
 
-    @GET("wallet/{symbol}/transaction/count")
+    @GET("walletModel/{symbol}/transaction/count")
     fun getTransactionCount(@Path("symbol") symbol: String, @Query("address") address: String): Call<Int>
 
-    @GET("/wallet/transaction/list")
-    fun addressTransactionList(@Query("address") address: String): Call<List<TransactionStatus>>
+    @GET("/walletModel/transaction/list")
+    fun addressTransactionList(@Query("address") address: String): Call<List<TransactionNetworkObject>>
 
     @GET("/transaction/list")
-    fun transactionList(): Call<List<TransactionStatus>>
+    fun transactionList(): Call<List<TransactionNetworkObject>>
 }

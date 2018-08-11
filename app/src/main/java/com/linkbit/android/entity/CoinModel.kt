@@ -1,4 +1,4 @@
-package com.linkbit.android.data.model.coin
+package com.linkbit.android.entity
 
 class CoinModel {
     constructor()

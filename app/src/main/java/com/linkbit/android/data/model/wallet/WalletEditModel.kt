@@ -1,6 +1,6 @@
 package com.linkbit.android.data.model.wallet
 
-import com.linkbit.android.data.model.coin.CoinModel
+import com.linkbit.android.entity.CoinModel
 
 
 class WalletEditModel {
