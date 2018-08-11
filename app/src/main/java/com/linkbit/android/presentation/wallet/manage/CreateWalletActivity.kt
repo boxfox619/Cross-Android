@@ -2,10 +2,9 @@ package com.linkbit.android.presentation.wallet.manage
 
 import android.app.Fragment
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.linkbit.android.R
-import com.linkbit.android.helper.SelectionMode
+import com.linkbit.android.presentation.wallet.manage.coinlist.SelectionMode
 import com.linkbit.android.presentation.BaseActivity
 import com.linkbit.android.presentation.wallet.manage.coinlist.CoinListFragment
 import com.linkbit.android.presentation.wallet.manage.info.WalletInfoEditFragment

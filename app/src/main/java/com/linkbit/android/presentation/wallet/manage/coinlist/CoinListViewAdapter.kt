@@ -1,4 +1,4 @@
-package com.linkbit.android.adapter
+package com.linkbit.android.presentation.wallet.manage.coinlist
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -7,14 +7,10 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import com.linkbit.android.R
-import com.linkbit.android.helper.SelectionMode
 import com.linkbit.android.data.model.coin.CoinModel
 
-
-import com.linkbit.android.presentation.wallet.manage.coinlist.CoinListViewHolder
-
 class CoinListViewAdapter(
-        private val mValues: List<CoinModel>,
+        private val mValues: ArrayList<CoinModel>,
         private val mListener: (item: CoinModel)->Unit?,
         private val selectionMode: SelectionMode)
     : RecyclerView.Adapter<CoinListViewHolder>() {
@@ -57,6 +53,16 @@ class CoinListViewAdapter(
                 mListener(item)
             })
         }
+    }
+
+    fun clear(){
+        this.mValues.removeAll(this.mValues)
+        notifyDataSetChanged()
+    }
+
+    fun addAll(items : List<CoinModel>){
+        this.mValues.addAll(items)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = mValues.size

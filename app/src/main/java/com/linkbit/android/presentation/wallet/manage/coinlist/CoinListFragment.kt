@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.linkbit.android.R
-import com.linkbit.android.helper.SelectionMode
+import com.linkbit.android.data.model.coin.CoinModel
 import com.linkbit.android.data.model.wallet.WalletEditModel
 import com.linkbit.android.presentation.BaseFragment
 
@@ -15,13 +15,15 @@ class CoinListFragment : BaseFragment<CoinListPresenter>(), CoinListView {
     private lateinit var wallet: WalletEditModel
     private lateinit var isValid: (state: Boolean) -> Unit
     private lateinit var selectionMode: SelectionMode
+    private lateinit var adapter: CoinListViewAdapter
     override val presenter = CoinListPresenter(this, wallet, isValid, selectionMode)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_coin_list, container, false)
+        adapter = CoinListViewAdapter(ArrayList(), { presenter.itemSeleced(it) }, selectionMode)
         if (view is RecyclerView) {
-            view.adapter = presenter.adapter
+            view.adapter = adapter
         }
         presenter.load()
         return view
@@ -35,5 +37,10 @@ class CoinListFragment : BaseFragment<CoinListPresenter>(), CoinListView {
             this.isValid = isValid
             this.selectionMode = selectionMode
         }
+    }
+
+    override fun setListItems(items: List<CoinModel>) {
+        this.adapter.clear()
+        this.adapter.addAll(items)
     }
 }

@@ -4,14 +4,11 @@ import com.linkbit.android.data.model.EntityMapper
 import com.linkbit.android.data.repository.Repository
 import io.reactivex.Observable
 
-
-class GetCoins()
-
 interface CoinRepository : Repository {
     fun getSupportCoins() : Observable<List<CoinModel>>
     fun getCoinByName(name: String) : Observable<CoinModel>
     fun getCoinBySymbol(symbol: String) : Observable<CoinModel>
-    fun getCoinIcon() : Observable<String>
+    fun getCoinIcon(coin: CoinModel) : Observable<String>
 }
 
 object CoinEntityMapper : EntityMapper<CoinModel, CoinObject>{

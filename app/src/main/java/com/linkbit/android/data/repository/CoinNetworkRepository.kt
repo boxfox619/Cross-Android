@@ -19,7 +19,7 @@ class CoinNetworkRepository(private val context: Context) : CoinRepository {
             val subscriber = it
             context.retrofit.walletAPI.getSupportedCoins().enqueue((object : Response<List<CoinObject>>(context) {
                 override fun setResponseData(code: Int, newWalletList: List<CoinObject>?) {
-                    if (isSuccess(code)&&newWalletList != null) {
+                    if (isSuccess(code) && newWalletList != null) {
                         val loadedCoinList: List<CoinModel> = newWalletList.map { it -> CoinEntityMapper.fromNetworkObject(it) }
                         coinList.onNext(loadedCoinList)
                         subscriber.onNext(loadedCoinList)
@@ -33,17 +33,29 @@ class CoinNetworkRepository(private val context: Context) : CoinRepository {
     }
 
     override fun getCoinByName(name: String): Observable<CoinModel> {
-        Observable.create {
-
+        return Observable.create { obs ->
+            getSupportCoins().subscribe { coinList ->
+                val result = coinList.filter { it.name.equals(name) }
+                if (result.isNotEmpty())
+                    obs.onNext(result[0])
+                else obs.onNext(null)
+            }
         }
     }
 
     override fun getCoinBySymbol(symbol: String): Observable<CoinModel> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Observable.create { obs ->
+            getSupportCoins().subscribe { coinList ->
+                val result = coinList.filter { it.symbol.equals(symbol) }
+                if (result.isNotEmpty())
+                    obs.onNext(result[0])
+                else obs.onNext(null)
+            }
+        }
     }
 
-    override fun getCoinIcon(): Observable<String> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getCoinIcon(coin: CoinModel): Observable<String> {
+
     }
 
 }

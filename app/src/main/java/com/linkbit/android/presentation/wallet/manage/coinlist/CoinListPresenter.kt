@@ -1,37 +1,31 @@
 package com.linkbit.android.presentation.wallet.manage.coinlist
 
-import com.linkbit.android.adapter.CoinListViewAdapter
-import com.linkbit.android.helper.SelectionMode
 import com.linkbit.android.data.model.coin.CoinModel
 import com.linkbit.android.data.model.wallet.WalletEditModel
-import com.linkbit.android.data.network.Connector
-import com.linkbit.android.data.network.Response
+import com.linkbit.android.data.repository.CoinNetworkRepository
 import com.linkbit.android.presentation.Presenter
 
 
-class CoinListPresenter (view: CoinListView, wallet: WalletEditModel, isValid : (state:Boolean)->Unit, selectionMode: SelectionMode) : Presenter<CoinListView>(view) {
-
+class CoinListPresenter (view: CoinListView,
+                         wallet: WalletEditModel,
+                         isValid : (state:Boolean)->Unit,
+                         selectionMode: SelectionMode,
+                         private val coinRepository: CoinNetworkRepository = CoinNetworkRepository(view.getContext())) : Presenter<CoinListView>(view) {
     val wallet: WalletEditModel = wallet
-    val adapter: CoinListViewAdapter
     val isValid: (state:Boolean) -> Unit = isValid
-    var selectionMode: SelectionMode
+    var selectionMode: SelectionMode = selectionMode
     private var items = ArrayList<CoinModel>()
 
     init {
-        adapter = CoinListViewAdapter(items, {itemSeleced(it)}, selectionMode)
-        this.selectionMode = selectionMode
         isValid(false)
     }
 
     fun load(){
-        Connector(view.getContext()).walletAPI.getSupportedCoins().enqueue((object : Response<List<CoinModel>>(view.getContext()) {
-            override fun setResponseData(code: Int, supportCoinList: List<CoinModel>?) {
-                if (isSuccess(code)) {
-                    items.addAll(supportCoinList!!)
-                    adapter.notifyDataSetChanged()
-                }
+        coinRepository.getSupportCoins().subscribe { supportCoinList ->
+            if(supportCoinList!=null){
+                view.setListItems(supportCoinList)
             }
-        }))
+        }
     }
 
     fun itemSeleced(item: CoinModel){
