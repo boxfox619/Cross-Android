@@ -9,10 +9,10 @@ class CoinStatistic {
         get() = field
     var balance : Double
         get() = field
-    var price : Long
+    var price : Double
         get() = field
 
-    constructor(symbol: String, money: String, name : String, balance: Double, price: Long){
+    constructor(symbol: String, money: String, name : String, balance: Double, price: Double){
         this.symbol = symbol
         this.money = money
         this.name = name

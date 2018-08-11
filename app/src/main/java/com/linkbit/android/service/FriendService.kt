@@ -22,7 +22,7 @@ class FriendService private constructor() {
     fun loadFriendList(ctx: Context): Observable<List<UserModel>> {
         return Observable.create({
             val subscriber = it
-            Connector(ctx).friendApi.friendList().enqueue((object : Response<List<UserModel>>(ctx) {
+            Connector(ctx).friendAPI.friendList().enqueue((object : Response<List<UserModel>>(ctx) {
                 override fun setResponseData(code: Int, loadedFriendList: List<UserModel>?) {
                     if (isSuccess(code)) {
                         friendList.onNext(loadedFriendList)

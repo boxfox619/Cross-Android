@@ -2,97 +2,53 @@ package com.linkbit.android.presentation.main
 
 import com.linkbit.android.R
 import com.linkbit.android.data.model.CoinStatistic
-import com.linkbit.android.data.model.wallet.Wallet
+import com.linkbit.android.data.repository.CoinRepository
+import com.linkbit.android.data.repository.WalletRepository
+import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.service.WalletService
-import com.linkbit.android.adapter.CoinStatisticAdapter
-import com.linkbit.android.adapter.FriendAdapter
-import com.linkbit.android.adapter.TransactionAdapter
-import com.linkbit.android.adapter.WalletAdapter
-import com.linkbit.android.data.model.TransactionStatus
-import com.linkbit.android.data.model.User
+import com.linkbit.android.entity.TransactionModel
 import com.linkbit.android.presentation.Presenter
-import com.linkbit.android.service.FriendService
+import io.reactivex.disposables.Disposable
 import rx.Subscription
+import java.util.*
 
 
-class MainActivityPresenter(view: MainActivityView) : Presenter<MainActivityView>(view) {
-    lateinit var walletListSubscriber: Subscription
-    lateinit var headerAdapter: CoinStatisticAdapter
-    lateinit var walletListAdapter: WalletAdapter
-
-    lateinit var transactionListSubscription: Subscription
-    lateinit var transactionListAdapter: TransactionAdapter
-
-    lateinit var friendListSubscription: Subscription
-    lateinit var friendListAdapter: FriendAdapter
-
-    fun load(walletList: List<Wallet>) {
-        view.let {
-            val headerView = it
-            headerAdapter!!.clear()
-            var coinMap = HashMap<String, CoinStatistic>()
-            var totalExchangeBalace: Double = 0.toDouble()
-            walletList!!.forEach {
-                totalExchangeBalace += it.krBalance
-                var statistic = coinMap.get(it.coin)
-                if (statistic == null) {
-                    statistic = CoinStatistic(it.coin!!, "KRW", it.coinName!!, it.balance!!, it.krBalance.toLong())
-                    coinMap.put(it.coin!!, statistic)
-                } else {
-                    statistic.balance = statistic.balance + it.balance!!
-                    statistic.price = (statistic.price + it.krBalance).toLong()
-                }
-            }
-            coinMap.values.forEach { headerAdapter!!.addItem(it) }
-            headerView.setTotalExchangeBalance(totalExchangeBalace.toString())
-        }
-    }
+class MainActivityPresenter(
+        view: MainActivityView,
+        private val coinRepository: CoinRepository = CoinRepository(view.getContext()),
+        private val walletRepository: WalletRepository = WalletRepository(view.getContext())
+) : Presenter<MainActivityView>(view) {
 
     fun init() {
-        this.headerAdapter = CoinStatisticAdapter(ctx)
-        this.view.setStatisticRecyclerAdapter(this.headerAdapter)
         val wallet = ctx.getString(R.string.wallet)
         val transaction = ctx.getString(R.string.transaction)
         val friendList = ctx.getString(R.string.friend_list)
         this.view.addTabSpec(wallet, R.id.tab_wallet, wallet)
         this.view.addTabSpec(transaction, R.id.tab_transaction, transaction)
         this.view.addTabSpec(friendList, R.id.tab_friend, friendList)
-        this.walletListAdapter = WalletAdapter(ctx)
-        this.friendListAdapter = FriendAdapter(ctx)
-        this.transactionListAdapter = TransactionAdapter(ctx)
-        this.view.setWalletListAdapter(walletListAdapter)
-        this.view.setFriendListAdapter(friendListAdapter)
-        this.view.setTransactionListAdapter(transactionListAdapter)
-        this.walletListSubscriber = WalletService.instance.walletList.subscribe({ walletListLoad(it) })
-        this.friendListSubscription = FriendService.instance.friendList.subscribe({ friendListLoad(it) })
-        this.transactionListSubscription = WalletService.instance.transactionList.subscribe({ transactionListLoad(it) })
+        walletRepository.getWalletList().subscribe({ walletListLoad(it) }).apply { disposables.add(this) }
     }
 
-    override fun destory() {
-        walletListSubscriber.unsubscribe()
-        this.friendListSubscription.unsubscribe()
-        this.walletListSubscriber.unsubscribe()
-        this.transactionListSubscription.unsubscribe()
-    }
-
-    fun walletListLoad(walletList: List<Wallet>) {
+    fun walletListLoad(walletModelList: List<WalletModel>) {
         this.view.let {
-            this.walletListAdapter.clear()
-            walletList.forEach { this.walletListAdapter.addItem(it) }
-        }
-    }
-
-    fun friendListLoad(friendList: List<User>) {
-        this.view.let {
-            this.friendListAdapter.clear()
-            friendList.forEach { this.friendListAdapter.addItem(it) }
-        }
-    }
-
-    fun transactionListLoad(transactionList: List<TransactionStatus>) {
-        this.view.let {
-            this.transactionListAdapter.clear()
-            transactionList.forEach { this.transactionListAdapter.addItem(it) }
+            var coinMap = HashMap<String, CoinStatistic>()
+            var totalExchangeBalace: Double = 0.toDouble()
+            walletModelList!!.forEach {
+                val coin = coinRepository.getCoinBySymbol(it.coinSymbol).blockingGet()
+                val price = coinRepository.getCoinPrice(coin, Locale.getDefault()).blockingGet()
+                val realBalance = it.balance * price
+                totalExchangeBalace += realBalance
+                var statistic = coinMap.get(it.coinSymbol)
+                if (statistic == null) {
+                    statistic = CoinStatistic(coin.symbol!!, "KRW", coin.name!!, it.balance!!, realBalance)
+                    coinMap.put(coin.symbol!!, statistic)
+                } else {
+                    statistic.balance = statistic.balance + it.balance!!
+                    statistic.price = (statistic.price + realBalance)
+                }
+            }
+            view.setCoinCardItems(coinMap.values.toList())
+            view.setTotalExchangeBalance(totalExchangeBalace.toString())
         }
     }
 }
