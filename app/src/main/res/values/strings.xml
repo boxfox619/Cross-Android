@@ -9,7 +9,7 @@
     <string name="facebook_app_id">402524810151096</string>
     <string name="fb_login_protocol_scheme">fb402524810151096</string>
 
-    <string name="wallet">지갑</string>
+    <string name="walletModel">지갑</string>
     <string name="transaction">트렌젝션</string>
     <string name="friend_list">주소록</string>
 

@@ -1,8 +1,8 @@
 package com.linkbit.android.service
 
 import android.content.Context
-import com.linkbit.android.data.model.TransactionStatus
-import com.linkbit.android.data.model.wallet.Wallet
+import com.linkbit.android.entity.TransactionModel
+import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.data.network.Connector
 import com.linkbit.android.data.network.Response
 import io.reactivex.Observable
@@ -18,17 +18,17 @@ class WalletService private constructor() {
         val instance: WalletService by lazy { Holder.INSTANCE }
     }
 
-    val walletList: BehaviorSubject<List<Wallet>> = BehaviorSubject.create()
-    val transactionList: BehaviorSubject<List<TransactionStatus>> = BehaviorSubject.create()
+    val walletModelList: BehaviorSubject<List<WalletModel>> = BehaviorSubject.create()
+    val transactionListModel: BehaviorSubject<List<TransactionModel>> = BehaviorSubject.create()
 
-    fun loadWalletList(ctx: Context): Observable<List<Wallet>> {
+    fun loadWalletList(ctx: Context): Observable<List<WalletModel>> {
         return Observable.create({
             val subscriber = it
-            Connector(ctx).walletAPI.getWalletList().enqueue((object : Response<List<Wallet>>(ctx) {
-                override fun setResponseData(code: Int, newWalletList: List<Wallet>?) {
+            Connector(ctx).walletAPI.getWalletList().enqueue((object : Response<List<WalletModel>>(ctx) {
+                override fun setResponseData(code: Int, newWalletModelList: List<WalletModel>?) {
                     if (isSuccess(code)) {
-                        walletList.onNext(newWalletList)
-                        subscriber.onNext(newWalletList)
+                        walletModelList.onNext(newWalletModelList)
+                        subscriber.onNext(newWalletModelList)
                         subscriber.onComplete()
                     } else {
                         subscriber.onError(null)
@@ -38,14 +38,14 @@ class WalletService private constructor() {
         })
     }
 
-    fun loadTotalTransactionList(ctx: Context): Observable<List<TransactionStatus>> {
+    fun loadTotalTransactionList(ctx: Context): Observable<List<TransactionModel>> {
         return Observable.create({
             val subscriber = it
-            Connector(ctx).walletAPI.transactionList().enqueue((object : Response<List<TransactionStatus>>(ctx) {
-                override fun setResponseData(code: Int, totalTransactionList: List<TransactionStatus>?) {
+            Connector(ctx).walletAPI.transactionList().enqueue((object : Response<List<TransactionModel>>(ctx) {
+                override fun setResponseData(code: Int, totalTransactionListModel: List<TransactionModel>?) {
                     if (isSuccess(code)) {
-                        transactionList.onNext(totalTransactionList)
-                        subscriber.onNext(totalTransactionList)
+                        transactionListModel.onNext(totalTransactionListModel)
+                        subscriber.onNext(totalTransactionListModel)
                         subscriber.onComplete()
                     } else {
                         subscriber.onError(null)

@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 
 import com.linkbit.android.R
 import com.linkbit.android.helper.URLHelper
-import com.linkbit.android.data.model.coin.CoinModel
+import com.linkbit.android.entity.CoinModel
 import com.linkbit.android.data.model.wallet.WalletEditModel
 import com.linkbit.android.presentation.BaseFragment
 import com.linkbit.android.ui.base.SimpleTextChangeListener
@@ -29,14 +29,14 @@ class WalletInfoEditFragment : BaseFragment<WalletInfoEditPresenter>(), WalletIn
     }
 
     override fun initView(wallet: WalletEditModel){
-        wallet.let({
+        wallet.let {
             layout_wallet_info_edit_coin_list.addView(createCoinItem(it.coin))
-            it.subCoinList.forEach({
+            it.subCoinList.forEach {
                 layout_wallet_info_edit_coin_list.addView(createCoinItem(it))
-            })
+            }
             et_wallet_info_edit_name.setText(it.name)
             et_wallet_info_edit_description.setText(it.description)
-        })
+        }
         et_wallet_info_edit_password.addTextChangedListener(SimpleTextChangeListener({presenter.setPassword(it)}))
         et_wallet_info_edit_password_confirm.addTextChangedListener(SimpleTextChangeListener({presenter.setPasswordConfim(it)}))
         et_wallet_info_edit_name.addTextChangedListener(SimpleTextChangeListener{presenter.setName(it)})

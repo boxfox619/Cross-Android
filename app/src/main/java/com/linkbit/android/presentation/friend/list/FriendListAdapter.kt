@@ -1,12 +1,12 @@
-package com.linkbit.android.adapter
+package com.linkbit.android.presentation.friend.list
 
 import android.content.Context
 import android.view.ViewGroup
-import com.linkbit.android.data.model.User
+import com.linkbit.android.entity.UserModel
 import com.linkbit.android.ui.base.AbstractRecyclerAdapter
 import com.linkbit.android.presentation.main.holder.FriendCardViewHolder
 
-class FriendAdapter(context: Context) : AbstractRecyclerAdapter<User, FriendCardViewHolder>(context) {
+class FriendListAdapter(context: Context) : AbstractRecyclerAdapter<UserModel, FriendCardViewHolder>(context) {
     override fun onItemViewType(position: Int): Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendCardViewHolder {

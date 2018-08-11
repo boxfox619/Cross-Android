@@ -7,7 +7,7 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import com.linkbit.android.R
-import com.linkbit.android.data.model.coin.CoinModel
+import com.linkbit.android.entity.CoinModel
 
 class CoinListViewAdapter(
         private val mValues: ArrayList<CoinModel>,

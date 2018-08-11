@@ -1,7 +1,7 @@
 package com.linkbit.android.service
 
 import android.content.Context
-import com.linkbit.android.data.model.User
+import com.linkbit.android.entity.UserModel
 import com.linkbit.android.data.network.Connector
 import com.linkbit.android.data.network.Response
 import io.reactivex.Observable
@@ -17,13 +17,13 @@ class FriendService private constructor() {
         val instance: FriendService by lazy { Holder.INSTANCE }
     }
 
-    val friendList: BehaviorSubject<List<User>> = BehaviorSubject.create()
+    val friendList: BehaviorSubject<List<UserModel>> = BehaviorSubject.create()
 
-    fun loadFriendList(ctx: Context): Observable<List<User>> {
+    fun loadFriendList(ctx: Context): Observable<List<UserModel>> {
         return Observable.create({
             val subscriber = it
-            Connector(ctx).friendApi.friendList().enqueue((object : Response<List<User>>(ctx) {
-                override fun setResponseData(code: Int, loadedFriendList: List<User>?) {
+            Connector(ctx).friendApi.friendList().enqueue((object : Response<List<UserModel>>(ctx) {
+                override fun setResponseData(code: Int, loadedFriendList: List<UserModel>?) {
                     if (isSuccess(code)) {
                         friendList.onNext(loadedFriendList)
                         subscriber.onNext(loadedFriendList)

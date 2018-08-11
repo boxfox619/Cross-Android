@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.linkbit.android.R
-import com.linkbit.android.data.model.coin.CoinModel
+import com.linkbit.android.entity.CoinModel
 import com.linkbit.android.data.model.wallet.WalletEditModel
 import com.linkbit.android.presentation.BaseFragment
 
