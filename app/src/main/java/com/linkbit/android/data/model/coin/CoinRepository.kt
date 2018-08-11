@@ -1,6 +1,7 @@
-package com.linkbit.android.model.coin
+package com.linkbit.android.data.model.coin
 
-import com.linkbit.android.model.EntityMapper
+import com.linkbit.android.data.model.EntityMapper
+import com.linkbit.android.data.repository.Repository
 import io.reactivex.Observable
 
 
@@ -8,21 +9,21 @@ class GetCoins()
 
 interface CoinRepository : Repository {
     fun getSupportCoins() : Observable<List<CoinModel>>
-    fun getCoinByName() : Observable<CoinModel>
-    fun getCoinBySymbol() : Observable<CoinModel>
+    fun getCoinByName(name: String) : Observable<CoinModel>
+    fun getCoinBySymbol(symbol: String) : Observable<CoinModel>
     fun getCoinIcon() : Observable<String>
 }
 
 object CoinEntityMapper : EntityMapper<CoinModel, CoinObject>{
 
-    override fun toRealmObject(model: CoinModel): CoinObject {
+    override fun toNetworkObject(model: CoinModel): CoinObject {
         return CoinObject().apply {
             symbol = model.symbol
             name = model.name
         }
     }
 
-    override fun fronRealmObject(obj: CoinObject): CoinModel {
+    override fun fromNetworkObject(obj: CoinObject): CoinModel {
         return CoinModel(obj.symbol, obj.name)
     }
 

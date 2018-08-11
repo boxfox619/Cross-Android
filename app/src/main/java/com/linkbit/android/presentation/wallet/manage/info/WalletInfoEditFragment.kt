@@ -10,9 +10,8 @@ import com.bumptech.glide.Glide
 
 import com.linkbit.android.R
 import com.linkbit.android.helper.URLHelper
-import com.linkbit.android.model.Wallet
-import com.linkbit.android.model.coin.CoinModel
-import com.linkbit.android.model.WalletEditModel
+import com.linkbit.android.data.model.coin.CoinModel
+import com.linkbit.android.data.model.wallet.WalletEditModel
 import com.linkbit.android.presentation.BaseFragment
 import com.linkbit.android.ui.base.SimpleTextChangeListener
 import kotlinx.android.synthetic.main.fragment_wallet_info_edit.*

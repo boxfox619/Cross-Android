@@ -1,4 +1,4 @@
-package com.linkbit.android.model
+package com.linkbit.android.data.model
 
 class User {
     var email: String? = null

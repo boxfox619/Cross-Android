@@ -1,15 +1,15 @@
 package com.linkbit.android.presentation.main
 
 import com.linkbit.android.R
-import com.linkbit.android.model.CoinStatistic
-import com.linkbit.android.model.Wallet
+import com.linkbit.android.data.model.CoinStatistic
+import com.linkbit.android.data.model.wallet.Wallet
 import com.linkbit.android.service.WalletService
 import com.linkbit.android.adapter.CoinStatisticAdapter
 import com.linkbit.android.adapter.FriendAdapter
 import com.linkbit.android.adapter.TransactionAdapter
 import com.linkbit.android.adapter.WalletAdapter
-import com.linkbit.android.model.TransactionStatus
-import com.linkbit.android.model.User
+import com.linkbit.android.data.model.TransactionStatus
+import com.linkbit.android.data.model.User
 import com.linkbit.android.presentation.Presenter
 import com.linkbit.android.service.FriendService
 import rx.Subscription

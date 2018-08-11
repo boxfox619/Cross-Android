@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import android.widget.RadioButton
 import com.linkbit.android.R
 import com.linkbit.android.helper.SelectionMode
-import com.linkbit.android.model.coin.CoinModel
+import com.linkbit.android.data.model.coin.CoinModel
 
 
 import com.linkbit.android.presentation.wallet.manage.coinlist.CoinListViewHolder

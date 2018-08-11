@@ -2,8 +2,8 @@ package com.linkbit.android.presentation.wallet.manage.coinlist
 
 import com.linkbit.android.adapter.CoinListViewAdapter
 import com.linkbit.android.helper.SelectionMode
-import com.linkbit.android.model.coin.CoinModel
-import com.linkbit.android.model.WalletEditModel
+import com.linkbit.android.data.model.coin.CoinModel
+import com.linkbit.android.data.model.wallet.WalletEditModel
 import com.linkbit.android.data.network.Connector
 import com.linkbit.android.data.network.Response
 import com.linkbit.android.presentation.Presenter

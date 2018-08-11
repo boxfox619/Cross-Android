@@ -1,19 +1,20 @@
 package com.linkbit.android.data.network
 
-import com.linkbit.android.model.TransactionStatus
+import com.linkbit.android.data.model.TransactionStatus
 import retrofit2.http.GET
-import com.linkbit.android.model.Wallet
+import com.linkbit.android.data.model.wallet.Wallet
 import retrofit2.http.POST
 import retrofit2.http.FormUrlEncoded
-import com.linkbit.android.model.coin.CoinModel
-import com.linkbit.android.model.WalletData
+import com.linkbit.android.data.model.coin.CoinObject
+import com.linkbit.android.data.model.wallet.WalletData
 import retrofit2.Call
 import retrofit2.http.*
+import rx.Observable
 
 
 interface WalletApi{
     @GET("support/wallet/list")
-    fun getSupportedCoins(): Call<List<CoinModel>>
+    fun getSupportedCoins(): Call<List<CoinObject>>
 
     @FormUrlEncoded
     @POST("wallet/")

@@ -1,35 +1,44 @@
 package com.linkbit.android.data.repository
 
 import android.content.Context
-import com.google.gson.annotations.SerializedName
-import com.linkbit.android.model.Wallet
-import com.linkbit.android.model.coin.CoinModel
-import com.linkbit.android.model.coin.CoinRepository
+import com.linkbit.android.data.model.coin.CoinEntityMapper
+import com.linkbit.android.data.model.coin.CoinModel
+import com.linkbit.android.data.model.coin.CoinObject
+import com.linkbit.android.data.model.coin.CoinRepository
 import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
 import io.reactivex.Observable
+import rx.subjects.BehaviorSubject
 
 class CoinNetworkRepository(private val context: Context) : CoinRepository {
 
+    val coinList: BehaviorSubject<List<CoinModel>> = BehaviorSubject.create()
+
     override fun getSupportCoins(): Observable<List<CoinModel>> {
-        return context.retrofit.walletAPI.getSupportedCoins().enqueue((object : Response<List<Wallet>>(ctx) {
-            override fun setResponseData(code: Int, newWalletList: List<Wallet>?) {
-                if (isSuccess(code)) {
-                    walletList.onNext(newWalletList)
-                    subscriber.onNext(newWalletList)
-                    subscriber.onComplete()
-                } else {
-                    subscriber.onError(null)
+        return Observable.create {
+            val subscriber = it
+            context.retrofit.walletAPI.getSupportedCoins().enqueue((object : Response<List<CoinObject>>(context) {
+                override fun setResponseData(code: Int, newWalletList: List<CoinObject>?) {
+                    if (isSuccess(code)&&newWalletList != null) {
+                        val loadedCoinList: List<CoinModel> = newWalletList.map { it -> CoinEntityMapper.fromNetworkObject(it) }
+                        coinList.onNext(loadedCoinList)
+                        subscriber.onNext(loadedCoinList)
+                        subscriber.onComplete()
+                    } else {
+                        subscriber.onError(null)
+                    }
                 }
-            }
-        }))
+            }))
+        }
     }
 
-    override fun getCoinByName(): Observable<CoinModel> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getCoinByName(name: String): Observable<CoinModel> {
+        Observable.create {
+
+        }
     }
 
-    override fun getCoinBySymbol(): Observable<CoinModel> {
+    override fun getCoinBySymbol(symbol: String): Observable<CoinModel> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -38,8 +47,3 @@ class CoinNetworkRepository(private val context: Context) : CoinRepository {
     }
 
 }
-
-data class CoinObject {
-    @SerializedName("symbol") var symbol: String? = null
-    @SerializedName("name") var name: String? = null
-} : Response

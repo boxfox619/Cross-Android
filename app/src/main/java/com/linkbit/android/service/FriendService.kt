@@ -1,7 +1,7 @@
 package com.linkbit.android.service
 
 import android.content.Context
-import com.linkbit.android.model.User
+import com.linkbit.android.data.model.User
 import com.linkbit.android.data.network.Connector
 import com.linkbit.android.data.network.Response
 import io.reactivex.Observable

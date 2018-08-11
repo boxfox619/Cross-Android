@@ -1,8 +1,8 @@
 package com.linkbit.android.service
 
 import android.content.Context
-import com.linkbit.android.model.TransactionStatus
-import com.linkbit.android.model.Wallet
+import com.linkbit.android.data.model.TransactionStatus
+import com.linkbit.android.data.model.wallet.Wallet
 import com.linkbit.android.data.network.Connector
 import com.linkbit.android.data.network.Response
 import io.reactivex.Observable

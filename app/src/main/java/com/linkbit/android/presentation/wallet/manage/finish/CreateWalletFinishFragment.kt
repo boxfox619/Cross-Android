@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.linkbit.android.R
 import com.linkbit.android.helper.URLHelper
-import com.linkbit.android.model.Wallet
+import com.linkbit.android.data.model.wallet.Wallet
 import kotlinx.android.synthetic.main.fragment_create_wallet_finish.*
 
 class CreateWalletFinishFragment : Fragment() {

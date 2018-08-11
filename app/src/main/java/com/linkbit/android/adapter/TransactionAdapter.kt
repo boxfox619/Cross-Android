@@ -2,7 +2,7 @@ package com.linkbit.android.adapter
 
 import android.content.Context
 import android.view.ViewGroup
-import com.linkbit.android.model.TransactionStatus
+import com.linkbit.android.data.model.TransactionStatus
 import com.linkbit.android.ui.base.AbstractRecyclerAdapter
 import com.linkbit.android.presentation.main.holder.TransactionViewHolder
 

@@ -1,5 +1,6 @@
-package com.linkbit.android.model
+package com.linkbit.android.data.model
 
+import com.linkbit.android.data.model.wallet.Wallet
 import java.math.BigInteger
 
 class TransactionStatus {
