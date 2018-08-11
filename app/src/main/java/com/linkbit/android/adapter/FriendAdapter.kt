@@ -3,10 +3,8 @@ package com.linkbit.android.adapter
 import android.content.Context
 import android.view.ViewGroup
 import com.linkbit.android.model.User
-import com.linkbit.android.model.Wallet
 import com.linkbit.android.ui.base.AbstractRecyclerAdapter
-import com.linkbit.android.ui.view.holder.FriendCardViewHolder
-import com.linkbit.android.ui.view.holder.WalletCardViewHolder
+import com.linkbit.android.presentation.main.holder.FriendCardViewHolder
 
 class FriendAdapter(context: Context) : AbstractRecyclerAdapter<User, FriendCardViewHolder>(context) {
     override fun onItemViewType(position: Int): Int = 0
