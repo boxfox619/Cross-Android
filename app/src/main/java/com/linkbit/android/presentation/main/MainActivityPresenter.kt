@@ -8,8 +8,6 @@ import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.service.WalletService
 import com.linkbit.android.entity.TransactionModel
 import com.linkbit.android.presentation.Presenter
-import io.reactivex.disposables.Disposable
-import rx.Subscription
 import java.util.*
 
 
@@ -35,12 +33,12 @@ class MainActivityPresenter(
             var totalExchangeBalace: Double = 0.toDouble()
             walletModelList!!.forEach {
                 val coin = coinRepository.getCoinBySymbol(it.coinSymbol).blockingGet()
-                val price = coinRepository.getCoinPrice(coin, Locale.getDefault()).blockingGet()
-                val realBalance = it.balance * price
+                val price = coinRepository.getCoinPrice(coin.symbol, Locale.getDefault()).blockingGet()
+                val realBalance = it.balance * price.amount
                 totalExchangeBalace += realBalance
                 var statistic = coinMap.get(it.coinSymbol)
                 if (statistic == null) {
-                    statistic = CoinStatistic(coin.symbol!!, "KRW", coin.name!!, it.balance!!, realBalance)
+                    statistic = CoinStatistic(coin.symbol!!, price.unit, coin.name!!, it.balance!!, realBalance)
                     coinMap.put(coin.symbol!!, statistic)
                 } else {
                     statistic.balance = statistic.balance + it.balance!!

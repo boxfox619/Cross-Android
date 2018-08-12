@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.friend.list
+package com.linkbit.android.presentation.wallet.list
 
 import com.linkbit.android.data.repository.WalletRepository
 import com.linkbit.android.presentation.Presenter

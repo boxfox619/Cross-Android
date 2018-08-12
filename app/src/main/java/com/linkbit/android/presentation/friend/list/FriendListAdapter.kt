@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.ViewGroup
 import com.linkbit.android.entity.UserModel
 import com.linkbit.android.ui.base.AbstractRecyclerAdapter
-import com.linkbit.android.presentation.main.holder.FriendCardViewHolder
 
 class FriendListAdapter(context: Context) : AbstractRecyclerAdapter<UserModel, FriendCardViewHolder>(context) {
     override fun onItemViewType(position: Int): Int = 0
@@ -16,6 +15,6 @@ class FriendListAdapter(context: Context) : AbstractRecyclerAdapter<UserModel, F
     override fun onBindViewHolder(holder: FriendCardViewHolder, position: Int) {
         var model = getItem(position)
         holder.setName(model!!.name!!)
-        holder.setAddress(model!!.crossAddress!!)
+        holder.setAddress(model!!.linkbitAddress!!)
     }
 }

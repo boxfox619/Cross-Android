@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.friend.list
+package com.linkbit.android.presentation.wallet.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import com.linkbit.android.R
 import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.presentation.BaseFragment
-import com.linkbit.android.presentation.wallet.list.WalletListAdapter
-import kotlinx.android.synthetic.main.fragment_wallet_list.*
+import kotlinx.android.synthetic.main.fragment_any_list.*
 
 class WalletListFragment : BaseFragment<WalletListPresenter>(), WalletListView {
     override val presenter: WalletListPresenter = WalletListPresenter(this)
@@ -17,9 +16,9 @@ class WalletListFragment : BaseFragment<WalletListPresenter>(), WalletListView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_friend_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_any_list, container, false)
         this.walletListAdpater = WalletListAdapter(this.context)
-        recyclerview_wallet.adapter = walletListAdpater
+        recyclerview_any.adapter = walletListAdpater
         return view
     }
 

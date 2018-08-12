@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.main.holder;
+package com.linkbit.android.presentation.transaction.list;
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.linkbit.android.R
 import java.text.DecimalFormat
 
-class FriendCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     constructor(context: Context, parent: ViewGroup) : this(LayoutInflater.from(context).inflate(R.layout.view_wallet_card, parent, false))
 

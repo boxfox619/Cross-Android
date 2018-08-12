@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.main.holder;
+package com.linkbit.android.presentation.main;
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

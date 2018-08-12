@@ -1,10 +1,10 @@
-package com.linkbit.android.adapter;
+package com.linkbit.android.presentation.main;
 
 import android.content.Context
 import android.view.ViewGroup
 import com.linkbit.android.data.model.CoinStatistic
 import com.linkbit.android.ui.base.AbstractRecyclerAdapter
-import com.linkbit.android.presentation.main.holder.CoinStatisticCardViewHolder
+import com.linkbit.android.presentation.main.CoinStatisticCardViewHolder
 
 class CoinStatisticAdapter(context: Context) : AbstractRecyclerAdapter<CoinStatistic, CoinStatisticCardViewHolder>(context) {
     override fun onItemViewType(position: Int): Int = 0

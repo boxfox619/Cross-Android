@@ -6,24 +6,31 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.linkbit.android.R
+import com.linkbit.android.entity.UserModel
 import com.linkbit.android.presentation.BaseFragment
-import kotlinx.android.synthetic.main.fragment_friend_list.*
+import kotlinx.android.synthetic.main.fragment_any_list.*
 
 class FriendListFragment : BaseFragment<FriendListPresenter>(), FriendListView {
+
     override val presenter: FriendListPresenter = FriendListPresenter(this)
     lateinit var friendListAdapter: FriendListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_friend_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_any_list, container, false)
         this.friendListAdapter = FriendListAdapter(this.context)
-        recyclerview_friend.adapter = friendListAdapter
+        recyclerview_any.adapter = friendListAdapter
         return view
     }
 
     override fun onDetach() {
         super.onDetach()
         presenter.destory()
+    }
+
+    override fun setFriendItems(items: List<UserModel>) {
+        friendListAdapter.clear()
+        friendListAdapter.addItems(items)
     }
 
     companion object {

@@ -1,12 +1,12 @@
-package com.linkbit.android.adapter
+package com.linkbit.android.presentation.transaction.list
 
 import android.content.Context
 import android.view.ViewGroup
 import com.linkbit.android.entity.TransactionModel
 import com.linkbit.android.ui.base.AbstractRecyclerAdapter
-import com.linkbit.android.presentation.main.holder.TransactionViewHolder
+import com.linkbit.android.presentation.transaction.list.TransactionViewHolder
 
-class TransactionAdapter(context: Context) : AbstractRecyclerAdapter<TransactionModel, TransactionViewHolder>(context) {
+class TransactionListAdpater(context: Context) : AbstractRecyclerAdapter<TransactionModel, TransactionViewHolder>(context) {
     override fun onItemViewType(position: Int): Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {

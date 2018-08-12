@@ -3,9 +3,6 @@ package com.linkbit.android.presentation.main
 import android.content.Context
 import android.os.Bundle
 import com.linkbit.android.R
-import com.linkbit.android.adapter.CoinStatisticAdapter
-import com.linkbit.android.adapter.TransactionAdapter
-import com.linkbit.android.presentation.wallet.list.WalletListAdapter
 import com.linkbit.android.data.model.CoinStatistic
 import com.linkbit.android.presentation.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*

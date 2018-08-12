@@ -15,7 +15,7 @@ import io.reactivex.Observable
 
 class WalletRepository(private val context: Context) : WalletUsecase {
 
-    override fun loadAllOwnWalletList(): Single<List<WalletModel>> {
+    override fun loadWalletList(): Single<List<WalletModel>> {
         return Single.create { subscriber ->
             context.retrofit.walletAPI.getWalletList().enqueue(object : Response<List<WalletNetworkObject>>(context) {
                 override fun setResponseData(code: Int, newWalletList: List<WalletNetworkObject>?) {

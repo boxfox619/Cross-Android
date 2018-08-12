@@ -5,6 +5,6 @@ import io.reactivex.Observable
 import io.reactivex.Single
 
 interface WalletUsecase : Repository {
-    fun loadAllOwnWalletList() : Single<List<WalletModel>>
+    fun loadWalletList() : Single<List<WalletModel>>
     fun getWalletList() : Observable<List<WalletModel>>
 }
