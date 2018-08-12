@@ -2,14 +2,12 @@ package com.linkbit.android.data.repository
 
 import android.content.Context
 import com.linkbit.android.R
-import com.linkbit.android.data.model.coin.CoinNetworkEntityMapper
-import com.linkbit.android.data.model.coin.CoinNetworkObject
-import com.linkbit.android.data.model.coin.CoinRealmEntityMapper
-import com.linkbit.android.data.model.coin.CoinRealmObject
+import com.linkbit.android.data.model.coin.*
 import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.entity.CoinModel
 import com.linkbit.android.domain.CoinUsecase
+import com.linkbit.android.entity.CoinPriceModel
 import com.linkbit.android.util.realm
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -60,18 +58,22 @@ class CoinRepository(private val context: Context) : CoinUsecase {
         }
     }
 
-    override fun getCoinIcon(coin: CoinModel): Single<String> {
+    override fun getCoinIcon(symbol: String): Single<String> {
         return Single.create { obs ->
-            obs.onSuccess(context.getString(R.string.server_host) + context.getString(R.string.url_asset) + coin.name.toUpperCase() + ".png")
+            obs.onSuccess(context.getString(R.string.server_host) + context.getString(R.string.url_asset) + symbol.toUpperCase() + ".png")
         }
     }
 
-    override fun getCoinPrice(coin: CoinModel, locale: Locale): Single<Double> {
+    override fun getCoinPrice(symbol: String, locale: Locale): Single<CoinPriceModel> {
         return Single.create{ subscriber ->
-            context.retrofit.coinAPI.getPrice(coin.symbol, locale.displayName).enqueue((object : Response<Double>(context) {
-                override fun setResponseData(code: Int, price: Double?) {
+            context.retrofit.coinAPI.getPrice(symbol, locale.displayName).enqueue((object : Response<CoinPriceNetworkObject>(context) {
+                override fun setResponseData(code: Int, price: CoinPriceNetworkObject?) {
                     if (isSuccess(code) && price != null) {
-                        subscriber.onSuccess(price)
+                        subscriber.onSuccess(CoinPriceModel().apply {
+                            this.symbol = symbol
+                            this.amount = price.amount
+                            this.unit = price.unit
+                        })
                     } else {
                         subscriber.onError(null)
                     }
