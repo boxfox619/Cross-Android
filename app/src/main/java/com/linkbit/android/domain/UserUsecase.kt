@@ -1,8 +1,8 @@
 package com.linkbit.android.domain
 
 import com.linkbit.android.entity.UserModel
-import io.reactivex.Observable
-import io.reactivex.Single
+import rx.Single
+import rx.Observable
 
 interface UserUsecase : Repository {
     fun loadFriendList() : Single<List<UserModel>>

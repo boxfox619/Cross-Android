@@ -9,8 +9,8 @@ import com.linkbit.android.entity.CoinModel
 import com.linkbit.android.domain.CoinUsecase
 import com.linkbit.android.entity.CoinPriceModel
 import com.linkbit.android.util.realm
-import io.reactivex.Observable
-import io.reactivex.Single
+import rx.Single
+import rx.Observable
 import java.util.*
 
 class CoinRepository(private val context: Context) : CoinUsecase {

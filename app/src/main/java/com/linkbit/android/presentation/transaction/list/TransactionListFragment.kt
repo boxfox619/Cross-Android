@@ -12,8 +12,9 @@ import com.linkbit.android.presentation.transaction.list.TransactionListAdpater
 import kotlinx.android.synthetic.main.fragment_any_list.*
 
 class TransactionListFragment : BaseFragment<TransactionListPresenter>(), TransactionListView {
-    override val presenter: TransactionListPresenter = TransactionListPresenter(this)
-    lateinit var transactionListAdpater : TransactionListAdpater
+    var address: String? = null
+    override val presenter: TransactionListPresenter = TransactionListPresenter(this, address)
+    lateinit var transactionListAdpater: TransactionListAdpater
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -28,8 +29,7 @@ class TransactionListFragment : BaseFragment<TransactionListPresenter>(), Transa
         presenter.destory()
     }
 
-    override fun setTransationItems(items: List<TransactionModel>) {
-        transactionListAdpater.clear()
+    override fun addTransationItems(items: List<TransactionModel>) {
         transactionListAdpater.addItems(items)
     }
 
@@ -37,5 +37,10 @@ class TransactionListFragment : BaseFragment<TransactionListPresenter>(), Transa
         @JvmStatic
         fun newInstance() =
                 TransactionListFragment()
+
+        fun newInstance(address: String) =
+                TransactionListFragment().apply {
+                    this.address = address
+                }
     }
 }

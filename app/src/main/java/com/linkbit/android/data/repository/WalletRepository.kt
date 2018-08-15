@@ -7,11 +7,11 @@ import com.linkbit.android.data.model.wallet.WalletNetworkObject
 import com.linkbit.android.data.model.wallet.WalletRealmObject
 import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
-import io.reactivex.Single
 import com.linkbit.android.domain.WalletUsecase
 import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.util.realm
-import io.reactivex.Observable
+import rx.Single
+import rx.Observable
 
 class WalletRepository(private val context: Context) : WalletUsecase {
 

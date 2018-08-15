@@ -2,9 +2,8 @@ package com.linkbit.android.domain
 
 import com.linkbit.android.entity.CoinModel
 import com.linkbit.android.entity.CoinPriceModel
-import com.linkbit.android.entity.WalletModel
-import io.reactivex.Observable
-import io.reactivex.Single
+import rx.Single
+import rx.Observable
 import java.util.*
 
 interface CoinUsecase : Repository {

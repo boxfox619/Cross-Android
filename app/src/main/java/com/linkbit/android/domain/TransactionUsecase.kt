@@ -1,7 +1,7 @@
 package com.linkbit.android.domain
 
 import com.linkbit.android.entity.TransactionModel
-import io.reactivex.Single
+import rx.Single
 
 interface TransactionUsecase : Repository {
     fun getIntegralTransactionList(page: Int, count: Int): Single<List<TransactionModel>>

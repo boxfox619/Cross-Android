@@ -4,6 +4,6 @@ import com.linkbit.android.entity.TransactionModel
 import com.linkbit.android.presentation.View
 
 interface TransactionListView : View {
-    fun setTransationItems(items: List<TransactionModel>): Unit
+    fun addTransationItems(items: List<TransactionModel>): Unit
 
 }
