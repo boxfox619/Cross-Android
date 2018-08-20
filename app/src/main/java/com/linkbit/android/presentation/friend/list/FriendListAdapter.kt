@@ -14,7 +14,8 @@ class FriendListAdapter(context: Context) : AbstractRecyclerAdapter<UserModel, F
 
     override fun onBindViewHolder(holder: FriendCardViewHolder, position: Int) {
         var model = getItem(position)
-        holder.setName(model!!.name!!)
-        holder.setAddress(model!!.linkbitAddress!!)
+        holder.setProfile(model!!.profileUrl)
+        holder.setName(model!!.name)
+        holder.setAddress(model!!.linkbitAddress)
     }
 }

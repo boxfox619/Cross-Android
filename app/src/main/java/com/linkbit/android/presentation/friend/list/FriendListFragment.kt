@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_any_list.*
 class FriendListFragment : BaseFragment<FriendListPresenter>(), FriendListView {
 
     override val presenter: FriendListPresenter = FriendListPresenter(this)
-    lateinit var friendListAdapter: FriendListAdapter
+    private lateinit var friendListAdapter: FriendListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

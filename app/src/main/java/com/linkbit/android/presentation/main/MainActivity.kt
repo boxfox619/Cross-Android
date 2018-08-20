@@ -5,6 +5,9 @@ import android.os.Bundle
 import com.linkbit.android.R
 import com.linkbit.android.data.model.CoinStatistic
 import com.linkbit.android.presentation.BaseActivity
+import com.linkbit.android.presentation.friend.list.FriendListFragment
+import com.linkbit.android.presentation.trasnaction.list.TransactionListFragment
+import com.linkbit.android.presentation.wallet.list.WalletListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_header.*
 
@@ -17,7 +20,10 @@ class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
         setContentView(R.layout.activity_main)
         this.coinStatisticAdapter = CoinStatisticAdapter(this)
         recyclerview_coin_statistics.adapter = coinStatisticAdapter
-
+        val manager = fragmentManager
+        manager.beginTransaction().replace(R.id.tab_wallet, WalletListFragment.newInstance()).commit()
+        manager.beginTransaction().replace(R.id.tab_friend, FriendListFragment.newInstance()).commit()
+        manager.beginTransaction().replace(R.id.tab_transaction, TransactionListFragment.newInstance()).commit()
         presenter.init()
     }
 
