@@ -1,6 +1,8 @@
 package com.linkbit.android.data.repository
 
 import android.content.Context
+import com.linkbit.android.data.model.coin.CoinRealmEntityMapper
+import com.linkbit.android.data.model.coin.CoinRealmObject
 import com.linkbit.android.data.model.coin.WalletNetworkEntityMapper
 import com.linkbit.android.data.model.coin.WalletRealmEntityMapper
 import com.linkbit.android.data.model.wallet.WalletNetworkObject
@@ -21,6 +23,10 @@ class WalletRepository(private val context: Context) : WalletUsecase {
                 override fun setResponseData(code: Int, newWalletList: List<WalletNetworkObject>?) {
                     if (isSuccess(code) && newWalletList != null) {
                         val loadedWalletList: List<WalletModel> = newWalletList.map { it -> WalletNetworkEntityMapper.fromNetworkObject(it) }
+                        context.realm.beginTransaction()
+                        context.realm.where(WalletRealmObject::class.java).findAll().deleteAllFromRealm()
+                        context.realm.copyToRealm(loadedWalletList.map { WalletRealmEntityMapper.toRealmObject(it) })
+                        context.realm.commitTransaction()
                         subscriber.onSuccess(loadedWalletList)
                     } else {
                         subscriber.onError(null)

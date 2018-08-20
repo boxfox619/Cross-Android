@@ -6,7 +6,7 @@ import rx.Single
 import rx.Observable
 import java.util.*
 
-interface CoinUsecase : Repository {
+interface CoinUsecase : Usecase {
     fun loadAllCoinList() : Single<List<CoinModel>>
     fun getSupportCoins() : Observable<List<CoinModel>>
     fun getCoinByName(name: String) : Single<CoinModel>

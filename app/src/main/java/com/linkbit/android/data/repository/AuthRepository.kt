@@ -9,14 +9,14 @@ import rx.Single
 
 class AuthRepository(private val context: Context) : AuthUsecase {
 
-    override fun login(): Single<String> {
+    override fun login(token: String): Single<Boolean> {
         return Single.create { subscriber ->
-            context.retrofit.authAPI.signin().enqueue(object : Response<SigninNetworkObject>(context) {
-                override fun setResponseData(code: Int, data: SigninNetworkObject?) {
-                    if (isSuccess(code) && data != null && data.result) {
-                        subscriber.onSuccess(data.token)
+            context.retrofit.authAPI.signin().enqueue(object : Response<Void>(context) {
+                override fun setResponseData(code: Int, data: Void?) {
+                    if (isSuccess(code)) {
+                        subscriber.onSuccess(true)
                     } else {
-                        subscriber.onSuccess(null)
+                        subscriber.onSuccess(false)
                     }
                 }
             })

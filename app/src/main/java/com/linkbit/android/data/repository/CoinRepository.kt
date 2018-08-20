@@ -18,9 +18,13 @@ class CoinRepository(private val context: Context) : CoinUsecase {
     override fun loadAllCoinList(): Single<List<CoinModel>> {
         return Single.create { subscriber ->
             context.retrofit.coinAPI.getSupportedCoins().enqueue((object : Response<List<CoinNetworkObject>>(context) {
-                override fun setResponseData(code: Int, newWalletList: List<CoinNetworkObject>?) {
-                    if (isSuccess(code) && newWalletList != null) {
-                        val loadedCoinList: List<CoinModel> = newWalletList.map { it -> CoinNetworkEntityMapper.fromNetworkObject(it) }
+                override fun setResponseData(code: Int, supportedCoinList: List<CoinNetworkObject>?) {
+                    if (isSuccess(code) && supportedCoinList != null) {
+                        val loadedCoinList: List<CoinModel> = supportedCoinList.map { it -> CoinNetworkEntityMapper.fromNetworkObject(it) }
+                        context.realm.beginTransaction()
+                        context.realm.where(CoinRealmObject::class.java).findAll().deleteAllFromRealm()
+                        context.realm.copyToRealm(loadedCoinList.map { CoinRealmEntityMapper.toRealmObject(it) })
+                        context.realm.commitTransaction()
                         subscriber.onSuccess(loadedCoinList)
                     } else {
                         subscriber.onError(null)

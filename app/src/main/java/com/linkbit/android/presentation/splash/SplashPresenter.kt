@@ -6,29 +6,36 @@ import com.facebook.login.LoginResult
 import com.facebook.FacebookCallback
 import com.google.firebase.auth.FacebookAuthProvider
 import com.linkbit.android.R
+import com.linkbit.android.data.repository.AuthRepository
+import com.linkbit.android.data.repository.CoinRepository
+import com.linkbit.android.data.repository.FriendRepository
+import com.linkbit.android.data.repository.WalletRepository
 import com.linkbit.android.helper.Helper
 import com.linkbit.android.presentation.Presenter
-import com.linkbit.android.service.FriendService
-import com.linkbit.android.service.WalletService
 import io.realm.Realm
-import rx.Observable
+import rx.Single
+
+
 
 
 class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookCallback<LoginResult> {
+    val authRepository = AuthRepository(view.getContext())
+    val coinRepository = CoinRepository(view.getContext())
+    val friendRepository = FriendRepository(view.getContext())
+    val walletRepository = WalletRepository(view.getContext())
 
     override fun destory() {}
 
     fun loadInitializeData() {
         view.let {
             view.showProgress()
-            Observable.just(WalletService.instance.loadTotalTransactionList(it.getContext()),
-                    WalletService.instance.loadWalletList(it.getContext()),
-                    FriendService.instance.loadFriendList(it.getContext()))
-                    .subscribe({ view.finishSplash() },
-                            {
-                                view.hideProgress()
-                                view.showErrorMessage(ctx.getString(R.string.err_fail_load_init_data))
-                            })
+            Single.merge(coinRepository.loadAllCoinList(), friendRepository.loadFriendList(), walletRepository.loadWalletList()).subscribe({
+                view.hideProgress()
+                view.finishSplash()
+            }, {
+                view.hideProgress()
+                view.showErrorMessage(ctx.getString(R.string.err_fail_load_init_data))
+            })
         }
     }
 
@@ -48,7 +55,19 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener { res ->
                     if (res.isSuccessful()) {
-                        loadInitializeData()
+                        res.result.user.getIdToken(true).addOnCompleteListener { res ->
+                            run {
+                                if (res.isSuccessful()) {
+                                    authRepository.login(res.result.token!!).subscribe{
+                                        if(it){
+                                            loadInitializeData()
+                                        }else{
+                                            Helper.showToast(ctx, ctx.getString(R.string.err_fail_login))
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     } else {
                         Helper.showToast(ctx, ctx.getString(R.string.err_fail_login))
                     }

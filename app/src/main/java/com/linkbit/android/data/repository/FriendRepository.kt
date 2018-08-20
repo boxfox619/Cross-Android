@@ -1,16 +1,13 @@
 package com.linkbit.android.data.repository
 
 import android.content.Context
-import com.linkbit.android.data.model.auth.SigninNetworkObject
-import com.linkbit.android.data.model.coin.CoinRealmEntityMapper
-import com.linkbit.android.data.model.coin.CoinRealmObject
 import com.linkbit.android.data.model.coin.UserNetworkEntityMapper
 import com.linkbit.android.data.model.coin.UserRealmEntityMapper
+import com.linkbit.android.data.model.user.FriendRealmObject
 import com.linkbit.android.data.model.user.UserNetworkObject
 import com.linkbit.android.data.model.user.UserRealmObject
 import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
-import com.linkbit.android.domain.AuthUsecase
 import com.linkbit.android.domain.FriendUsecase
 import com.linkbit.android.entity.UserModel
 import com.linkbit.android.util.realm
@@ -24,6 +21,10 @@ class FriendRepository(private val context: Context) : FriendUsecase {
             context.retrofit.friendAPI.friendList().enqueue(object : Response<List<UserNetworkObject>>(context) {
                 override fun setResponseData(code: Int, friendList: List<UserNetworkObject>?) {
                     if (isSuccess(code) && friendList != null) {
+                        context.realm.beginTransaction()
+                        context.realm.where(FriendRealmObject::class.java).findAll().deleteAllFromRealm()
+                        context.realm.copyToRealm(friendList.map { UserRealmEntityMapper.toFriendObject(UserNetworkEntityMapper.fromNetworkObject(it)) })
+                        context.realm.commitTransaction()
                         subscriber.onSuccess(friendList.map { UserNetworkEntityMapper.fromNetworkObject(it) })
                     } else {
                         subscriber.onError(null)

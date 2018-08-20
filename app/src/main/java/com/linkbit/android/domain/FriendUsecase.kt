@@ -4,7 +4,7 @@ import com.linkbit.android.entity.UserModel
 import rx.Single
 import rx.Observable
 
-interface FriendUsecase : Repository {
+interface FriendUsecase : Usecase {
     fun loadFriendList() : Single<List<UserModel>>
     fun getFriendList() : Observable<List<UserModel>>
     fun addFriend(uid: String) : Single<Boolean>
