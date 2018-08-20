@@ -13,7 +13,7 @@ class TransactionRepository(private val context: Context) : TransactionUsecase {
 
     override fun getIntegralTransactionList(page: Int, count: Int): Single<List<TransactionModel>> {
         return Single.create { subscriber ->
-            context.retrofit.transactionApi.getIntegralTransactionList(page, count).enqueue((object : Response<List<TransactionNetworkObject>>(context) {
+            context.retrofit.transactionAPI.getIntegralTransactionList(page, count).enqueue((object : Response<List<TransactionNetworkObject>>(context) {
                 override fun setResponseData(code: Int, transactionList: List<TransactionNetworkObject>?) {
                     if (isSuccess(code) && transactionList != null) {
                         val transactionList: List<TransactionModel> = transactionList.map { it -> TransactioNetworkEntityMapper.fromNetworkObject(it) }
@@ -28,7 +28,7 @@ class TransactionRepository(private val context: Context) : TransactionUsecase {
 
     override fun getTransactionsByAddress(address: String, page: Int, count: Int): Single<List<TransactionModel>> {
         return Single.create { subscriber ->
-            context.retrofit.transactionApi.getTransactionList(address, page, count).enqueue((object : Response<List<TransactionNetworkObject>>(context) {
+            context.retrofit.transactionAPI.getTransactionList(address, page, count).enqueue((object : Response<List<TransactionNetworkObject>>(context) {
                 override fun setResponseData(code: Int, transactionList: List<TransactionNetworkObject>?) {
                     if (isSuccess(code) && transactionList != null) {
                         val transactionList: List<TransactionModel> = transactionList.map { it -> TransactioNetworkEntityMapper.fromNetworkObject(it) }
@@ -43,7 +43,7 @@ class TransactionRepository(private val context: Context) : TransactionUsecase {
 
     override fun getTransactionByHash(txHash: String): Single<TransactionModel> {
         return Single.create { subscriber ->
-            context.retrofit.transactionApi.getTransaction(txHash).enqueue((object : Response<TransactionNetworkObject>(context) {
+            context.retrofit.transactionAPI.getTransaction(txHash).enqueue((object : Response<TransactionNetworkObject>(context) {
                 override fun setResponseData(code: Int, transaction: TransactionNetworkObject?) {
                     if (isSuccess(code) && transaction != null) {
                         subscriber.onSuccess(TransactioNetworkEntityMapper.fromNetworkObject(transaction))

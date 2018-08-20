@@ -16,7 +16,8 @@ class Connector(context: Context) {
     val walletAPI: WalletApi
     val friendAPI: FriendApi
     val coinAPI: CoinApi
-    val transactionApi: TransactionApi
+    val transactionAPI: TransactionApi
+    val authAPI: AuthApi
 
     init {
         val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -37,7 +38,8 @@ class Connector(context: Context) {
         walletAPI = retrofit.create(WalletApi::class.java)
         friendAPI = retrofit.create(FriendApi::class.java)
         coinAPI = retrofit.create(CoinApi::class.java)
-        transactionApi = retrofit.create(TransactionApi::class.java)
+        transactionAPI = retrofit.create(TransactionApi::class.java)
+        authAPI = retrofit.create(AuthApi::class.java)
     }
 
 }
