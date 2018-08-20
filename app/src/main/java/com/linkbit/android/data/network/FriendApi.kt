@@ -10,8 +10,8 @@ import retrofit2.http.*
 
 interface FriendApi{
 
-    @GET("search/account/:type")
-    fun searchFriends(@Query("text") text: String): Call<List<UserNetworkObject>>
+    @GET("search/account/")
+    fun searchUsers(@Query("text") text: String): Call<List<UserNetworkObject>>
 
     @GET("friend")
     fun friendList(): Call<List<UserNetworkObject>>
