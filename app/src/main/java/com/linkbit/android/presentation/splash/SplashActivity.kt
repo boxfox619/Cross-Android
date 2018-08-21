@@ -27,18 +27,16 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashView {
         setContentView(R.layout.activity_splash)
         FacebookSdk.sdkInitialize(this)
         AppEventsLogger.activateApp(this)
-
-        presenter.init()
-
         fbCallbackManager = CallbackManager.Factory.create()
         fbLoginButton = LoginButton(this)
         fbLoginButton.setReadPermissions("email", "public_profile")
         fbLoginButton.setOnClickListener({fbLoginButton.performClick()})
         Picasso.get()
                 .load(R.drawable.ic_app_icon)
-                .resize(1600,1600)
+                .resize(1000,1000)
                 .onlyScaleDown()
                 .into(iv_splash_logo)
+        presenter.init()
     }
 
     override fun showProgress() {
