@@ -2,7 +2,7 @@ package com.linkbit.android.presentation.wallet.manage.coinlist
 
 import com.linkbit.android.entity.CoinModel
 import com.linkbit.android.data.model.wallet.WalletEditModel
-import com.linkbit.android.data.network.loader.CoinNetworkRepository
+import com.linkbit.android.data.repository.CoinRepository
 import com.linkbit.android.presentation.Presenter
 
 
@@ -10,7 +10,7 @@ class CoinListPresenter (view: CoinListView,
                          wallet: WalletEditModel,
                          isValid : (state:Boolean)->Unit,
                          selectionMode: SelectionMode,
-                         private val coinRepository: CoinNetworkRepository = CoinNetworkRepository(view.getContext())) : Presenter<CoinListView>(view) {
+                         private val coinRepository: CoinRepository = CoinRepository(view.getContext())) : Presenter<CoinListView>(view) {
     val wallet: WalletEditModel = wallet
     val isValid: (state:Boolean) -> Unit = isValid
     var selectionMode: SelectionMode = selectionMode

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
-class TransactionRealmObject : RealmObject(){
+open class TransactionRealmObject : RealmObject(){
     @PrimaryKey
     @SerializedName("transactionHash") lateinit var transactionHash: String
     @SerializedName("sourceAddress") lateinit var sourceAddress: String

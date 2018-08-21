@@ -1,5 +1,6 @@
 package com.linkbit.android.data.network
 
+import com.linkbit.android.data.model.auth.SigninNetworkObject
 import retrofit2.http.GET
 import retrofit2.Call
 

@@ -19,8 +19,8 @@ class WalletListAdapter(
 
     override fun onBindViewHolder(holder: WalletCardViewHolder, position: Int) {
         var model = getItem(position)
-        val coinPrice = repository.getCoinPrice(model!!.coinSymbol, Locale.getDefault()).blockingGet()
-        val coinIcon = repository.getCoinIcon(model!!.coinSymbol).blockingGet()
+        val coinPrice = repository.getCoinPrice(model!!.coinSymbol, Locale.getDefault()).toBlocking().value()
+        val coinIcon = repository.getCoinIcon(model!!.coinSymbol).toBlocking().value()
         holder.setName(model!!.walletName)
         holder.setSymbol(model!!.coinSymbol)
         holder.setMoney(coinPrice.unit)

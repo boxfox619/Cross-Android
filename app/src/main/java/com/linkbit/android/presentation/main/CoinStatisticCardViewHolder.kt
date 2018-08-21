@@ -31,7 +31,7 @@ class CoinStatisticCardViewHolder(itemView: View) : RecyclerView.ViewHolder(item
         itemView.findViewById<TextView>(R.id.tv_statistic_balance).text = String.format("%.2f", balance)
     }
 
-    fun setCoinPrice(price: Long){
+    fun setCoinPrice(price: Double){
         itemView.findViewById<TextView>(R.id.tv_statistic_price).text = DecimalFormat("#,###").format(price)
     }
 

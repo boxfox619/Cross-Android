@@ -19,9 +19,9 @@ class CreateWalletFinishFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_create_wallet_finish, container, false)
-        Glide.with(activity!!).load(URLHelper.createAssetUrl(activity!!, this.walletModel.coin.toUpperCase())).into(view.findViewById(R.id.iv_wallet_icon))
-        view.findViewById<TextView>(R.id.tv_wallet_symbol).text = this.walletModel.coin
-        view.findViewById<TextView>(R.id.tv_wallet_cross_address).text = this.walletModel.crossAddress
+        Glide.with(activity!!).load(URLHelper.createAssetUrl(activity!!, this.walletModel.coinSymbol.toUpperCase())).into(view.findViewById(R.id.iv_wallet_icon))
+        view.findViewById<TextView>(R.id.tv_wallet_symbol).text = this.walletModel.coinSymbol
+        view.findViewById<TextView>(R.id.tv_wallet_cross_address).text = this.walletModel.linkbitAddress
         view.findViewById<TextView>(R.id.tv_wallet_address).text = this.walletModel.originalAddress
         btn_createwallet_finish.setOnClickListener({this.confirmListener()})
         return view

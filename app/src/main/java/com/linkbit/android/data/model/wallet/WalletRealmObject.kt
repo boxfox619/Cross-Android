@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
-class WalletRealmObject : RealmObject(){
+open class WalletRealmObject : RealmObject(){
     @SerializedName("ownerId") lateinit var  ownerId: String
     @SerializedName("ownerName") lateinit var  ownerName: String
     @SerializedName("name") lateinit var  walletName: String

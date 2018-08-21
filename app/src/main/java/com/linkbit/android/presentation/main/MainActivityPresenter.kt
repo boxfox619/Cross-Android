@@ -5,8 +5,6 @@ import com.linkbit.android.data.model.CoinStatistic
 import com.linkbit.android.data.repository.CoinRepository
 import com.linkbit.android.data.repository.WalletRepository
 import com.linkbit.android.entity.WalletModel
-import com.linkbit.android.service.WalletService
-import com.linkbit.android.entity.TransactionModel
 import com.linkbit.android.presentation.Presenter
 import java.util.*
 
@@ -24,7 +22,7 @@ class MainActivityPresenter(
         this.view.addTabSpec(wallet, R.id.tab_wallet, wallet)
         this.view.addTabSpec(transaction, R.id.tab_transaction, transaction)
         this.view.addTabSpec(friendList, R.id.tab_friend, friendList)
-        walletRepository.getWalletList().subscribe({ walletListLoad(it) }).apply { disposables.add(this) }
+        walletRepository.getWalletList().subscribe { walletListLoad(it) }.apply { disposables.add(this) }
     }
 
     fun walletListLoad(walletModelList: List<WalletModel>) {
@@ -32,8 +30,8 @@ class MainActivityPresenter(
             var coinMap = HashMap<String, CoinStatistic>()
             var totalExchangeBalace: Double = 0.toDouble()
             walletModelList!!.forEach {
-                val coin = coinRepository.getCoinBySymbol(it.coinSymbol).blockingGet()
-                val price = coinRepository.getCoinPrice(coin.symbol, Locale.getDefault()).blockingGet()
+                val coin = coinRepository.getCoinBySymbol(it.coinSymbol).toBlocking().value()
+                val price = coinRepository.getCoinPrice(coin.symbol, Locale.getDefault()).toBlocking().value()
                 val realBalance = it.balance * price.amount
                 totalExchangeBalace += realBalance
                 var statistic = coinMap.get(it.coinSymbol)

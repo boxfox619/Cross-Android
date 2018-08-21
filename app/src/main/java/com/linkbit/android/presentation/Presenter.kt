@@ -1,15 +1,13 @@
 package com.linkbit.android.presentation
 
 import android.content.Context
-import io.reactivex.disposables.CompositeDisposable
+import rx.Subscription
 
-abstract class Presenter<out T : View> (protected val view : T){
-    protected val disposables by lazy {
-        CompositeDisposable()
-    }
+abstract class Presenter<out T : View>(protected val view: T) {
+    protected val disposables = ArrayList<Subscription>()
 
-    protected var ctx : Context = view.getContext()
-    open fun destory(){
-        disposables.clear()
+    protected var ctx: Context = view.getContext()
+    open fun destory() {
+        disposables.forEach { it.unsubscribe() }
     }
 }
