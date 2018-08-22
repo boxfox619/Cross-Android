@@ -7,5 +7,4 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    tools:context=".presentation.walletModel.manage.coinlist.CoinListFragment"
-    tools:listitem="@layout/fragment_coin" />
+    tools:listitem="@layout/view_coin_item" />

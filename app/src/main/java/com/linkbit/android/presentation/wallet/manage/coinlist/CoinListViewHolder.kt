@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.*
 import com.bumptech.glide.Glide
 import com.linkbit.android.helper.URLHelper
-import kotlinx.android.synthetic.main.fragment_coin.view.*
+import kotlinx.android.synthetic.main.view_coin_item.view.*
 
 class CoinListViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
     val iconView: ImageView = mView.iv_coin_icon

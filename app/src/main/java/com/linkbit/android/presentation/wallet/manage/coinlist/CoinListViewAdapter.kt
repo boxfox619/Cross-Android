@@ -19,7 +19,7 @@ class CoinListViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinListViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.view_coin_item, parent, false)
+                .inflate(R.layout.view_coin_detail_item, parent, false)
         if(view is LinearLayout){
             if(selectionMode == SelectionMode.MULTI){
                 view.addView(CheckBox(parent.context),0)
