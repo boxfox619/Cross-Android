@@ -3,172 +3,44 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="250dp">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/albumDetailAppBar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:orientation="vertical"
+        android:gravity="bottom">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
+        <TextView
+            android:id="@+id/cross_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cross-3379"
+            android:textColor="#88555555"
+            android:textSize="15dp"
+            android:layout_marginLeft="15dp" />
+
+        <TextView
+            android:id="@+id/cross_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KRW 103,201,129"
+            android:textColor="#555555"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp" />
+
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:fitsSystemWindows="true"
-            app:contentScrim="@android:color/transparent"
-            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:titleEnabled="false">
-
+            android:layout_height="wrap_content">
             <LinearLayout
-                android:id="@+id/shadow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/bg_shadow">
-
-                <RelativeLayout
-                    android:layout_width="309dp"
-                    android:layout_height="165dp"
-                    android:background="@drawable/bg_coin_summary_card"
-                    android:padding="20dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/detail_symbol"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:text="ETH"
-                            android:textColor="#88FFFFFF"
-                            android:textSize="11dp" />
-
-                        <TextView
-                            android:id="@+id/detail_coin"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/detail_symbol"
-                            android:gravity="end"
-                            android:text="32.0938274347"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold"
-                            android:paddingLeft="4dp"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:background="@drawable/bg_white_circle" />
-
-                    <LinearLayout
-                        android:id="@+id/money_info_container"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@id/receive_container"
-                        android:orientation="vertical"
-                        android:paddingBottom="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="cross-1322-3213"
-                            android:textColor="@android:color/white"
-                            android:textSize="17dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="15dp"
-                            android:text="0x13Ab123bsad1231fqwfsqf124124123"
-                            android:textColor="#88FFFFFF"
-                            android:textSize="11dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/receive_container"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_wallet"
-                            android:tint="@android:color/white" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="10dp"
-                            android:padding="2dp"
-                            android:src="@drawable/ic_qrcode"
-                            android:tint="@android:color/white" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="10dp"
-                            android:src="@drawable/ic_nfc"
-                            android:tint="@android:color/white" />
-                    </LinearLayout>
-                </RelativeLayout>
+                android:orientation="horizontal">
+                <include layout="@layout/view_header_statistic_card"/>
+                <include layout="@layout/view_header_statistic_card"/>
+                <include layout="@layout/view_header_statistic_card"/>
             </LinearLayout>
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/albumDetailToolbar"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                app:contentInsetStart="0dp"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/albumDetailBackButton"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_back"
-                        android:tint="#555555" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="?attr/actionBarSize"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/albumDetailArtist"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_gravity="center"
-                            android:textColor="@android:color/white"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-
-                </RelativeLayout>
-            </android.support.v7.widget.Toolbar>
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-    </android.support.design.widget.AppBarLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
