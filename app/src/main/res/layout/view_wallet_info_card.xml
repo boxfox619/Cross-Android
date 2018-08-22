@@ -20,8 +20,7 @@
         android:textSize="11dp"
         app:layout_constraintBottom_toBottomOf="@id/tv_wallet_balance"
         tools:layout_editor_absoluteX="16dp"
-        tools:ignore="MissingConstraints" />it bash
-    
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv_wallet_balance"
