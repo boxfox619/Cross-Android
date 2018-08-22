@@ -3,59 +3,44 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="250dp">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/horizontal_guideline"
-        android:layout_width="1dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.03" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/vertical_guideline"
-        android:layout_width="1dp"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.03" />
+        android:gravity="bottom">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_coin_statistics"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="H,5:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/cross_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cross-3379"
+            android:textColor="#88555555"
+            android:textSize="15dp"
+            android:layout_marginLeft="15dp" />
 
-    <TextView
-        android:id="@+id/tv_total_exchange_balance"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:text="103,321,968.52"
-        android:textColor="#555555"
-        android:textSize="11pt"
-        app:layout_constraintBottom_toTopOf="@id/recyclerview_coin_statistics"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/vertical_guideline" />
+        <TextView
+            android:id="@+id/cross_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KRW 103,201,129"
+            android:textColor="#555555"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp" />
 
-    <TextView
-        android:id="@+id/tv_linkbit_address"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Linkbit-3218-3921"
-        android:textSize="7pt"
-        app:layout_constraintBottom_toTopOf="@id/tv_total_exchange_balance"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/vertical_guideline" />
-
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintStart_toStartOf="@id/vertical_guideline"
-        app:layout_constraintTop_toTopOf="@id/horizontal_guideline" />
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <include layout="@layout/view_header_statistic_card"/>
+                <include layout="@layout/view_header_statistic_card"/>
+                <include layout="@layout/view_header_statistic_card"/>
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
