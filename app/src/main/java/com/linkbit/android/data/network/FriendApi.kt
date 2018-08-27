@@ -13,7 +13,7 @@ interface FriendApi{
     @GET("search/account/list")
     fun searchUsers(@Query("text") text: String): Call<List<UserNetworkObject>>
 
-    @GET("search/account/")
+    @GET("search/account")
     fun searchUser(@Query("uid") uid: String): Call<UserNetworkObject>
 
     @GET("friend")

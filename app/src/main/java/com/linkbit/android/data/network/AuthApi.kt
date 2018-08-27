@@ -5,9 +5,9 @@ import retrofit2.Call
 
 
 interface AuthApi{
-    @GET("signin/")
+    @GET("signin")
     fun signin(): Call<Void>
 
-    @GET("logout/")
+    @GET("logout")
     fun logout(): Call<Void>
 }
