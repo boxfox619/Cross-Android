@@ -1,7 +1,6 @@
 package com.linkbit.android.data.repository
 
 import android.content.Context
-import com.linkbit.android.data.model.auth.SigninNetworkObject
 import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.domain.AuthUsecase

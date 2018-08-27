@@ -59,7 +59,7 @@
     <ProgressBar
         android:id="@+id/progress_splash"
         style="@style/Widget.AppCompat.ProgressBar"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -71,6 +71,8 @@
         android:text="@string/facebook_signin_button_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:textColor="@android:color/white"
+        android:background="@color/colorFacebook"
         app:layout_constraintDimensionRatio="H,7:1"
         app:layout_constraintBottom_toBottomOf="@id/guideline3"
         app:layout_constraintEnd_toEndOf="@id/guideline"
