@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.walletModel.manage.CreateWalletActivity"
-    android:padding="10dp">
+    tools:context=".presentation.walletModel.manage.CreateWalletActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -24,14 +23,13 @@
 
     <Button
         android:id="@+id/btn_createwallet_next"
-        android:background="@drawable/btn_gradient_background"
-        android:textColor="@android:color/white"
         android:layout_width="81dp"
         android:layout_height="30dp"
+        android:background="@drawable/btn_gradient_background"
         android:text="다음"
+        android:textColor="@android:color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -24,6 +24,8 @@
             android:textSize="14dp"/>
 
         <LinearLayout
+            android:id="@+id/iv_statistic_icon"
+            android:orientation="horizontal"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
@@ -38,6 +40,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_statistic_balance"
                 android:layout_width="wrap_content"
                 android:layout_height="15dp"
                 android:text="KRW"
@@ -45,6 +48,7 @@
                 android:textSize="12dp" />
 
             <TextView
+                android:id="@+id/tv_statistic_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="4dp"
@@ -61,6 +65,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_coin_symbol"
                 android:layout_width="wrap_content"
                 android:layout_height="15dp"
                 android:text="ETH"
@@ -68,6 +73,7 @@
                 android:textSize="12dp" />
 
             <TextView
+                android:id="@+id/tv_coin_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="4dp"
