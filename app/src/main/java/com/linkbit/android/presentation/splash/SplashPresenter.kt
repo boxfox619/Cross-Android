@@ -1,5 +1,6 @@
 package com.linkbit.android.presentation.splash
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
@@ -14,9 +15,6 @@ import com.linkbit.android.helper.Helper
 import com.linkbit.android.presentation.Presenter
 import io.realm.Realm
 import rx.Single
-
-
-
 
 class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookCallback<LoginResult> {
     val authRepository = AuthRepository(view.getContext())
@@ -50,6 +48,7 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
     }
 
     override fun onSuccess(loginResult: LoginResult) {
+        view.showProgress()
         val firebaseAuth = FirebaseAuth.getInstance()
         val credential = FacebookAuthProvider.getCredential(loginResult.accessToken.token)
         firebaseAuth.signInWithCredential(credential)
@@ -58,17 +57,22 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
                         res.result.user.getIdToken(true).addOnCompleteListener { res ->
                             run {
                                 if (res.isSuccessful()) {
-                                    authRepository.login(res.result.token!!).subscribe{
-                                        if(it){
+                                    authRepository.login(res.result.token!!).subscribe {
+                                        view.hideProgress()
+                                        if (it) {
                                             loadInitializeData()
-                                        }else{
+                                        } else {
+                                            FirebaseAuth.getInstance().signOut()
                                             Helper.showToast(ctx, ctx.getString(R.string.err_fail_login))
                                         }
                                     }
+                                } else {
+                                    view.hideProgress()
                                 }
                             }
                         }
                     } else {
+                        view.hideProgress()
                         Helper.showToast(ctx, ctx.getString(R.string.err_fail_login))
                     }
                 }

@@ -10,6 +10,6 @@ object Helper {
 
     fun getPrefData(key: String, context: Context): String = getPref(context).getString(key, "")
 
-    fun setPrefData(value: String, key: String, context: Context) = getPref(context).edit().putString(key, value).apply()
+    fun setPrefData(key: String, value: String, context: Context) = getPref(context).edit().putString(key, value).apply()
 
 }

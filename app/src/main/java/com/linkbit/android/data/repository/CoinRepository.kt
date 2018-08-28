@@ -27,7 +27,7 @@ class CoinRepository(private val context: Context) : CoinUsecase {
                         context.realm.commitTransaction()
                         subscriber.onSuccess(loadedCoinList)
                     } else {
-                        subscriber.onError(null)
+                        subscriber.onError(Throwable())
                     }
                 }
             }))
@@ -48,7 +48,7 @@ class CoinRepository(private val context: Context) : CoinUsecase {
             if (coinObject != null)
                 obs.onSuccess(CoinRealmEntityMapper.fromRealmObject(coinObject))
             else
-                obs.onError(null)
+                obs.onError(Throwable())
         }
     }
 
@@ -58,7 +58,7 @@ class CoinRepository(private val context: Context) : CoinUsecase {
             if (coinObject != null)
                 obs.onSuccess(CoinRealmEntityMapper.fromRealmObject(coinObject))
             else
-                obs.onError(null)
+                obs.onError(Throwable())
         }
     }
 
@@ -79,7 +79,7 @@ class CoinRepository(private val context: Context) : CoinUsecase {
                             this.unit = price.unit
                         })
                     } else {
-                        subscriber.onError(null)
+                        subscriber.onError(Throwable())
                     }
                 }
             }))

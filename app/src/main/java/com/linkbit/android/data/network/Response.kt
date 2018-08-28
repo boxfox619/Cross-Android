@@ -7,7 +7,10 @@ import retrofit2.Response
 
 abstract class Response<T>(private val context: Context) : Callback<T> {
 
-    override fun onFailure(call: Call<T>?, t: Throwable?) = Helper.showToast(context, "네트워크 오류")
+    override fun onFailure(call: Call<T>?, t: Throwable?) {
+        Helper.showToast(context, "네트워크 오류")
+        setResponseData(400, null)
+    }
 
     override fun onResponse(call: Call<T>?, response: Response<T>?) {
         response?.run { setResponseData(code(), body()) }

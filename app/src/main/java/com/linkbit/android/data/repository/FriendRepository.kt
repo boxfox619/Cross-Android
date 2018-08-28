@@ -27,7 +27,7 @@ class FriendRepository(private val context: Context) : FriendUsecase {
                         context.realm.commitTransaction()
                         subscriber.onSuccess(friendList.map { UserNetworkEntityMapper.fromNetworkObject(it) })
                     } else {
-                        subscriber.onError(null)
+                        subscriber.onError(Throwable())
                     }
                 }
             })
@@ -69,7 +69,7 @@ class FriendRepository(private val context: Context) : FriendUsecase {
                     if (isSuccess(code) && userList != null) {
                         subscriber.onSuccess(userList.map { UserNetworkEntityMapper.fromNetworkObject(it) })
                     } else {
-                        subscriber.onError(null)
+                        subscriber.onError(Throwable())
                     }
                 }
             })
