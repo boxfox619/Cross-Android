@@ -27,7 +27,7 @@ class CoinRepository(private val context: Context) : CoinUsecase {
                         context.realm.commitTransaction()
                         subscriber.onSuccess(loadedCoinList)
                     } else {
-                        subscriber.onError(Throwable())
+                        subscriber.onError(Throwable("Supported coin list load fail"))
                     }
                 }
             }))

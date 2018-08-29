@@ -29,7 +29,7 @@ class WalletRepository(private val context: Context) : WalletUsecase {
                         context.realm.commitTransaction()
                         subscriber.onSuccess(loadedWalletList)
                     } else {
-                        subscriber.onError(Throwable())
+                        subscriber.onError(Throwable("Fail the wallet list load"))
                     }
                 }
             })

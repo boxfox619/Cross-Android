@@ -7,7 +7,6 @@ import com.facebook.login.LoginResult
 import com.facebook.FacebookCallback
 import com.google.firebase.auth.FacebookAuthProvider
 import com.linkbit.android.R
-import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.data.repository.AuthRepository
 import com.linkbit.android.data.repository.CoinRepository
 import com.linkbit.android.data.repository.FriendRepository
@@ -32,6 +31,7 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
                 view.hideProgress()
                 view.finishSplash()
             }, {
+                Log.d("Splash-debug", it.message)
                 view.hideProgress()
                 view.showErrorMessage(ctx.getString(R.string.err_fail_load_init_data))
             })

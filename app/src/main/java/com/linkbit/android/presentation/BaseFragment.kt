@@ -14,6 +14,6 @@ abstract class BaseFragment <out T : Presenter<*>> :  Fragment(), View{
     }
 
     override fun getContext(): Context {
-        return this.getContext();
+        return this.context;
     }
 }

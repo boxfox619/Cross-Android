@@ -8,7 +8,7 @@ import retrofit2.http.*
 
 
 interface CoinApi {
-    @GET("coin/supported/list")
+    @GET("/coin/supported/list")
     fun getSupportedCoins(): Call<List<CoinNetworkObject>>
 
     @GET("coin/price")
