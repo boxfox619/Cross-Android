@@ -7,6 +7,7 @@ import com.facebook.login.LoginResult
 import com.facebook.FacebookCallback
 import com.google.firebase.auth.FacebookAuthProvider
 import com.linkbit.android.R
+import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.data.repository.AuthRepository
 import com.linkbit.android.data.repository.CoinRepository
 import com.linkbit.android.data.repository.FriendRepository
@@ -42,7 +43,11 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
         val firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth.currentUser
         if (user != null) {
-            this.loadInitializeData()
+            user.getIdToken(true).addOnCompleteListener { res ->
+                if(res.isSuccessful){
+                    this.loadInitializeData()
+                }
+            }
         }
         view.registFBLogin(this)
     }
@@ -58,12 +63,12 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
                             run {
                                 if (res.isSuccessful()) {
                                     authRepository.login(res.result.token!!).subscribe {
-                                        view.hideProgress()
                                         if (it) {
                                             loadInitializeData()
                                         } else {
                                             FirebaseAuth.getInstance().signOut()
                                             Helper.showToast(ctx, ctx.getString(R.string.err_fail_login))
+                                            view.hideProgress()
                                         }
                                     }
                                 } else {

@@ -10,7 +10,7 @@ class AuthRepository(private val context: Context) : AuthUsecase {
 
     override fun login(token: String): Single<Boolean> {
         return Single.create { subscriber ->
-            context.retrofit.authAPI.signin().enqueue(object : Response<Void>(context) {
+            context.retrofit.authAPI.signin(token).enqueue(object : Response<Void>(context) {
                 override fun setResponseData(code: Int, data: Void?) {
                     if (isSuccess(code)) {
                         subscriber.onSuccess(true)
