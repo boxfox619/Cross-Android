@@ -2,43 +2,50 @@
 
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="250dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:gravity="bottom"
         android:orientation="vertical"
-        android:gravity="bottom">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/cross_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:text="Cross-3379"
             android:textColor="#88555555"
-            android:textSize="15dp"
-            android:layout_marginLeft="15dp" />
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/cross_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:text="KRW 103,201,129"
             android:textColor="#555555"
-            android:textSize="20dp"
-            android:layout_marginLeft="15dp" />
+            android:textSize="20dp" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <include layout="@layout/view_header_statistic_card"/>
-                <include layout="@layout/view_header_statistic_card"/>
-                <include layout="@layout/view_header_statistic_card"/>
+
+                <include layout="@layout/view_header_statistic_card" />
+
+                <include layout="@layout/view_header_statistic_card" />
+
+                <include layout="@layout/view_header_statistic_card" />
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>
