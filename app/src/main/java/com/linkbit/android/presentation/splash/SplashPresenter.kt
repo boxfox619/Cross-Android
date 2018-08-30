@@ -27,7 +27,7 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
     fun loadInitializeData() {
         view.let {
             view.showProgress()
-            Single.merge(coinRepository.loadAllCoinList(), friendRepository.loadFriendList(), walletRepository.loadWalletList()).subscribe({
+            Single.merge(authRepository.getAuthData(), coinRepository.loadAllCoinList(), friendRepository.loadFriendList(), walletRepository.loadWalletList()).subscribe({
                 view.hideProgress()
                 view.finishSplash()
             }, {
