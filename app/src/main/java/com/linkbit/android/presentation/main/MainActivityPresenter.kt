@@ -19,9 +19,9 @@ class MainActivityPresenter(
         val wallet = ctx.getString(R.string.wallet)
         val transaction = ctx.getString(R.string.transaction)
         val friendList = ctx.getString(R.string.friend_list)
-        /*this.view.addTabSpec(wallet, R.id.tab_wallet, wallet)
+        this.view.addTabSpec(wallet, R.id.tab_wallet, wallet)
         this.view.addTabSpec(transaction, R.id.tab_transaction, transaction)
-        this.view.addTabSpec(friendList, R.id.tab_friend, friendList)*/
+        this.view.addTabSpec(friendList, R.id.tab_friend, friendList)
         walletRepository.getWalletList().subscribe { walletListLoad(it) }.apply { disposables.add(this) }
     }
 

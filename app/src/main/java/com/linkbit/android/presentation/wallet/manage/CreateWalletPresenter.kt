@@ -23,9 +23,5 @@ class CreateWalletPresenter(view : CreateWalletView) : Presenter<CreateWalletVie
     fun init() {
         this.wallet = WalletEditModel()
     }
-
-    override fun destory() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 }
 

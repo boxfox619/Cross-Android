@@ -11,25 +11,26 @@
         android:layout_width="1dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.3" />
 
-    <include layout="@layout/layout_header"
+    <include
+        layout="@layout/layout_header"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/toolbar_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/toolbar_guideline"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TabHost
         android:id="@+id/tab_host"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/toolbar_guideline"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="@id/toolbar_guideline">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,32 +38,50 @@
             android:orientation="vertical">
 
             <TabWidget
+                android:id="@android:id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:background="@android:color/white" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F8F8F8" />
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/tab_wallet"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <FrameLayout
                         android:id="@+id/tab_wallet_content"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"></FrameLayout>
 
-                </LinearLayout>
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/btn_main_create_wallet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="15dp"
+                        android:src="@drawable/ic_add_white_24dp"
+                        android:clickable="true"/>
+
+                </RelativeLayout>
 
                 <LinearLayout
                     android:id="@+id/tab_transaction"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <FrameLayout
                         android:id="@+id/tab_transaction_content"
                         android:layout_width="match_parent"
@@ -74,6 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <FrameLayout
                         android:id="@+id/tab_friend_content"
                         android:layout_width="match_parent"
