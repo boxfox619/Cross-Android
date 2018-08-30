@@ -15,5 +15,6 @@
 
     <string name="err_fail_login">로그인 실패</string>
     <string name="err_fail_load_init_data">초기 데이터 로드 실패</string>
+    <string name="msg_fail_load_transaction">트랜젝션 로드 실패</string>
 
 </resources>

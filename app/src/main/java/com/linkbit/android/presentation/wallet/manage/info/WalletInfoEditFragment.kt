@@ -20,11 +20,11 @@ import kotlinx.android.synthetic.main.fragment_wallet_info_edit.*
 class WalletInfoEditFragment : BaseFragment<WalletInfoEditPresenter>(), WalletInfoEditView {
     private lateinit var wallet: WalletEditModel
     private lateinit var isValid: (state: Boolean) -> Unit
-    override var presenter: WalletInfoEditPresenter = WalletInfoEditPresenter(this, wallet, isValid)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_wallet_info_edit, container, false)
+        this.presenter = WalletInfoEditPresenter(this, wallet, isValid)
         return view
     }
 

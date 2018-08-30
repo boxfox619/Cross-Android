@@ -14,6 +14,6 @@ abstract class BaseActivity<out T : Presenter<*>> : AppCompatActivity() , View{
     }
 
     override fun getContext(): Context {
-        return this;
+        return this
     }
 }

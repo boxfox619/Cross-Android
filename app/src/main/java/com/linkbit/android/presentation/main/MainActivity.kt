@@ -21,9 +21,9 @@ class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
         this.coinStatisticAdapter = CoinStatisticAdapter(this)
         recyclerview_coin_statistics.adapter = coinStatisticAdapter
         val manager = fragmentManager
-        manager.beginTransaction().replace(R.id.tab_wallet, WalletListFragment.newInstance()).commit()
-        manager.beginTransaction().replace(R.id.tab_friend, FriendListFragment.newInstance()).commit()
-        manager.beginTransaction().replace(R.id.tab_transaction, TransactionListFragment.newInstance()).commit()
+        manager.beginTransaction().replace(R.id.tab_wallet_content, WalletListFragment.newInstance()).commit()
+        manager.beginTransaction().replace(R.id.tab_friend_content, FriendListFragment.newInstance()).commit()
+        manager.beginTransaction().replace(R.id.tab_transaction_content, TransactionListFragment.newInstance()).commit()
         presenter.init()
     }
 

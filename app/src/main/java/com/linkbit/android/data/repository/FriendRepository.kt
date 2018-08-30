@@ -27,7 +27,7 @@ class FriendRepository(private val context: Context) : FriendUsecase {
                         context.realm.commitTransaction()
                         subscriber.onSuccess(friendList.map { UserNetworkEntityMapper.fromNetworkObject(it) })
                     } else {
-                        subscriber.onError(Throwable("Fail the friend list load"))
+                        subscriber.onError(Throwable("Fail the frield list load"))
                     }
                 }
             })

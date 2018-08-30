@@ -16,7 +16,6 @@ class CoinListFragment : BaseFragment<CoinListPresenter>(), CoinListView {
     private lateinit var isValid: (state: Boolean) -> Unit
     private lateinit var selectionMode: SelectionMode
     private lateinit var adapter: CoinListViewAdapter
-    override val presenter = CoinListPresenter(this, wallet, isValid, selectionMode)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -25,6 +24,7 @@ class CoinListFragment : BaseFragment<CoinListPresenter>(), CoinListView {
         if (view is RecyclerView) {
             view.adapter = adapter
         }
+        this.presenter = CoinListPresenter(this, wallet, isValid, selectionMode)
         presenter.load()
         return view
     }

@@ -51,6 +51,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+                    <FrameLayout
+                        android:id="@+id/tab_wallet_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"></FrameLayout>
 
                 </LinearLayout>
 
@@ -59,6 +63,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+                    <FrameLayout
+                        android:id="@+id/tab_transaction_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"></FrameLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -66,6 +74,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+                    <FrameLayout
+                        android:id="@+id/tab_friend_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"></FrameLayout>
 
                 </LinearLayout>
             </FrameLayout>
