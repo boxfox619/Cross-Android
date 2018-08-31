@@ -1,6 +1,7 @@
 package com.linkbit.android.data.repository
 
 import android.content.Context
+import android.util.Log
 import com.linkbit.android.data.model.coin.UserNetworkEntityMapper
 import com.linkbit.android.data.model.coin.UserRealmEntityMapper
 import com.linkbit.android.data.model.user.UserNetworkObject
@@ -16,8 +17,10 @@ class AuthRepository(private val context: Context) : AuthUsecase {
 
     override fun login(token: String): Single<Boolean> {
         return Single.create { subscriber ->
+            Log.d("Networking", "try singin")
             context.retrofit.authAPI.signin(token).enqueue(object : Response<Void>(context) {
                 override fun setResponseData(code: Int, data: Void?) {
+                    Log.d("Networking", "result : "+code)
                     if (isSuccess(code)) {
                         subscriber.onSuccess(true)
                     } else {
@@ -30,6 +33,7 @@ class AuthRepository(private val context: Context) : AuthUsecase {
 
     override fun logout(): Single<Boolean> {
         return Single.create { subscriber ->
+            Log.d("Networking", "try signout")
             context.retrofit.authAPI.logout().enqueue(object : Response<Void>(context) {
                 override fun setResponseData(code: Int, void: Void?) {
                     if (isSuccess(code)) {
@@ -43,6 +47,7 @@ class AuthRepository(private val context: Context) : AuthUsecase {
     }
     override fun loadAuthData(): Single<UserModel> {
         return Single.create { subscriber ->
+            Log.d("Networking", "try getting auth info")
             context.retrofit.authAPI.info().enqueue(object : Response<UserNetworkObject>(context) {
                 override fun setResponseData(code: Int, data: UserNetworkObject?) {
                     if (isSuccess(code) && data !=null) {
@@ -53,7 +58,8 @@ class AuthRepository(private val context: Context) : AuthUsecase {
                         context.realm.commitTransaction()
                         subscriber.onSuccess(userModel)
                     } else {
-                        subscriber.onError(Throwable())
+                        Log.d("Networking", "Auth data load fail")
+                        subscriber.onError(Throwable("Auth data load fail"))
                     }
                 }
             })
@@ -66,7 +72,7 @@ class AuthRepository(private val context: Context) : AuthUsecase {
             if(userModel!=null){
                 subscriber.onSuccess(UserRealmEntityMapper.fromRealmObject(userModel))
             }else{
-                subscriber.onError(Throwable())
+                subscriber.onError(Throwable("Failt to get auth data"))
             }
 
         }

@@ -27,11 +27,12 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
     fun loadInitializeData() {
         view.let {
             view.showProgress()
-            Single.merge(authRepository.getAuthData(), coinRepository.loadAllCoinList(), friendRepository.loadFriendList(), walletRepository.loadWalletList()).subscribe({
+            Single.merge(authRepository.loadAuthData(), coinRepository.loadAllCoinList(), friendRepository.loadFriendList(), walletRepository.loadWalletList()).subscribe({
                 view.hideProgress()
                 view.finishSplash()
             }, {
-                Log.d("Splash-debug", it.message)
+                Log.d("Splash", "Fail to load initalize data")
+                Log.d("Splash", it.message)
                 view.hideProgress()
                 view.showErrorMessage(ctx.getString(R.string.err_fail_load_init_data))
             })
@@ -66,6 +67,7 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
                                         if (it) {
                                             loadInitializeData()
                                         } else {
+                                            Log.d("Splash", "Fail to login")
                                             FirebaseAuth.getInstance().signOut()
                                             Helper.showToast(ctx, ctx.getString(R.string.err_fail_login))
                                             view.hideProgress()

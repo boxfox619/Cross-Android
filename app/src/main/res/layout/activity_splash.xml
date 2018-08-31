@@ -66,6 +66,7 @@
         app:layout_constraintBottom_toTopOf="@id/btn_fb_login"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+
     <Button
         android:id="@+id/btn_fb_login"
         android:text="@string/facebook_signin_button_text"

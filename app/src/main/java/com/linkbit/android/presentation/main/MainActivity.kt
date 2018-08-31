@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.linkbit.android.R
 import com.linkbit.android.data.model.CoinStatistic
+import com.linkbit.android.entity.UserModel
 import com.linkbit.android.presentation.BaseActivity
 import com.linkbit.android.presentation.friend.list.FriendListFragment
 import com.linkbit.android.presentation.trasnaction.list.TransactionListFragment
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_header.*
 
 class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
+
     override val presenter: MainActivityPresenter = MainActivityPresenter(this)
     lateinit var coinStatisticAdapter: CoinStatisticAdapter
 
@@ -40,6 +42,10 @@ class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
 
     override fun getContext(): Context {
         return this
+    }
+
+    override fun setAuthInfo(authData: UserModel) {
+        tv_main_linkbit_address.text = authData.linkbitAddress
     }
 
     override fun setLinkbitAddress(address: String) {

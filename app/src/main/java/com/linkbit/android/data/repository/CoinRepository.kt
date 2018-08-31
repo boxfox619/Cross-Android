@@ -1,6 +1,7 @@
 package com.linkbit.android.data.repository
 
 import android.content.Context
+import android.util.Log
 import com.linkbit.android.R
 import com.linkbit.android.data.model.coin.*
 import com.linkbit.android.data.network.Response
@@ -17,6 +18,7 @@ class CoinRepository(private val context: Context) : CoinUsecase {
 
     override fun loadAllCoinList(): Single<List<CoinModel>> {
         return Single.create { subscriber ->
+            Log.d("Networking", "try getting supported coin list")
             context.retrofit.coinAPI.getSupportedCoins().enqueue((object : Response<List<CoinNetworkObject>>(context) {
                 override fun setResponseData(code: Int, supportedCoinList: List<CoinNetworkObject>?) {
                     if (isSuccess(code) && supportedCoinList != null) {
@@ -27,6 +29,7 @@ class CoinRepository(private val context: Context) : CoinUsecase {
                         context.realm.commitTransaction()
                         subscriber.onSuccess(loadedCoinList)
                     } else {
+                        Log.d("Networking", "Supported coin list load fail")
                         subscriber.onError(Throwable("Supported coin list load fail"))
                     }
                 }

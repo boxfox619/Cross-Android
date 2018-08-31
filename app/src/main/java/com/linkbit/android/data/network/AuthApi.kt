@@ -13,6 +13,6 @@ interface AuthApi{
     @GET("logout")
     fun logout(): Call<Void>
 
-    @GET("info")
+    @GET("auth/info")
     fun info(): Call<UserNetworkObject>
 }

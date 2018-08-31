@@ -1,6 +1,7 @@
 package com.linkbit.android.data.repository
 
 import android.content.Context
+import android.util.Log
 import com.linkbit.android.data.model.coin.UserNetworkEntityMapper
 import com.linkbit.android.data.model.coin.UserRealmEntityMapper
 import com.linkbit.android.data.model.user.FriendRealmObject
@@ -18,6 +19,7 @@ class FriendRepository(private val context: Context) : FriendUsecase {
 
     override fun loadFriendList(): Single<List<UserModel>> {
         return Single.create { subscriber ->
+            Log.d("Networking", "Try loading friend list")
             context.retrofit.friendAPI.friendList().enqueue(object : Response<List<UserNetworkObject>>(context) {
                 override fun setResponseData(code: Int, friendList: List<UserNetworkObject>?) {
                     if (isSuccess(code) && friendList != null) {
@@ -27,6 +29,7 @@ class FriendRepository(private val context: Context) : FriendUsecase {
                         context.realm.commitTransaction()
                         subscriber.onSuccess(friendList.map { UserNetworkEntityMapper.fromNetworkObject(it) })
                     } else {
+                        Log.d("Networking", "Fail the frield list load")
                         subscriber.onError(Throwable("Fail the frield list load"))
                     }
                 }

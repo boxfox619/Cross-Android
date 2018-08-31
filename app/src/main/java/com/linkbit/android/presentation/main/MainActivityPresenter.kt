@@ -2,6 +2,7 @@ package com.linkbit.android.presentation.main
 
 import com.linkbit.android.R
 import com.linkbit.android.data.model.CoinStatistic
+import com.linkbit.android.data.repository.AuthRepository
 import com.linkbit.android.data.repository.CoinRepository
 import com.linkbit.android.data.repository.WalletRepository
 import com.linkbit.android.entity.WalletModel
@@ -11,6 +12,7 @@ import java.util.*
 
 class MainActivityPresenter(
         view: MainActivityView,
+        private val authRepository: AuthRepository = AuthRepository(view.getContext()),
         private val coinRepository: CoinRepository = CoinRepository(view.getContext()),
         private val walletRepository: WalletRepository = WalletRepository(view.getContext())
 ) : Presenter<MainActivityView>(view) {
@@ -22,6 +24,7 @@ class MainActivityPresenter(
         this.view.addTabSpec(wallet, R.id.tab_wallet, wallet)
         this.view.addTabSpec(transaction, R.id.tab_transaction, transaction)
         this.view.addTabSpec(friendList, R.id.tab_friend, friendList)
+        authRepository.getAuthData().subscribe{view.setAuthInfo(it)}
         walletRepository.getWalletList().subscribe { walletListLoad(it) }.apply { disposables.add(this) }
     }
 

@@ -1,6 +1,7 @@
 package com.linkbit.android.data.repository
 
 import android.content.Context
+import android.util.Log
 import com.linkbit.android.data.model.coin.CoinRealmEntityMapper
 import com.linkbit.android.data.model.coin.CoinRealmObject
 import com.linkbit.android.data.model.coin.WalletNetworkEntityMapper
@@ -19,6 +20,7 @@ class WalletRepository(private val context: Context) : WalletUsecase {
 
     override fun loadWalletList(): Single<List<WalletModel>> {
         return Single.create { subscriber ->
+            Log.d("Networking", "Try loading wallet list")
             context.retrofit.walletAPI.getWalletList().enqueue(object : Response<List<WalletNetworkObject>>(context) {
                 override fun setResponseData(code: Int, newWalletList: List<WalletNetworkObject>?) {
                     if (isSuccess(code) && newWalletList != null) {
@@ -29,6 +31,7 @@ class WalletRepository(private val context: Context) : WalletUsecase {
                         context.realm.commitTransaction()
                         subscriber.onSuccess(loadedWalletList)
                     } else {
+                        Log.d("Networking", "Fail the wallet list load")
                         subscriber.onError(Throwable("Fail the wallet list load"))
                     }
                 }
