@@ -37,10 +37,11 @@ class CoinRepository(private val context: Context) : CoinUsecase {
         }
     }
 
-    override fun getSupportCoins(): Observable<List<CoinModel>> {
-        return Observable.create { obs ->
-            context.realm.where(CoinRealmObject::class.java).findAll().asObservable().subscribe {
-                obs.onNext(it.map { CoinRealmEntityMapper.fromRealmObject(it) })
+    override fun getSupportCoins(): Single<List<CoinModel>> {
+        return Single.create { obs ->
+            val result = context.realm.where(CoinRealmObject::class.java).findAll()
+            if (result != null) {
+                obs.onSuccess(result.map { CoinRealmEntityMapper.fromRealmObject(it) })
             }
         }
     }
@@ -72,7 +73,7 @@ class CoinRepository(private val context: Context) : CoinUsecase {
     }
 
     override fun getCoinPrice(symbol: String, locale: Locale): Single<CoinPriceModel> {
-        return Single.create{ subscriber ->
+        return Single.create { subscriber ->
             context.retrofit.coinAPI.getPrice(symbol, locale.displayName).enqueue((object : Response<CoinPriceNetworkObject>(context) {
                 override fun setResponseData(code: Int, price: CoinPriceNetworkObject?) {
                     if (isSuccess(code) && price != null) {

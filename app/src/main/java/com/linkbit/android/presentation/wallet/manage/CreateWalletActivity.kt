@@ -42,8 +42,8 @@ class CreateWalletActivity : BaseActivity<CreateWalletPresenter>(), CreateWallet
     override fun setStep(step: Int) {
         var fragment: Fragment? = null
         when (step) {
-            0 -> fragment = CoinListFragment.newInstance (presenter.wallet, { presenter.canNext(it) }, SelectionMode.SINGLE)
-            1 -> fragment = CoinListFragment.newInstance (presenter.wallet, { presenter.canNext(it) }, SelectionMode.MULTI)
+            0 -> fragment = CoinListFragment.newInstance (presenter.supportedCoins, presenter.wallet, { presenter.canNext(it) }, SelectionMode.SINGLE)
+            1 -> fragment = CoinListFragment.newInstance (presenter.supportedCoins, presenter.wallet, { presenter.canNext(it) }, SelectionMode.MULTI)
             2 -> fragment = WalletInfoEditFragment.newInstance(presenter.wallet, { presenter.canNext(it) })
         }
         if (fragment != null) {

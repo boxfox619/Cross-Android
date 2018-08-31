@@ -34,6 +34,7 @@ class Connector(context: Context) {
                         val tokenResult = Tasks.await(task)
                         val token = tokenResult.token
                         if (token != null) {
+                            Log.d("Networking", "Token : "+token)
                             builder.header("Authorization", token)
                         }
                     }
