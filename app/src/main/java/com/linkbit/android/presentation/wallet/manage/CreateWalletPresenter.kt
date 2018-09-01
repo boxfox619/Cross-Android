@@ -16,13 +16,6 @@ class CreateWalletPresenter(
     lateinit var supportedCoins: ArrayList<CoinModel>
     var step: Int = -1
     var canNext: Boolean = false
-    init{
-        coinRepository.getSupportCoins().subscribe({
-            this.supportedCoins = ArrayList(it)
-            this.onNext()
-        },{
-            Log.d("CreateWallet", "Fail get Supported coins")})
-    }
 
     fun canNext(state: Boolean) {
         canNext = state
@@ -36,6 +29,11 @@ class CreateWalletPresenter(
 
     fun init() {
         this.wallet = WalletEditModel()
+        coinRepository.getSupportCoins().subscribe({
+            this.supportedCoins = it as ArrayList<CoinModel>
+            this.onNext()
+        },{
+            Log.d("CreateWallet", "Fail get Supported coins")})
     }
 }
 

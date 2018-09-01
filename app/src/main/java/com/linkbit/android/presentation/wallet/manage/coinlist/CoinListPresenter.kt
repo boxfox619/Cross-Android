@@ -18,7 +18,6 @@ class CoinListPresenter (view: CoinListView,
         isValid(false)
     }
 
-
     fun itemSeleced(item: CoinModel){
         if(selectionMode == SelectionMode.SINGLE){
             wallet.coin = item

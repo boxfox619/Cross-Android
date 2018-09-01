@@ -1,10 +1,12 @@
 package com.linkbit.android.presentation.wallet.manage.coinlist
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import com.linkbit.android.R
 import com.linkbit.android.entity.CoinModel
 import com.linkbit.android.data.model.wallet.WalletEditModel
@@ -24,6 +26,7 @@ class CoinListFragment : BaseFragment<CoinListPresenter>(), CoinListView {
         this.presenter = CoinListPresenter(this, wallet, isValid, selectionMode)
         adapter = CoinListViewAdapter(this.coinList, { presenter.itemSeleced(it) }, selectionMode)
         if (view is RecyclerView) {
+            view.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
             view.adapter = adapter
         }
         return view

@@ -19,7 +19,7 @@ class CoinListViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinListViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.view_coin_detail_item, parent, false)
+                .inflate(R.layout.view_coin_item, parent, false)
         if(view is LinearLayout){
             if(selectionMode == SelectionMode.MULTI){
                 view.addView(CheckBox(parent.context),0)
@@ -38,20 +38,20 @@ class CoinListViewAdapter(
 
         with(holder.mView) {
             tag = item
-            setOnClickListener({
+            setOnClickListener {
                 if (selectedIndexList.contains(position)) {
                     selectedIndexList.remove(position)
                 } else {
                     if (selectionMode == SelectionMode.SINGLE) {
-                        selectedIndexList.forEach({
+                        selectedIndexList.forEach {
                             selectedIndexList.remove(it)
                             notifyItemChanged(it)
-                        })
+                        }
                     }
                     selectedIndexList.add(position)
                 }
                 mListener(item)
-            })
+            }
         }
     }
 

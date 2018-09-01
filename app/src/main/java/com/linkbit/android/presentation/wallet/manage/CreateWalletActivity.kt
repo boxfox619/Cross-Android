@@ -17,10 +17,10 @@ class CreateWalletActivity : BaseActivity<CreateWalletPresenter>(), CreateWallet
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_wallet)
-
         setSupportActionBar(toolbar_create_wallet)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = getString(R.string.activity_name_create_wallet)
+        presenter.init()
         btn_createwallet_next.setOnClickListener { presenter.onNext() }
     }
 
