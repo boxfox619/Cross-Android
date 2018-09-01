@@ -10,6 +10,8 @@ import kotlinx.android.synthetic.main.view_coin_item.view.*
 class CoinListViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
     val iconView: ImageView = mView.iv_coin_icon
     val mContentView: TextView = mView.tv_coin_name
+    val checkbox: CheckBox = mView.checkbox_coin_select
+    val radioButton: RadioButton = mView.radio_coin_select
 
     override fun toString(): String {
         return super.toString() + " '" + mContentView.text + "'"
@@ -18,10 +20,8 @@ class CoinListViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
     fun setSelected(state: Boolean){
         if(mContentView is LinearLayout){
             val view = mContentView.getChildAt(0)
-            if(view is CheckBox)
-                view.isChecked = state
-            if(view is RadioButton)
-                view.isChecked = state
+            checkbox.isSelected = state
+            radioButton.isSelected = state
         }
     }
 
@@ -32,5 +32,21 @@ class CoinListViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
 
     fun setCoinText(symbol: String, name: String) {
         mContentView.text = String.format("%s - %s", symbol, name)
+    }
+
+    fun setVisibleCheckbox(visible: Boolean){
+        if(visible){
+            checkbox.visibility = View.VISIBLE
+        }else{
+            checkbox.visibility = View.INVISIBLE
+        }
+    }
+
+    fun setVisibleRadioButton(visible: Boolean){
+        if(visible){
+            radioButton.visibility = View.VISIBLE
+        }else{
+            radioButton.visibility = View.INVISIBLE
+        }
     }
 }
