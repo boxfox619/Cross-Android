@@ -1,6 +1,7 @@
 package com.linkbit.android.data.repository
 
 import android.content.Context
+import android.util.Log
 import com.linkbit.android.R
 import com.linkbit.android.data.model.coin.*
 import com.linkbit.android.data.network.Response
@@ -17,6 +18,7 @@ class CoinRepository(private val context: Context) : CoinUsecase {
 
     override fun loadAllCoinList(): Single<List<CoinModel>> {
         return Single.create { subscriber ->
+            Log.d("Networking", "try getting supported coin list")
             context.retrofit.coinAPI.getSupportedCoins().enqueue((object : Response<List<CoinNetworkObject>>(context) {
                 override fun setResponseData(code: Int, supportedCoinList: List<CoinNetworkObject>?) {
                     if (isSuccess(code) && supportedCoinList != null) {
@@ -27,17 +29,19 @@ class CoinRepository(private val context: Context) : CoinUsecase {
                         context.realm.commitTransaction()
                         subscriber.onSuccess(loadedCoinList)
                     } else {
-                        subscriber.onError(null)
+                        Log.d("Networking", "Supported coin list load fail")
+                        subscriber.onError(Throwable("Supported coin list load fail"))
                     }
                 }
             }))
         }
     }
 
-    override fun getSupportCoins(): Observable<List<CoinModel>> {
-        return Observable.create { obs ->
-            context.realm.where(CoinRealmObject::class.java).findAll().asObservable().subscribe {
-                obs.onNext(it.map { CoinRealmEntityMapper.fromRealmObject(it) })
+    override fun getSupportCoins(): Single<List<CoinModel>> {
+        return Single.create { obs ->
+            val result = context.realm.where(CoinRealmObject::class.java).findAll()
+            if (result != null) {
+                obs.onSuccess(result.map { CoinRealmEntityMapper.fromRealmObject(it) })
             }
         }
     }
@@ -48,7 +52,7 @@ class CoinRepository(private val context: Context) : CoinUsecase {
             if (coinObject != null)
                 obs.onSuccess(CoinRealmEntityMapper.fromRealmObject(coinObject))
             else
-                obs.onError(null)
+                obs.onError(Throwable())
         }
     }
 
@@ -58,7 +62,7 @@ class CoinRepository(private val context: Context) : CoinUsecase {
             if (coinObject != null)
                 obs.onSuccess(CoinRealmEntityMapper.fromRealmObject(coinObject))
             else
-                obs.onError(null)
+                obs.onError(Throwable())
         }
     }
 
@@ -69,7 +73,7 @@ class CoinRepository(private val context: Context) : CoinUsecase {
     }
 
     override fun getCoinPrice(symbol: String, locale: Locale): Single<CoinPriceModel> {
-        return Single.create{ subscriber ->
+        return Single.create { subscriber ->
             context.retrofit.coinAPI.getPrice(symbol, locale.displayName).enqueue((object : Response<CoinPriceNetworkObject>(context) {
                 override fun setResponseData(code: Int, price: CoinPriceNetworkObject?) {
                     if (isSuccess(code) && price != null) {
@@ -79,7 +83,7 @@ class CoinRepository(private val context: Context) : CoinUsecase {
                             this.unit = price.unit
                         })
                     } else {
-                        subscriber.onError(null)
+                        subscriber.onError(Throwable())
                     }
                 }
             }))

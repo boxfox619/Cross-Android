@@ -1,14 +1,18 @@
 package com.linkbit.android.data.network
 
-import com.linkbit.android.data.model.auth.SigninNetworkObject
+import com.linkbit.android.data.model.user.UserNetworkObject
 import retrofit2.http.GET
 import retrofit2.Call
+import retrofit2.http.Query
 
 
 interface AuthApi{
-    @GET("signin/")
-    fun signin(): Call<Void>
+    @GET("signin")
+    fun signin(@Query("token") token: String): Call<Void>
 
-    @GET("logout/")
+    @GET("logout")
     fun logout(): Call<Void>
+
+    @GET("auth/info")
+    fun info(): Call<UserNetworkObject>
 }

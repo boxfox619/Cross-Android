@@ -9,23 +9,13 @@ import com.linkbit.android.presentation.Presenter
 class CoinListPresenter (view: CoinListView,
                          wallet: WalletEditModel,
                          isValid : (state:Boolean)->Unit,
-                         selectionMode: SelectionMode,
-                         private val coinRepository: CoinRepository = CoinRepository(view.getContext())) : Presenter<CoinListView>(view) {
+                         selectionMode: SelectionMode) : Presenter<CoinListView>(view) {
     val wallet: WalletEditModel = wallet
     val isValid: (state:Boolean) -> Unit = isValid
     var selectionMode: SelectionMode = selectionMode
-    private var items = ArrayList<CoinModel>()
 
     init {
         isValid(false)
-    }
-
-    fun load(){
-        coinRepository.getSupportCoins().subscribe { supportCoinList ->
-            if(supportCoinList!=null){
-                view.setListItems(supportCoinList)
-            }
-        }
     }
 
     fun itemSeleced(item: CoinModel){

@@ -7,13 +7,14 @@ object CoinNetworkEntityMapper : NetworkEntityMapper<CoinModel, CoinNetworkObjec
 
     override fun toNetworkObject(model: CoinModel): CoinNetworkObject {
         return CoinNetworkObject().apply {
-            symbol = model.symbol
-            name = model.name
         }
     }
 
     override fun fromNetworkObject(obj: CoinNetworkObject): CoinModel {
-        return CoinModel(obj.symbol, obj.name)
+        return CoinModel().apply {
+            symbol = obj.symbol
+            name = obj.name
+        }
     }
 
 }

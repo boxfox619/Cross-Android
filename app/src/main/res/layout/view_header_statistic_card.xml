@@ -1,87 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bg_shadow"
-    android:id="@+id/shadow">
+    android:id="@+id/shadow"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_shadow">
 
-    <RelativeLayout
-        android:layout_width="198dp"
-        android:layout_height="106dp"
-        android:background="@drawable/pouple_card_background"
-        android:paddingHorizontal="15dp"
-        android:paddingVertical="15dp">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pouple_card_background">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/top_guideline"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.17" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/bottom_guideline"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.83" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/start_guideline"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.10" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/end_guideline"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.96" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:cardCornerRadius="30dp"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintTop_toTopOf="@id/top_guideline">
+
+            <ImageView
+                android:id="@+id/iv_statistic_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp" />
+
+        </android.support.v7.widget.CardView>
 
         <TextView
+            android:id="@+id/tv_coin_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ethereum"
             android:textColor="@android:color/white"
+            android:textSize="15dp"
             android:textStyle="bold"
-            android:textSize="14dp"/>
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toTopOf="@id/top_guideline" />
 
-        <LinearLayout
-            android:id="@+id/iv_statistic_icon"
-            android:orientation="horizontal"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/bg_white_circle" />
-
-        <LinearLayout
-            android:id="@+id/money_info_container"
+        <TextView
+            android:id="@+id/tv_coin_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
+            android:layout_marginRight="3dp"
+            android:text="KRW"
+            android:textColor="#AAffffff"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline" />
 
-            <TextView
-                android:id="@+id/tv_statistic_balance"
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:text="KRW"
-                android:textColor="#88FFFFFF"
-                android:textSize="12dp" />
-
-            <TextView
-                android:id="@+id/tv_statistic_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="4dp"
-                android:text="102,302,128"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:textSize="14dp"  />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_coin_symbol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/money_info_container"
-            android:orientation="horizontal">
+            android:text="ETH"
+            android:textColor="#AAffffff"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tv_statistic_price"
+            app:layout_constraintStart_toStartOf="@id/start_guideline" />
 
-            <TextView
-                android:id="@+id/tv_coin_symbol"
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:text="ETH"
-                android:textColor="#88FFFFFF"
-                android:textSize="12dp" />
+        <TextView
+            android:id="@+id/tv_statistic_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123"
+            android:textColor="@android:color/white"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tv_statistic_price"
+            app:layout_constraintStart_toStartOf="@id/tv_statistic_price" />
 
-            <TextView
-                android:id="@+id/tv_coin_money"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="4dp"
-                android:text="35.0219"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:textSize="14dp"  />
-        </LinearLayout>
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_statistic_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123,3123,321"
+            android:textColor="@android:color/white"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
+            app:layout_constraintStart_toEndOf="@id/tv_coin_money" />
+
+    </android.support.constraint.ConstraintLayout>
+
 </LinearLayout>

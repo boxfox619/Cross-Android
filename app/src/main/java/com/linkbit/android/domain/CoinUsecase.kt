@@ -8,7 +8,7 @@ import java.util.*
 
 interface CoinUsecase : Usecase {
     fun loadAllCoinList() : Single<List<CoinModel>>
-    fun getSupportCoins() : Observable<List<CoinModel>>
+    fun getSupportCoins() : Single<List<CoinModel>>
     fun getCoinByName(name: String) : Single<CoinModel>
     fun getCoinBySymbol(symbol: String) : Single<CoinModel>
     fun getCoinIcon(symbol: String) : Single<String>

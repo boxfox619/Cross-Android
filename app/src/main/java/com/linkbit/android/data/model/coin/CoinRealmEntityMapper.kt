@@ -5,7 +5,10 @@ import com.linkbit.android.entity.CoinModel
 
 object CoinRealmEntityMapper : RealmEntityMapper<CoinModel, CoinRealmObject> {
     override fun fromRealmObject(obj: CoinRealmObject): CoinModel {
-        return CoinModel(obj.symbol, obj.name)
+        return CoinModel().apply {
+            symbol = obj.symbol
+            name = obj.name
+        }
     }
 
     override fun toRealmObject(model: CoinModel): CoinRealmObject {

@@ -1,16 +1,23 @@
 package com.linkbit.android.presentation.wallet.manage
 
+import android.util.Log
 import com.linkbit.android.data.model.wallet.WalletEditModel
+import com.linkbit.android.data.repository.CoinRepository
+import com.linkbit.android.entity.CoinModel
 import com.linkbit.android.presentation.Presenter
 
 
-class CreateWalletPresenter(view : CreateWalletView) : Presenter<CreateWalletView>(view) {
+class CreateWalletPresenter(
+        view: CreateWalletView,
+        private val coinRepository: CoinRepository = CoinRepository(view.getContext())
+) : Presenter<CreateWalletView>(view) {
 
     lateinit var wallet: WalletEditModel
-    var step: Int = 0
+    lateinit var supportedCoins: ArrayList<CoinModel>
+    var step: Int = -1
     var canNext: Boolean = false
 
-    fun canNext(state: Boolean){
+    fun canNext(state: Boolean) {
         canNext = state
         view.nextButtonEnabled(state)
     }
@@ -22,10 +29,11 @@ class CreateWalletPresenter(view : CreateWalletView) : Presenter<CreateWalletVie
 
     fun init() {
         this.wallet = WalletEditModel()
-    }
-
-    override fun destory() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        coinRepository.getSupportCoins().subscribe({
+            this.supportedCoins = it as ArrayList<CoinModel>
+            this.onNext()
+        },{
+            Log.d("CreateWallet", "Fail get Supported coins")})
     }
 }
 

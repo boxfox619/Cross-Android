@@ -13,33 +13,27 @@ import retrofit2.http.*
 interface WalletApi{
 
     @FormUrlEncoded
-    @POST("walletListAdpater/")
-    fun createWallet(@Path("symbol") symbol: String, @Field("name") name: String, @Field("description") description: String, @Field("password") password: String, @Field("major") major: Boolean, @Field("visible") visible: Boolean): Call<WalletData>
+    @POST("wallet")
+    fun createWallet(@Field("symbol") symbol: String, @Field("name") name: String, @Field("description") description: String, @Field("password") password: String, @Field("major") major: Boolean, @Field("open") open: Boolean): Call<WalletData>
 
-    @GET("walletListAdpater/list")
-    fun getWalletList(): Call<List<WalletNetworkObject>>
+    @PUT("wallet")
+    fun updateWallet(@Query("address") address: String, @Query("name") name: String, @Query("description") description: String, @Query("major") major: Boolean, @Query("open") open: Boolean): Call<Void>
 
-    @GET("walletListAdpater/balance")
-    fun getBalance(@Query("address") address: String): Call<String>
-
-    @GET("walletListAdpater/{symbol}/price/all")
-    fun getTotalPrice(@Path("symbol") symbol: String): Call<String>
-
-    @GET("walletListAdpater/{symbol}/balance/all")
-    fun getTotalBalance(@Path("symbol") symbol: String): Call<String>
-
-    @GET("walletModel")
+    @GET("wallet")
     fun getWalletInfo(@Query("address") address: String): Call<WalletNetworkObject>
 
-    @GET("walletListAdpater/{symbol}/transaction")
-    fun getTransactionStatus(@Path("symbol") symbol: String, @Query("hash") hash: String): Call<TransactionNetworkObject>
+    @GET("wallet/list")
+    fun getWalletList(): Call<List<WalletNetworkObject>>
 
-    @GET("walletListAdpater/{symbol}/transaction/count")
-    fun getTransactionCount(@Path("symbol") symbol: String, @Query("address") address: String): Call<Int>
+    @GET("wallet/balance")
+    fun getBalance(@Query("address") address: String): Call<String>
 
-    @GET("walletListAdpater/transaction/list")
-    fun addressTransactionList(@Query("address") address: String): Call<List<TransactionNetworkObject>>
+    @GET("wallet/price")
+    fun getPrice(@Query("address") address: String): Call<String>
 
-    @GET("transaction/list")
-    fun transactionList(): Call<List<TransactionNetworkObject>>
+    @GET("wallet/price/all")
+    fun getTotalPrice(@Query("symbol") symbol: String): Call<String>
+
+    @GET("wallet/balance/all")
+    fun getTotalBalance(@Query("symbol") symbol: String): Call<String>
 }

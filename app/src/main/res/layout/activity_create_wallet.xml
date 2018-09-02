@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.walletModel.manage.CreateWalletActivity">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_create_wallet"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize" />
 
@@ -15,17 +13,17 @@
         android:id="@+id/framelayout_content_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_create_wallet" />
 
     <Button
         android:id="@+id/btn_createwallet_next"
         android:layout_width="81dp"
         android:layout_height="30dp"
         android:background="@drawable/btn_gradient_background"
+        android:layout_margin="10dp"
         android:text="다음"
         android:textColor="@android:color/white"
         android:textSize="12sp"

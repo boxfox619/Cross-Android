@@ -5,5 +5,4 @@ import com.linkbit.android.presentation.View
 
 
 interface CoinListView : View {
-    fun setListItems(items: List<CoinModel>): Unit
 }

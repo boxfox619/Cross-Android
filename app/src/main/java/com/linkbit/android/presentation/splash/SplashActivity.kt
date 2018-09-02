@@ -30,12 +30,12 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashView {
         fbCallbackManager = CallbackManager.Factory.create()
         fbLoginButton = LoginButton(this)
         fbLoginButton.setReadPermissions("email", "public_profile")
-        fbLoginButton.setOnClickListener({fbLoginButton.performClick()})
         Picasso.get()
                 .load(R.drawable.ic_app_icon)
                 .resize(1000,1000)
                 .onlyScaleDown()
                 .into(iv_splash_logo)
+        btn_fb_login.setOnClickListener{fbLoginButton.performClick()}
         presenter.init()
     }
 

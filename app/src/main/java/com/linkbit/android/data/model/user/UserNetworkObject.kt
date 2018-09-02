@@ -12,7 +12,7 @@ class UserNetworkObject {
     @SerializedName("name")
     lateinit var name: String
 
-    @SerializedName("profile")
+    @SerializedName("profileUrl")
     lateinit var profileUrl: String
 
     @SerializedName("linkbitAddress")

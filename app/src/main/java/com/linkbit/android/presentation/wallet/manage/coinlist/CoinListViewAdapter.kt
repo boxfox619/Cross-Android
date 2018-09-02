@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.RadioButton
 import com.linkbit.android.R
 import com.linkbit.android.entity.CoinModel
+import rx.subjects.BehaviorSubject
 
 class CoinListViewAdapter(
         private val mValues: ArrayList<CoinModel>,
@@ -15,43 +16,44 @@ class CoinListViewAdapter(
         private val selectionMode: SelectionMode)
     : RecyclerView.Adapter<CoinListViewHolder>() {
 
-    private val selectedIndexList: ArrayList<Int> = ArrayList()
+    private val selectedIndexList: BehaviorSubject<ArrayList<Int>> = BehaviorSubject.create()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinListViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.view_coin_item, parent, false)
-        if(view is LinearLayout){
-            if(selectionMode == SelectionMode.MULTI){
-                view.addView(CheckBox(parent.context),0)
-            }else if(selectionMode == SelectionMode.SINGLE){
-                view.addView(RadioButton(parent.context),0)
-            }
-        }
         return CoinListViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: CoinListViewHolder, position: Int) {
         val item = mValues[position]
-        holder.setSelected(selectedIndexList.contains(position))
+        selectedIndexList.subscribe{ holder.setSelected(it.contains(position)) }
         holder.setIcon(item.symbol)
         holder.setCoinText(item.symbol, item.name)
+        if (this.selectionMode == SelectionMode.MULTI) {
+            holder.setVisibleCheckbox(true)
+        } else if (this.selectionMode == SelectionMode.SINGLE) {
+            holder.setVisibleRadioButton(true)
+        }
 
         with(holder.mView) {
             tag = item
-            setOnClickListener({
-                if (selectedIndexList.contains(position)) {
-                    selectedIndexList.remove(position)
-                } else {
-                    if (selectionMode == SelectionMode.SINGLE) {
-                        selectedIndexList.forEach({
-                            selectedIndexList.remove(it)
-                            notifyItemChanged(it)
-                        })
+            setOnClickListener {
+                selectedIndexList.first().subscribe { list ->
+                    if (list.contains(position)) {
+                        list.remove(position)
+                    } else {
+                        if (selectionMode == SelectionMode.SINGLE) {
+                            list.forEach {
+                                list.remove(it)
+                                notifyItemChanged(it)
+                            }
+                        }
+                        list.add(position)
                     }
-                    selectedIndexList.add(position)
+                    selectedIndexList.onNext(list)
+                    mListener(item)
                 }
-                mListener(item)
-            })
+            }
         }
     }
 

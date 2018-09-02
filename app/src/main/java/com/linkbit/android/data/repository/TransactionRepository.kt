@@ -19,7 +19,7 @@ class TransactionRepository(private val context: Context) : TransactionUsecase {
                         val transactionList: List<TransactionModel> = transactionList.map { it -> TransactioNetworkEntityMapper.fromNetworkObject(it) }
                         subscriber.onSuccess(transactionList)
                     } else {
-                        subscriber.onError(null)
+                        subscriber.onError(Throwable())
                     }
                 }
             }))
@@ -34,7 +34,7 @@ class TransactionRepository(private val context: Context) : TransactionUsecase {
                         val transactionList: List<TransactionModel> = transactionList.map { it -> TransactioNetworkEntityMapper.fromNetworkObject(it) }
                         subscriber.onSuccess(transactionList)
                     } else {
-                        subscriber.onError(null)
+                        subscriber.onError(Throwable())
                     }
                 }
             }))
@@ -48,7 +48,7 @@ class TransactionRepository(private val context: Context) : TransactionUsecase {
                     if (isSuccess(code) && transaction != null) {
                         subscriber.onSuccess(TransactioNetworkEntityMapper.fromNetworkObject(transaction))
                     } else {
-                        subscriber.onError(null)
+                        subscriber.onError(Throwable())
                     }
                 }
             }))

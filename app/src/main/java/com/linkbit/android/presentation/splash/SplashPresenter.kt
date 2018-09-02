@@ -1,5 +1,6 @@
 package com.linkbit.android.presentation.splash
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
@@ -15,9 +16,6 @@ import com.linkbit.android.presentation.Presenter
 import io.realm.Realm
 import rx.Single
 
-
-
-
 class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookCallback<LoginResult> {
     val authRepository = AuthRepository(view.getContext())
     val coinRepository = CoinRepository(view.getContext())
@@ -29,10 +27,12 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
     fun loadInitializeData() {
         view.let {
             view.showProgress()
-            Single.merge(coinRepository.loadAllCoinList(), friendRepository.loadFriendList(), walletRepository.loadWalletList()).subscribe({
+            Single.merge(authRepository.loadAuthData(), coinRepository.loadAllCoinList(), friendRepository.loadFriendList(), walletRepository.loadWalletList()).subscribe({
                 view.hideProgress()
                 view.finishSplash()
             }, {
+                Log.d("Splash", "Fail to load initalize data")
+                Log.d("Splash", it.message)
                 view.hideProgress()
                 view.showErrorMessage(ctx.getString(R.string.err_fail_load_init_data))
             })
@@ -44,12 +44,17 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
         val firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth.currentUser
         if (user != null) {
-            this.loadInitializeData()
+            user.getIdToken(true).addOnCompleteListener { res ->
+                if(res.isSuccessful){
+                    this.loadInitializeData()
+                }
+            }
         }
         view.registFBLogin(this)
     }
 
     override fun onSuccess(loginResult: LoginResult) {
+        view.showProgress()
         val firebaseAuth = FirebaseAuth.getInstance()
         val credential = FacebookAuthProvider.getCredential(loginResult.accessToken.token)
         firebaseAuth.signInWithCredential(credential)
@@ -58,17 +63,23 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
                         res.result.user.getIdToken(true).addOnCompleteListener { res ->
                             run {
                                 if (res.isSuccessful()) {
-                                    authRepository.login(res.result.token!!).subscribe{
-                                        if(it){
+                                    authRepository.login(res.result.token!!).subscribe {
+                                        if (it) {
                                             loadInitializeData()
-                                        }else{
+                                        } else {
+                                            Log.d("Splash", "Fail to login")
+                                            FirebaseAuth.getInstance().signOut()
                                             Helper.showToast(ctx, ctx.getString(R.string.err_fail_login))
+                                            view.hideProgress()
                                         }
                                     }
+                                } else {
+                                    view.hideProgress()
                                 }
                             }
                         }
                     } else {
+                        view.hideProgress()
                         Helper.showToast(ctx, ctx.getString(R.string.err_fail_login))
                     }
                 }

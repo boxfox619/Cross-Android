@@ -1,18 +1,26 @@
 package com.linkbit.android.data.repository
 
 import android.content.Context
-import com.linkbit.android.data.model.auth.SigninNetworkObject
+import android.util.Log
+import com.linkbit.android.data.model.coin.UserNetworkEntityMapper
+import com.linkbit.android.data.model.coin.UserRealmEntityMapper
+import com.linkbit.android.data.model.user.UserNetworkObject
+import com.linkbit.android.data.model.user.UserRealmObject
 import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.domain.AuthUsecase
+import com.linkbit.android.entity.UserModel
+import com.linkbit.android.util.realm
 import rx.Single
 
 class AuthRepository(private val context: Context) : AuthUsecase {
 
     override fun login(token: String): Single<Boolean> {
         return Single.create { subscriber ->
-            context.retrofit.authAPI.signin().enqueue(object : Response<Void>(context) {
+            Log.d("Networking", "try singin")
+            context.retrofit.authAPI.signin(token).enqueue(object : Response<Void>(context) {
                 override fun setResponseData(code: Int, data: Void?) {
+                    Log.d("Networking", "result : "+code)
                     if (isSuccess(code)) {
                         subscriber.onSuccess(true)
                     } else {
@@ -25,6 +33,7 @@ class AuthRepository(private val context: Context) : AuthUsecase {
 
     override fun logout(): Single<Boolean> {
         return Single.create { subscriber ->
+            Log.d("Networking", "try signout")
             context.retrofit.authAPI.logout().enqueue(object : Response<Void>(context) {
                 override fun setResponseData(code: Int, void: Void?) {
                     if (isSuccess(code)) {
@@ -34,6 +43,38 @@ class AuthRepository(private val context: Context) : AuthUsecase {
                     }
                 }
             })
+        }
+    }
+    override fun loadAuthData(): Single<UserModel> {
+        return Single.create { subscriber ->
+            Log.d("Networking", "try getting auth info")
+            context.retrofit.authAPI.info().enqueue(object : Response<UserNetworkObject>(context) {
+                override fun setResponseData(code: Int, data: UserNetworkObject?) {
+                    if (isSuccess(code) && data !=null) {
+                        val userModel = UserNetworkEntityMapper.fromNetworkObject(data)
+                        context.realm.beginTransaction()
+                        context.realm.where(UserRealmObject::class.java).findAll().deleteAllFromRealm()
+                        context.realm.copyToRealm(UserRealmEntityMapper.toRealmObject(userModel))
+                        context.realm.commitTransaction()
+                        subscriber.onSuccess(userModel)
+                    } else {
+                        Log.d("Networking", "Auth data load fail")
+                        subscriber.onError(Throwable("Auth data load fail"))
+                    }
+                }
+            })
+        }
+    }
+
+    override fun getAuthData(): Single<UserModel> {
+        return Single.create { subscriber ->
+            val userModel = context.realm.where(UserRealmObject::class.java).findFirst()
+            if(userModel!=null){
+                subscriber.onSuccess(UserRealmEntityMapper.fromRealmObject(userModel))
+            }else{
+                subscriber.onError(Throwable("Failt to get auth data"))
+            }
+
         }
     }
 }

@@ -8,8 +8,7 @@ class WalletListPresenter(
         private val walletRepository: WalletRepository = WalletRepository(view.getContext())
 ) : Presenter<WalletListView>(view) {
 
-    init {
+    fun init(){
         disposables.add(walletRepository.getWalletList().subscribe{view.setWalletItems(it)})
     }
-
 }
