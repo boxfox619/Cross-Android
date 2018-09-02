@@ -17,7 +17,7 @@ object WalletNetworkEntityMapper : NetworkEntityMapper<WalletModel, WalletNetwor
             walletName = obj.walletName
             coinSymbol = obj.coinSymbol
             description = obj.description
-            originalAddress = obj.accountAddress
+            accountAddress = obj.accountAddress
             linkbitAddress = obj.linkbitAddress
             balance = obj.balance
         }
@@ -30,7 +30,7 @@ object WalletNetworkEntityMapper : NetworkEntityMapper<WalletModel, WalletNetwor
             walletName = model.walletName
             coinSymbol = model.coinSymbol
             description = model.description
-            accountAddress = model.originalAddress
+            accountAddress = model.accountAddress
             linkbitAddress = model.linkbitAddress
             balance = model.balance
         }
@@ -43,7 +43,7 @@ object WalletNetworkEntityMapper : NetworkEntityMapper<WalletModel, WalletNetwor
             walletName = obj.walletName
             coinSymbol = obj.coinSymbol
             description = obj.description
-            originalAddress = obj.accountAddress
+            accountAddress = obj.accountAddress
             linkbitAddress = obj.linkbitAddress
             balance = obj.balance
         }

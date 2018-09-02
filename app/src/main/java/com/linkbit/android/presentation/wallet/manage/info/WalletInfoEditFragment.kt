@@ -31,9 +31,6 @@ class WalletInfoEditFragment : BaseFragment<WalletInfoEditPresenter>(), WalletIn
     override fun initView(wallet: WalletEditModel){
         wallet.let {
             layout_wallet_info_edit_coin_list.addView(createCoinItem(it.coin))
-            it.subCoinList.forEach {
-                layout_wallet_info_edit_coin_list.addView(createCoinItem(it))
-            }
             et_wallet_info_edit_name.setText(it.name)
             et_wallet_info_edit_description.setText(it.description)
         }

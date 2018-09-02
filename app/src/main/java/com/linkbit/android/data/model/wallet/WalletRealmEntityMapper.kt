@@ -15,7 +15,7 @@ object WalletRealmEntityMapper : RealmEntityMapper<WalletModel, WalletRealmObjec
             walletName = obj.walletName
             coinSymbol = obj.coinSymbol
             description = obj.description
-            originalAddress = obj.accountAddress
+            accountAddress = obj.accountAddress
             linkbitAddress = obj.linkbitAddress
             balance = obj.balance
         }
@@ -28,7 +28,7 @@ object WalletRealmEntityMapper : RealmEntityMapper<WalletModel, WalletRealmObjec
             walletName = model.walletName
             coinSymbol = model.coinSymbol
             description = model.description
-            originalAddress = model.accountAddress
+            accountAddress = model.accountAddress
             linkbitAddress = model.linkbitAddress
             balance = model.balance
         }
@@ -41,7 +41,7 @@ object WalletRealmEntityMapper : RealmEntityMapper<WalletModel, WalletRealmObjec
             walletName = obj.walletName
             coinSymbol = obj.coinSymbol
             description = obj.description
-            originalAddress = obj.accountAddress
+            accountAddress = obj.accountAddress
             linkbitAddress = obj.linkbitAddress
             balance = obj.balance
         }

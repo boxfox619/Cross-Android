@@ -19,21 +19,8 @@ class CoinListPresenter (view: CoinListView,
     }
 
     fun itemSeleced(item: CoinModel){
-        if(selectionMode == SelectionMode.SINGLE){
-            wallet.coin = item
-            isValid(true)
-        }else{
-            if(wallet.subCoinList.contains(item)){
-                wallet.subCoinList.remove(item)
-            }else{
-                wallet.subCoinList.add(item)
-            }
-            isValid(wallet.subCoinList.size > 0)
-        }
-    }
-
-    override fun destory() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        wallet.coin = item
+        isValid(true)
     }
 }
 

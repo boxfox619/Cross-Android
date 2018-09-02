@@ -11,7 +11,7 @@ open class WalletRealmObject : RealmObject(){
     @SerializedName("coin") lateinit var  coinSymbol: String
     @SerializedName("description") lateinit var  description: String
     @PrimaryKey
-    @SerializedName("originalAddress") lateinit var  originalAddress: String
+    @SerializedName("accountAddress") lateinit var  accountAddress: String
     @SerializedName("linkbitAddress") lateinit var  linkbitAddress: String
     @SerializedName("balance") var balance: Double = 0.0
 }
