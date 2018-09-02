@@ -3,8 +3,7 @@ package com.linkbit.android.data.network
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.FormUrlEncoded
-import com.linkbit.android.data.model.wallet.WalletData
-import com.linkbit.android.data.model.transaction.TransactionNetworkObject
+import com.linkbit.android.data.model.wallet.WalletCreateNetworkObject
 import com.linkbit.android.data.model.wallet.WalletNetworkObject
 import retrofit2.Call
 import retrofit2.http.*
@@ -14,7 +13,7 @@ interface WalletApi{
 
     @FormUrlEncoded
     @POST("wallet")
-    fun createWallet(@Field("symbol") symbol: String, @Field("name") name: String, @Field("description") description: String, @Field("password") password: String, @Field("major") major: Boolean, @Field("open") open: Boolean): Call<WalletData>
+    fun createWallet(@Field("symbol") symbol: String, @Field("name") name: String, @Field("description") description: String, @Field("password") password: String, @Field("major") major: Boolean, @Field("open") open: Boolean): Call<WalletCreateNetworkObject>
 
     @PUT("wallet")
     fun updateWallet(@Query("address") address: String, @Query("name") name: String, @Query("description") description: String, @Query("major") major: Boolean, @Query("open") open: Boolean): Call<Void>

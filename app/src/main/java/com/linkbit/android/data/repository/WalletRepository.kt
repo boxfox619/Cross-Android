@@ -6,6 +6,7 @@ import com.linkbit.android.data.model.coin.CoinRealmEntityMapper
 import com.linkbit.android.data.model.coin.CoinRealmObject
 import com.linkbit.android.data.model.coin.WalletNetworkEntityMapper
 import com.linkbit.android.data.model.coin.WalletRealmEntityMapper
+import com.linkbit.android.data.model.wallet.WalletCreateNetworkObject
 import com.linkbit.android.data.model.wallet.WalletNetworkObject
 import com.linkbit.android.data.model.wallet.WalletRealmObject
 import com.linkbit.android.data.network.Response
@@ -40,10 +41,24 @@ class WalletRepository(private val context: Context) : WalletUsecase {
     }
 
     override fun getWalletList(): Observable<List<WalletModel>> {
-        return Observable.create{ subscriber ->
-            context.realm.where(WalletRealmObject::class.java).findAll().asObservable().subscribe{
-                subscriber.onNext(it.map{WalletRealmEntityMapper.fromRealmObject(it)})
+        return Observable.create { subscriber ->
+            context.realm.where(WalletRealmObject::class.java).findAll().asObservable().subscribe {
+                subscriber.onNext(it.map { WalletRealmEntityMapper.fromRealmObject(it) })
             }
         }
+    }
+
+    override fun createWallet(symbol: String, name: String, description: String, password: String, major: Boolean, open: Boolean): Single<WalletModel> {
+        return Single.create { subsrciber ->
+            context.retrofit.walletAPI.createWallet(symbol, name, description, password, major, open).enqueue(object : Response<WalletCreateNetworkObject>(context) {
+                override fun setResponseData(code: Int, walletCreatedResult: WalletCreateNetworkObject?) {
+
+                }
+            })
+        }
+    }
+
+    override fun updateWallet(address: String, name: String, description: String, major: Boolean, open: Boolean): Single<Boolean> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
