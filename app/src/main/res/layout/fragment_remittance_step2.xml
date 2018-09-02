@@ -16,11 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
-<<<<<<< HEAD
         android:layout_marginTop="10dp"
-=======
-        android:layout_marginTop="8dp"
->>>>>>> 449c98c8b8a09132bcad891687f43db78d6dcc9f
         android:text="출금할 지갑"
         android:textColor="@color/colorAccentDark"
         android:textStyle="bold"/>

@@ -13,32 +13,33 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
 
-    <include layout="@layout/layout_header"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_header"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/toolbar_guideline"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TabHost
         android:id="@+id/tab_host"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/toolbar_guideline"
-        app:layout_constraintBottom_toBottomOf="parent">
-
+        app:layout_constraintTop_toBottomOf="@+id/include">
+ow
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TabWidget
+                android:id="@android:id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:background="@android:color/white" />
 
             <FrameLayout
@@ -52,14 +53,17 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/tab_transaction"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-                </LinearLayout>
+                    android:orientation="vertical"/>
 
                 <LinearLayout
                     android:id="@+id/tab_friend"
