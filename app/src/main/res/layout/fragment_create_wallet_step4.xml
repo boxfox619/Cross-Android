@@ -29,29 +29,18 @@
             android:textColor="@color/colorAccentDark"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinner_wallet_info_edit_secure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Option 1"
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
-                android:padding="5dp"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_arrow_drop_down"/>
-        </LinearLayout>
+            android:layout_marginHorizontal="10dp"/>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="#707070"
             android:layout_marginHorizontal="10dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,16 +78,4 @@
             android:textSize="13sp" />
 
     </LinearLayout>
-
-    <Button
-        android:layout_width="81dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/btn_gradient_background"
-        android:text="다음"
-        android:textColor="@android:color/white"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

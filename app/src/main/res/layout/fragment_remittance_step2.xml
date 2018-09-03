@@ -96,7 +96,7 @@
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:listitem="@layout/view_friend_info"/>
+                        tools:listitem="@layout/view_friend_item"/>
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/tab3"
@@ -107,7 +107,7 @@
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:listitem="@layout/view_friend_info"/>
+                        tools:listitem="@layout/view_friend_item"/>
                 </LinearLayout>
             </FrameLayout>
 

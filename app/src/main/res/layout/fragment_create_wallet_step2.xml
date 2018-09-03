@@ -67,15 +67,4 @@
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="81dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/btn_gradient_background"
-        android:text="다음"
-        android:textColor="@android:color/white"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>
