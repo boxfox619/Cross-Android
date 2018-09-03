@@ -99,6 +99,7 @@
             app:layout_constraintBottom_toTopOf="@id/tv_statistic_price"
             app:layout_constraintStart_toStartOf="@id/tv_statistic_price" />
 
+
         <TextView
             android:id="@+id/tv_statistic_price"
             android:layout_width="wrap_content"

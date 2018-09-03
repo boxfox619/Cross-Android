@@ -51,7 +51,7 @@ class CreateWalletActivity : BaseActivity<CreateWalletPresenter>(), CreateWallet
             0 -> fragment = CoinListFragment.newInstance (presenter.supportedCoins, presenter.wallet, { presenter.canNext(it) }, SelectionMode.SINGLE)
             1 -> fragment = WalletInfoEditFragment.newInstance(presenter.wallet) { presenter.canNext(it) }
             2 -> presenter.doCreate()
-            3 -> fragment = CreateWalletFinishFragment.newInstance(presenter.resultWallet, {})
+            3 -> fragment = CreateWalletFinishFragment.newInstance(presenter.resultWallet)
         }
         if (fragment != null) {
             val ft = fragmentManager.beginTransaction()
