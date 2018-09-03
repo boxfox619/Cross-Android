@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.fragment_create_wallet_finish.*
 
 class CreateWalletFinishFragment : Fragment() {
     lateinit var walletModel: WalletModel
-    lateinit var confirmListener: () -> Unit
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -23,16 +22,14 @@ class CreateWalletFinishFragment : Fragment() {
         view.findViewById<TextView>(R.id.tv_wallet_symbol).text = this.walletModel.coinSymbol
         view.findViewById<TextView>(R.id.tv_wallet_cross_address).text = this.walletModel.linkbitAddress
         view.findViewById<TextView>(R.id.tv_wallet_address).text = this.walletModel.accountAddress
-        btn_createwallet_finish.setOnClickListener {this.confirmListener()}
         return view
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(walletModel: WalletModel, confirmListener: () -> Unit) =
+        fun newInstance(walletModel: WalletModel) =
                 CreateWalletFinishFragment().apply {
                     this.walletModel = walletModel
-                    this.confirmListener = confirmListener
                 }
     }
 }

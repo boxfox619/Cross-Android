@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import com.linkbit.android.R
 import com.linkbit.android.data.model.CoinStatistic
-import com.linkbit.android.entity.UserModel
 import com.linkbit.android.presentation.BaseActivity
 import com.linkbit.android.presentation.friend.list.FriendListFragment
 import com.linkbit.android.presentation.trasnaction.list.TransactionListFragment
@@ -44,16 +43,8 @@ class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
         return this
     }
 
-    override fun setAuthInfo(authData: UserModel) {
-        tv_main_linkbit_address.text = authData.linkbitAddress
-    }
-
     override fun setLinkbitAddress(address: String) {
-        tv_linkbit_address.text = address
-    }
-
-    override fun setTotalExchangeBalance(balance: String) {
-        tv_total_exchange_balance.text = balance
+        tv_main_linkbit_address.text = address
     }
 
     override fun setTotalExchangeBalance(balance: String) {

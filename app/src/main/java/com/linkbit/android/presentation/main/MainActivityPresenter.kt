@@ -24,7 +24,7 @@ class MainActivityPresenter(
         this.view.addTabSpec(wallet, R.id.tab_wallet, wallet)
         this.view.addTabSpec(transaction, R.id.tab_transaction, transaction)
         this.view.addTabSpec(friendList, R.id.tab_friend, friendList)
-        authRepository.getAuthData().subscribe{view.setAuthInfo(it)}
+        authRepository.getAuthData().subscribe{view.setLinkbitAddress(it.linkbitAddress)}
         walletRepository.getWalletList().subscribe { walletListLoad(it) }.apply { disposables.add(this) }
     }
 

@@ -9,6 +9,4 @@ interface MainActivityView : View {
     fun setTotalExchangeBalance(balance: String)
     fun addTabSpec(tabName: String, contentId: Int, indicator: String)
     fun setCoinCardItems(items: List<CoinStatistic>)
-    fun setAuthInfo(authData: UserModel)
-
 }
