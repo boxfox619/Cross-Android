@@ -15,6 +15,16 @@ class CoinListViewAdapter(
 
     private val selectedIndexList: BehaviorSubject<ArrayList<CoinModel>> = BehaviorSubject.create()
 
+    init {
+        selectedIndexList.subscribe { list ->
+            if (list.size > 0) {
+                mListener(list.get(0))
+            } else {
+                mListener(null)
+            }
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinListViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.view_coin_item, parent, false)
@@ -25,8 +35,6 @@ class CoinListViewAdapter(
     override fun onBindViewHolder(holder: CoinListViewHolder, position: Int) {
         val item = mValues[position]
         selectedIndexList.subscribe { holder.setSelected(it.contains(item)) }
-        holder.setIcon(item.symbol)
-        holder.setCoinText(item.symbol, item.name)
         holder.setIcon(item.symbol)
         holder.setCoinText(item.symbol, item.name)
         if (this.selectionMode == SelectionMode.MULTI) {
@@ -45,10 +53,8 @@ class CoinListViewAdapter(
                 }
                 if (checked) {
                     list.add(item)
-                    mListener(item)
                 } else {
                     list.remove(item)
-                    mListener(null)
                 }
                 selectedIndexList.onNext(list)
             }

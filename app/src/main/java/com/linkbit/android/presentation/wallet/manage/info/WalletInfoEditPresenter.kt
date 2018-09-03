@@ -46,7 +46,6 @@ class WalletInfoEditPresenter (view: WalletInfoEditView, wallet: WalletEditModel
     }
 
     fun init() {
-        this.view.initView(this.wallet)
         isValid(false)
     }
 }

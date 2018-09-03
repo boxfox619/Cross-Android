@@ -12,6 +12,7 @@ class CoinListPresenter (view: CoinListView,
     val wallet: WalletEditModel = wallet
     val isValid: (state:Boolean) -> Unit = isValid
 
+    //@TODO Fix for multiple select
     init {
         isValid(false)
     }

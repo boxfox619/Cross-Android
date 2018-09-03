@@ -33,7 +33,6 @@ class CoinListFragment : BaseFragment<CoinListPresenter>(), CoinListView {
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance(coinList: ArrayList<CoinModel>, wallet: WalletEditModel, isValid: (state: Boolean) -> Unit, selectionMode: SelectionMode) = CoinListFragment().apply {
             this.coinList = coinList

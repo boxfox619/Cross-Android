@@ -5,5 +5,4 @@ import com.linkbit.android.presentation.View
 
 
 interface WalletInfoEditView : View {
-    fun initView(wallet: WalletEditModel)
 }
