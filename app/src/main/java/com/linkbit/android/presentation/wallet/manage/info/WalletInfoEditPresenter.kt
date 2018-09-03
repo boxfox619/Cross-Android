@@ -49,9 +49,5 @@ class WalletInfoEditPresenter (view: WalletInfoEditView, wallet: WalletEditModel
         this.view.initView(this.wallet)
         isValid(false)
     }
-
-    override fun destory() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 }
 

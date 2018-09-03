@@ -9,7 +9,7 @@ import rx.subjects.BehaviorSubject
 
 class CoinListViewAdapter(
         private val mValues: ArrayList<CoinModel>,
-        private val mListener: (item: CoinModel) -> Unit?,
+        private val mListener: (item: CoinModel?) -> Unit?,
         private val selectionMode: SelectionMode)
     : RecyclerView.Adapter<CoinListViewHolder>() {
 
@@ -48,6 +48,7 @@ class CoinListViewAdapter(
                     mListener(item)
                 } else {
                     list.remove(item)
+                    mListener(null)
                 }
                 selectedIndexList.onNext(list)
             }
