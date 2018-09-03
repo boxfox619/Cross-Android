@@ -4,10 +4,12 @@ import android.app.Fragment
 import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import com.linkbit.android.R
 import com.linkbit.android.presentation.wallet.manage.coinlist.SelectionMode
 import com.linkbit.android.presentation.BaseActivity
 import com.linkbit.android.presentation.wallet.manage.coinlist.CoinListFragment
+import com.linkbit.android.presentation.wallet.manage.finish.CreateWalletFinishFragment
 import com.linkbit.android.presentation.wallet.manage.info.WalletInfoEditFragment
 import kotlinx.android.synthetic.main.activity_create_wallet.*
 
@@ -36,15 +38,20 @@ class CreateWalletActivity : BaseActivity<CreateWalletPresenter>(), CreateWallet
     }
 
     override fun nextButtonEnabled(state: Boolean) {
-        btn_createwallet_next.isEnabled = state
+        if(state){
+            btn_createwallet_next.visibility = View.VISIBLE
+        }else{
+            btn_createwallet_next.visibility = View.INVISIBLE
+        }
     }
 
     override fun setStep(step: Int) {
         var fragment: Fragment? = null
         when (step) {
             0 -> fragment = CoinListFragment.newInstance (presenter.supportedCoins, presenter.wallet, { presenter.canNext(it) }, SelectionMode.SINGLE)
-            1 -> fragment = CoinListFragment.newInstance (presenter.supportedCoins, presenter.wallet, { presenter.canNext(it) }, SelectionMode.MULTI)
-            2 -> fragment = WalletInfoEditFragment.newInstance(presenter.wallet, { presenter.canNext(it) })
+            1 -> fragment = WalletInfoEditFragment.newInstance(presenter.wallet) { presenter.canNext(it) }
+            2 -> presenter.doCreate()
+            3 -> fragment = CreateWalletFinishFragment.newInstance(presenter.resultWallet, {})
         }
         if (fragment != null) {
             val ft = fragmentManager.beginTransaction()

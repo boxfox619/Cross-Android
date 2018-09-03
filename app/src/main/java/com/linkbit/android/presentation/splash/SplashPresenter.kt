@@ -24,6 +24,7 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
 
     override fun destory() {}
 
+    //@TODO Refactoring facebook, google auth
     fun loadInitializeData() {
         view.let {
             view.showProgress()
