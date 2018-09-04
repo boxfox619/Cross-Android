@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
@@ -19,14 +20,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.03" />
 
-    <ImageView
-        android:id="@+id/iv_main_menu"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_menu_black_24dp"
-        app:layout_constraintStart_toStartOf="@id/vertical_guideline"
-        app:layout_constraintTop_toTopOf="@id/horizontal_guideline" />
-
     <TextView
         android:id="@+id/tv_main_linkbit_address"
         android:layout_width="0dp"
@@ -35,8 +28,7 @@
         android:text="Linkbit user address"
         android:textSize="7pt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/vertical_guideline"
-        app:layout_constraintTop_toBottomOf="@id/iv_main_menu" />
+        app:layout_constraintStart_toStartOf="@id/vertical_guideline"/>
 
     <TextView
         android:id="@+id/tv_main_total_exchange_balance"
@@ -52,12 +44,12 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_main_coin_statistics"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
-        app:layout_constraintDimensionRatio="H,2:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_main_total_exchange_balance" />
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/tv_main_total_exchange_balance"
+        tools:listitem="@layout/view_header_statistic_card" />
 
 </android.support.constraint.ConstraintLayout>
