@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import com.linkbit.android.R
 import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.presentation.BaseFragment
-import kotlinx.android.synthetic.main.fragment_any_list.*
 
 class WalletListFragment : BaseFragment<WalletListPresenter>(), WalletListView {
     lateinit var walletListAdpater : WalletListAdapter
@@ -24,11 +23,6 @@ class WalletListFragment : BaseFragment<WalletListPresenter>(), WalletListView {
         return view
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        presenter.destory()
-    }
-
     override fun setWalletItems(items: List<WalletModel>) {
         walletListAdpater.clear()
         walletListAdpater.addItems(items)
@@ -36,7 +30,6 @@ class WalletListFragment : BaseFragment<WalletListPresenter>(), WalletListView {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
-                WalletListFragment()
+        fun newInstance() = WalletListFragment()
     }
 }
