@@ -33,50 +33,56 @@
         android:layout_width="1dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5"  />
+        app:layout_constraintGuide_percent="0.5" />
 
     <ImageView
         android:id="@+id/iv_splash_logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,5:1"
         app:layout_constraintBottom_toBottomOf="@id/center_guideline"
+        app:layout_constraintDimensionRatio="H,5:1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/tv_splash_error"
-        android:visibility="invisible"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:layout_marginBottom="10dp"
+        android:textAlignment="center"
         android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@id/btn_fb_login"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/layout_splash_buttons"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
     <ProgressBar
         android:id="@+id/progress_splash"
         style="@style/Widget.AppCompat.ProgressBar"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@id/btn_fb_login"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/layout_splash_buttons"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
-    <Button
-        android:id="@+id/btn_fb_login"
-        android:text="@string/facebook_signin_button_text"
+    <LinearLayout
+        android:id="@+id/layout_splash_buttons"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:textColor="@android:color/white"
-        android:background="@color/colorFacebook"
-        app:layout_constraintDimensionRatio="H,7:1"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/guideline3"
         app:layout_constraintEnd_toEndOf="@id/guideline"
-        app:layout_constraintStart_toStartOf="@id/guideline2" />
+        app:layout_constraintStart_toStartOf="@id/guideline2">
+
+        <Button
+            android:id="@+id/btn_fb_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorFacebook"
+            android:text="@string/facebook_signin_button_text"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
