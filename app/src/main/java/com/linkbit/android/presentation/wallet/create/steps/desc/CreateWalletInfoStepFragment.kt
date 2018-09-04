@@ -23,8 +23,13 @@ class CreateWalletInfoStepFragment : BaseFragment<CreateWalletInfoStepPresenter>
         this.et_layout_info_edit_name = view.findViewById<TextInputLayout>(R.id.et_layout_info_edit_name)
         return view
     }
-    override fun setNameInputError(msg: String) {
-        this.et_layout_info_edit_name.error = msg
+    override fun setNameInputError(msg: String?) {
+        if(msg == null){
+            this.et_layout_info_edit_name.isErrorEnabled = false
+        }else{
+            this.et_layout_info_edit_name.isErrorEnabled = true
+            this.et_layout_info_edit_name.error = msg
+        }
     }
 
     companion object {

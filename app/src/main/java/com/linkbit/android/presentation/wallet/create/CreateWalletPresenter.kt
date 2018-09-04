@@ -29,6 +29,7 @@ class CreateWalletPresenter(
     fun onNext() {
         step += 1
         view.setStep(step)
+        this.canNext(false)
     }
 
     fun init() {

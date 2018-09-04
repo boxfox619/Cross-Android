@@ -58,7 +58,7 @@ class CreateWalletActivity : BaseActivity<CreateWalletPresenter>(), CreateWallet
         }
         if (fragment != null) {
             val ft = fragmentManager.beginTransaction()
-            ft.add(R.id.framelayout_content_view, fragment).commit()
+            ft.replace(R.id.framelayout_content_view, fragment).commit()
         }
     }
 }

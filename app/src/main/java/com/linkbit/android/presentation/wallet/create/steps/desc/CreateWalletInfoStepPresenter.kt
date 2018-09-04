@@ -21,9 +21,11 @@ class CreateWalletInfoStepPresenter(
     }
 
     private fun notifyValid(){
-        val valid : Boolean = walletModel.name.isEmpty()
+        val valid : Boolean = walletModel.name.isNotEmpty()
         if(!valid){
             this.view.setNameInputError(this.view.getContext().getString(R.string.err_create_wallet_et_name))
+        }else{
+            this.view.setNameInputError(null)
         }
         this.isValid(valid)
     }
