@@ -1,6 +1,7 @@
 package com.linkbit.android.presentation.wallet.create
 
 import android.app.Fragment
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_create_wallet.*
 
 class CreateWalletActivity : BaseActivity<CreateWalletPresenter>(), CreateWalletView {
     override val presenter: CreateWalletPresenter = CreateWalletPresenter(this)
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +61,18 @@ class CreateWalletActivity : BaseActivity<CreateWalletPresenter>(), CreateWallet
         if (fragment != null) {
             val ft = fragmentManager.beginTransaction()
             ft.replace(R.id.framelayout_content_view, fragment).commit()
+        }
+    }
+
+    override fun setProgressDialogVisible(visible: Boolean) {
+        if(visible){
+            progressDialog = ProgressDialog(this)
+            progressDialog.setTitle("")
+            progressDialog.setMessage("지갑 생성중...")
+            progressDialog.setCancelable(false)
+            progressDialog.show()
+        }else{
+            progressDialog.dismiss()
         }
     }
 }

@@ -42,6 +42,15 @@ class CreateWalletPresenter(
     }
 
     fun doCreate(){
+        this.view.setProgressDialogVisible(true)
+        this.walletRepository.createWallet(this.wallet).subscribe({
+            this.resultWallet = it
+            this.view.setProgressDialogVisible(false)
+            this.onNext()
+        }, {
+            this.view.setProgressDialogVisible(false)
+            //@TODO error
+        })
     }
 }
 

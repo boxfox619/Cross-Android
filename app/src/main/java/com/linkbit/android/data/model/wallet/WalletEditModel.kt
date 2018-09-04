@@ -8,5 +8,7 @@ class WalletEditModel {
     lateinit var coin: CoinModel //change symbol string to coin
     var description: String = ""
     var password: String = ""
+    var major: Boolean = false
+    var open: Boolean = false
 
 }
