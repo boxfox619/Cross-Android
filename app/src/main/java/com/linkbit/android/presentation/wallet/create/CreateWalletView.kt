@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.wallet.manage
+package com.linkbit.android.presentation.wallet.create
 
 import com.linkbit.android.presentation.View
 

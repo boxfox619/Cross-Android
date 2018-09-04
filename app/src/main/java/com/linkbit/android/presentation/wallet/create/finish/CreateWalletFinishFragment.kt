@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.wallet.manage.finish
+package com.linkbit.android.presentation.wallet.create.finish
 
 import android.app.Fragment
 import android.os.Bundle
@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.linkbit.android.R
 import com.linkbit.android.helper.URLHelper
 import com.linkbit.android.entity.WalletModel
-import kotlinx.android.synthetic.main.fragment_create_wallet_finish.*
 
 class CreateWalletFinishFragment : Fragment() {
     lateinit var walletModel: WalletModel

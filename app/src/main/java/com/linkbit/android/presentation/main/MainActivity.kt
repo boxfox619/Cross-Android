@@ -9,7 +9,7 @@ import com.linkbit.android.presentation.BaseActivity
 import com.linkbit.android.presentation.friend.list.FriendListFragment
 import com.linkbit.android.presentation.trasnaction.list.TransactionListFragment
 import com.linkbit.android.presentation.wallet.list.WalletListFragment
-import com.linkbit.android.presentation.wallet.manage.CreateWalletActivity
+import com.linkbit.android.presentation.wallet.create.CreateWalletActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_header.*
 

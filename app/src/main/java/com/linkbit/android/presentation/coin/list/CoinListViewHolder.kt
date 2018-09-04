@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.wallet.manage.coinlist
+package com.linkbit.android.presentation.coin.list
 
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView

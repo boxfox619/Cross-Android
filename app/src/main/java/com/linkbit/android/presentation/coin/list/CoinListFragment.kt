@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.wallet.manage.coinlist
+package com.linkbit.android.presentation.coin.list
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager

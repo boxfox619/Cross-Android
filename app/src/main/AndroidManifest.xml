@@ -24,7 +24,8 @@
             android:value="@string/facebook_app_id" />
 
         <activity android:name=".presentation.main.MainActivity"></activity>
-        <activity android:name=".presentation.wallet.manage.CreateWalletActivity"></activity>
+        <activity android:name=".presentation.wallet.create.CreateWalletActivity"></activity>
+        <activity android:name=".presentation.wallet.manage.info.WalletInfoEditActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.wallet.manage
+package com.linkbit.android.presentation.wallet.create
 
 import android.util.Log
 import com.linkbit.android.data.model.wallet.WalletEditModel
