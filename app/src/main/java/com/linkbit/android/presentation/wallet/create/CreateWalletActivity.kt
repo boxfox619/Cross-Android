@@ -10,6 +10,8 @@ import com.linkbit.android.presentation.coin.list.SelectionMode
 import com.linkbit.android.presentation.BaseActivity
 import com.linkbit.android.presentation.coin.list.CoinListFragment
 import com.linkbit.android.presentation.wallet.create.finish.CreateWalletFinishFragment
+import com.linkbit.android.presentation.wallet.list.CreateWalletInfoStepFragment
+import com.linkbit.android.presentation.wallet.list.CreateWalletSecurityStepFragment
 import com.linkbit.android.presentation.wallet.manage.info.WalletInfoEditActivity
 import kotlinx.android.synthetic.main.activity_create_wallet.*
 
@@ -49,9 +51,10 @@ class CreateWalletActivity : BaseActivity<CreateWalletPresenter>(), CreateWallet
         var fragment: Fragment? = null
         when (step) {
             0 -> fragment = CoinListFragment.newInstance (presenter.supportedCoins, presenter.wallet, { presenter.canNext(it) }, SelectionMode.SINGLE)
-            //1 -> fragment = WalletInfoEditActivity.newInstance(presenter.wallet) { presenter.canNext(it) }
-            2 -> presenter.doCreate()
-            3 -> fragment = CreateWalletFinishFragment.newInstance(presenter.resultWallet)
+            1 -> fragment = CreateWalletInfoStepFragment.newInstance(presenter.wallet) { presenter.canNext(it) }
+            2 -> fragment = CreateWalletSecurityStepFragment.newInstance(presenter.wallet) { presenter.canNext(it) }
+            3 -> presenter.doCreate()
+            4 -> fragment = CreateWalletFinishFragment.newInstance(presenter.resultWallet)
         }
         if (fragment != null) {
             val ft = fragmentManager.beginTransaction()

@@ -3,9 +3,6 @@ package com.linkbit.android.presentation.wallet.manage.info
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.Spinner
 
 import com.linkbit.android.R
 import com.linkbit.android.entity.CoinModel
@@ -16,7 +13,6 @@ import com.linkbit.android.ui.base.SimpleTextChangeListener
 import kotlinx.android.synthetic.main.activity_wallet_info_edit.*
 import kotlinx.android.synthetic.main.fragment_create_wallet_step2.*
 import kotlinx.android.synthetic.main.fragment_create_wallet_step3.*
-import kotlinx.android.synthetic.main.fragment_create_wallet_step4.*
 
 class WalletInfoEditActivity : BaseActivity<WalletInfoEditPresenter>(), WalletInfoEditView {
     override val presenter: WalletInfoEditPresenter = WalletInfoEditPresenter(this, wallet, isValid)
@@ -38,11 +34,11 @@ class WalletInfoEditActivity : BaseActivity<WalletInfoEditPresenter>(), WalletIn
         et_wallet_info_edit_name.addTextChangedListener(SimpleTextChangeListener{presenter.setName(it)})
         et_wallet_info_edit_description.addTextChangedListener(SimpleTextChangeListener{presenter.setDescription(it)})
 
-        // setting secure spinner adpater
+  /*      // setting secure spinner adpater
         val spinnerItem = arrayOf("핀번호")
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerItem)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner_wallet_info_edit_secure.adapter = adapter
+        spinner_wallet_info_edit_secure.adapter = adapter*/
     }
 
     private fun createCoinItem(coin: CoinModel): View {

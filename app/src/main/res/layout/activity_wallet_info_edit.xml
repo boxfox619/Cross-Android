@@ -30,8 +30,6 @@
             <include layout="@layout/fragment_create_wallet_step2"/>
 
            <include layout="@layout/fragment_create_wallet_step3"/>
-
-            <include layout="@layout/fragment_create_wallet_step4"/>
         </LinearLayout>
     </ScrollView>
 
