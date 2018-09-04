@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="지갑 정보"
+            android:text="지갑정보"
             android:textColor="@color/colorAccentDark"
             android:layout_marginBottom="10dp"
             android:textStyle="bold" />
@@ -24,18 +24,24 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:text="지갑 이름을 입력해주세요"
             android:textSize="13sp" />
 
-        <EditText
-            android:id="@+id/et_wallet_info_edit_name"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/et_layout_info_edit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_edittext_background"
-            android:padding="10dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="13sp" />
+            app:errorEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_wallet_info_edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_edittext_background"
+                android:textSize="13sp"
+                android:padding="10dp" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:layout_width="wrap_content"

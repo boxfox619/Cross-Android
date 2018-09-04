@@ -1,5 +1,6 @@
 package com.linkbit.android.presentation.wallet.list
 
+import com.linkbit.android.R
 import com.linkbit.android.data.model.wallet.WalletEditModel
 import com.linkbit.android.presentation.Presenter
 
@@ -19,7 +20,11 @@ class CreateWalletInfoStepPresenter(
         notifyValid()
     }
 
-    fun notifyValid(){
-        this.isValid(walletModel.name.isEmpty())
+    private fun notifyValid(){
+        val valid : Boolean = walletModel.name.isEmpty()
+        if(!valid){
+            this.view.setNameInputError(this.view.getContext().getString(R.string.err_create_wallet_et_name))
+        }
+        this.isValid(valid)
     }
 }
