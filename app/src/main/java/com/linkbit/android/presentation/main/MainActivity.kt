@@ -3,6 +3,8 @@ package com.linkbit.android.presentation.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.widget.LinearLayout
 import com.linkbit.android.R
 import com.linkbit.android.data.model.CoinStatistic
 import com.linkbit.android.presentation.BaseActivity
@@ -22,6 +24,7 @@ class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         this.coinStatisticAdapter = CoinStatisticAdapter(this)
+        recyclerview_main_coin_statistics.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         recyclerview_main_coin_statistics.adapter = coinStatisticAdapter
         btn_main_create_wallet.setOnClickListener{startActivity(Intent(this, CreateWalletActivity::class.java))}
         tab_host.setup()
@@ -54,6 +57,7 @@ class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
     override fun setCoinCardItems(items: List<CoinStatistic>) {
         coinStatisticAdapter.clear()
         coinStatisticAdapter.addItems(items)
+        coinStatisticAdapter.notifyDataSetChanged()
     }
 
 }

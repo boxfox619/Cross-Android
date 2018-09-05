@@ -13,7 +13,6 @@ import com.linkbit.android.presentation.coin.list.CoinListFragment
 import com.linkbit.android.presentation.wallet.create.finish.CreateWalletFinishFragment
 import com.linkbit.android.presentation.wallet.list.CreateWalletInfoStepFragment
 import com.linkbit.android.presentation.wallet.list.CreateWalletSecurityStepFragment
-import com.linkbit.android.presentation.wallet.manage.info.WalletInfoEditActivity
 import kotlinx.android.synthetic.main.activity_create_wallet.*
 
 class CreateWalletActivity : BaseActivity<CreateWalletPresenter>(), CreateWalletView {
@@ -76,3 +75,7 @@ class CreateWalletActivity : BaseActivity<CreateWalletPresenter>(), CreateWallet
         }
     }
 }
+
+
+
+

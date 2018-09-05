@@ -1,10 +1,12 @@
 package com.linkbit.android.presentation.wallet.list
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 
 import com.linkbit.android.R
 import com.linkbit.android.entity.WalletModel
@@ -17,6 +19,7 @@ class WalletListFragment : BaseFragment<WalletListPresenter>(), WalletListView {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_any_list, container, false)
         this.walletListAdpater = WalletListAdapter(this.context)
+        //view.findViewById<RecyclerView>(R.id.recyclerview_any).layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         view.findViewById<RecyclerView>(R.id.recyclerview_any).adapter = walletListAdpater
         this.presenter = WalletListPresenter(this)
         presenter.init()
