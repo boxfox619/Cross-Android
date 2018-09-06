@@ -51,16 +51,14 @@ class MainActivityPresenter(
                                 statistic.balance = statistic.balance + wallet.balance!!
                                 statistic.price = (statistic.price + realBalance)
                             }
+                            view.setCoinCardItems(coinMap.values.toList())
+                            view.setTotalExchangeBalance(totalExchangeBalace.toString())
                         }
                     }
                 }
                 return Object()
             }
 
-           override fun onPostExecute(void: Object) {
-               view.setCoinCardItems(coinMap.values.toList())
-               view.setTotalExchangeBalance(totalExchangeBalace.toString())
-           }
         }.execute()
     }
 }

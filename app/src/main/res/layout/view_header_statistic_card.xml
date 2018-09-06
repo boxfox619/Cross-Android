@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/shadow"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_shadow">
+    android:layout_width="150dp"
+    android:layout_marginVertical="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_height="match_parent">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@drawable/pouple_card_background">
 
         <android.support.constraint.Guideline
@@ -16,21 +17,21 @@
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.17" />
+            app:layout_constraintGuide_percent="0.10" />
 
         <android.support.constraint.Guideline
             android:id="@+id/bottom_guideline"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.83" />
+            app:layout_constraintGuide_percent="0.88" />
 
         <android.support.constraint.Guideline
             android:id="@+id/start_guideline"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.10" />
+            app:layout_constraintGuide_percent="0.08" />
 
         <android.support.constraint.Guideline
             android:id="@+id/end_guideline"
