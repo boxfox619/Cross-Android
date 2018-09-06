@@ -19,7 +19,7 @@ class WalletListFragment : BaseFragment<WalletListPresenter>(), WalletListView {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_any_list, container, false)
         this.walletListAdpater = WalletListAdapter(this.context)
-        //view.findViewById<RecyclerView>(R.id.recyclerview_any).layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+        view.findViewById<RecyclerView>(R.id.recyclerview_any).layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         view.findViewById<RecyclerView>(R.id.recyclerview_any).adapter = walletListAdpater
         this.presenter = WalletListPresenter(this)
         presenter.init()

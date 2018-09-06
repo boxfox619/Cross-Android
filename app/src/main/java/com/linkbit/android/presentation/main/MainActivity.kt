@@ -24,7 +24,7 @@ class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         this.coinStatisticAdapter = CoinStatisticAdapter(this)
-        recyclerview_main_coin_statistics.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        recyclerview_main_coin_statistics.layoutManager = LinearLayoutManager(this, LinearLayout.HORIZONTAL, false)
         recyclerview_main_coin_statistics.adapter = coinStatisticAdapter
         btn_main_create_wallet.setOnClickListener{startActivity(Intent(this, CreateWalletActivity::class.java))}
         tab_host.setup()

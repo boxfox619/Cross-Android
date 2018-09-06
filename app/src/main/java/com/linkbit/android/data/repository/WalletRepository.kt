@@ -23,8 +23,7 @@ class WalletRepository(private val context: Context) : WalletUsecase {
             context.retrofit.walletAPI.getWalletList().enqueue(object : Response<List<WalletNetworkObject>>(context) {
                 override fun setResponseData(code: Int, newWalletList: List<WalletNetworkObject>?) {
                     if (isSuccess(code) && newWalletList != null) {
-                        val loadedWalletList: List<WalletModel> = newWalletList.map {
-                            it -> WalletNetworkEntityMapper.fromNetworkObject(it) }
+                        val loadedWalletList: List<WalletModel> = newWalletList.map { it -> WalletNetworkEntityMapper.fromNetworkObject(it) }
                         context.realm.beginTransaction()
                         context.realm.where(WalletRealmObject::class.java).findAll().deleteAllFromRealm()
                         context.realm.copyToRealm(loadedWalletList.map { WalletRealmEntityMapper.toRealmObject(it) })

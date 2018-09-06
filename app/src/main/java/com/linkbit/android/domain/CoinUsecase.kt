@@ -11,6 +11,6 @@ interface CoinUsecase : Usecase {
     fun getSupportCoins() : Single<List<CoinModel>>
     fun getCoinByName(name: String) : Single<CoinModel>
     fun getCoinBySymbol(symbol: String) : Single<CoinModel>
-    fun getCoinIcon(symbol: String) : Single<String>
+    fun getCoinIconUrl(symbol: String) : String
     fun getCoinPrice(symbol: String, locale: Locale) : Single<CoinPriceModel>
 }

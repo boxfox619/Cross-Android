@@ -9,7 +9,7 @@ import java.util.*
 
 class WalletListAdapter(
         context: Context,
-                    private val repository: CoinRepository = CoinRepository(context)
+        private val repository: CoinRepository = CoinRepository(context)
 ) : AbstractRecyclerAdapter<WalletModel, WalletCardViewHolder>(context) {
     override fun onItemViewType(position: Int): Int = 0
 
@@ -19,13 +19,14 @@ class WalletListAdapter(
 
     override fun onBindViewHolder(holder: WalletCardViewHolder, position: Int) {
         var model = getItem(position)
-        val coinPrice = repository.getCoinPrice(model!!.coinSymbol, Locale.getDefault()).toBlocking().value()
-        val coinIcon = repository.getCoinIcon(model!!.coinSymbol).toBlocking().value()
-        holder.setName(model!!.walletName)
-        holder.setSymbol(model!!.coinSymbol)
-        holder.setMoney(coinPrice.unit)
-        holder.setBalance(model!!.balance)
-        holder.setExchangeBalance(model!!.balance * coinPrice.amount)
-        holder.setCoinIcon(coinIcon)
+        repository.getCoinPrice(model!!.coinSymbol, Locale.getDefault()).subscribe{
+            val coinPrice = it
+            holder.setName(model!!.walletName)
+            holder.setSymbol(model!!.coinSymbol)
+            holder.setMoney(coinPrice.unit)
+            holder.setBalance(model!!.balance)
+            holder.setExchangeBalance(model!!.balance * coinPrice.amount)
+            holder.setCoinIcon(model!!.coinSymbol)
+        }
     }
 }

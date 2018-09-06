@@ -66,10 +66,8 @@ class CoinRepository(private val context: Context) : CoinUsecase {
         }
     }
 
-    override fun getCoinIcon(symbol: String): Single<String> {
-        return Single.create { obs ->
-            obs.onSuccess(context.getString(R.string.server_host) + context.getString(R.string.url_asset) + symbol.toUpperCase() + ".png")
-        }
+    override fun getCoinIconUrl(symbol: String): String {
+        return context.getString(R.string.server_host) + context.getString(R.string.url_asset) + symbol.toUpperCase() + ".png"
     }
 
     override fun getCoinPrice(symbol: String, locale: Locale): Single<CoinPriceModel> {
