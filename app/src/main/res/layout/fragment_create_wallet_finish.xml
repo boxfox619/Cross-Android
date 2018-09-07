@@ -71,7 +71,26 @@
                 <include layout="@layout/view_wallet_info_card" />
             </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2018.07.05 02:03:12"
+                android:textColor="#555555"
+                android:alpha="0.53"/>
+
         </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:layout_width="108dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/btn_gradient_background"
+        android:text="확인"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>
