@@ -25,6 +25,7 @@
         android:layout_margin="16dp"
         android:background="@drawable/btn_gradient_background"
         android:text="다음"
+        android:textStyle="bold"
         android:textColor="@android:color/white"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"

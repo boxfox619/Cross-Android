@@ -7,7 +7,7 @@
     android:background="@drawable/bg_shadow">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="196dp"
+        android:layout_width="198dp"
         android:layout_height="108dp"
         android:background="@drawable/pouple_card_background">
 

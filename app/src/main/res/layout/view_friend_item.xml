@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="60dp"
+    android:paddingLeft="17dp"
+    android:paddingStart="17dp"
+    android:paddingRight="17dp"
+    android:paddingEnd="17dp">
 
     <ImageView
         android:id="@+id/iv_friend_item_profile"
@@ -10,13 +16,30 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:id="@+id/tv_friend_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_friend_item_name"/>
+        android:layout_marginTop="8dp"
+        android:text="김성래"
+        app:layout_constraintStart_toStartOf="@+id/iv_friend_item_profile"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tv_friend_item_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_friend_item_address"/>
+        android:layout_marginBottom="8dp"
+        android:text="cross-0011-2233"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_friend_item_name" />
 
-</LinearLayout>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#cacaca"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
