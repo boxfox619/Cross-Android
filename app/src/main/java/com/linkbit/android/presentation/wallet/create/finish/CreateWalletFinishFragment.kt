@@ -5,13 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.linkbit.android.R
 import com.linkbit.android.helper.URLHelper
 import com.linkbit.android.entity.WalletModel
-import com.linkbit.android.presentation.coin.list.CoinListViewHolder
 
 class CreateWalletFinishFragment : Fragment() {
     lateinit var walletModel: WalletModel
@@ -23,7 +21,7 @@ class CreateWalletFinishFragment : Fragment() {
         view.findViewById<TextView>(R.id.tv_wallet_info_symbol).text = this.walletModel.coinSymbol
         view.findViewById<TextView>(R.id.tv_wallet_info_linked_address).text = this.walletModel.linkbitAddress
         view.findViewById<TextView>(R.id.tv_wallet_info_address).text = this.walletModel.accountAddress
-        view.findViewById<TextView>(R.id.tv_create_wallet_finish_name).text = this.walletModel.walletName
+        view.findViewById<TextView>(R.id.tv_wallet_info_wallet_name).text = this.walletModel.walletName
         view.findViewById<TextView>(R.id.tv_create_wallet_finish_desc).text = this.walletModel.description
         return view
     }
