@@ -1,54 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="100dp"
+    android:background="?attr/selectableItemBackground"
+    android:paddingEnd="17dp"
+    android:paddingLeft="17dp"
+    android:paddingRight="17dp"
+    android:paddingStart="17dp">
 
     <TextView
         android:id="@+id/tv_transaction_item_date"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline_transaction_list_top"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.4"/>
+        android:layout_marginTop="8dp"
+        android:text="2018. 08. 01"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_transaction_item_profile"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7">
+
+        <TextView
+            android:id="@+id/tv_transaction_item_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="boxfoxsg619@gmail.com" />
+
+        <TextView
+            android:id="@+id/tv_transaction_item_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0xasd1231fdva1231vas" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_transaction_list_top"/>
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_vertical"
+        app:layout_constraintVertical_bias="0.7">
 
-    <TextView
-        android:id="@+id/tv_transaction_item_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_transaction_item_profile"/>
+        <TextView
+            android:id="@+id/tv_transaction_item_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- 2.51 ETH"
+            android:layout_gravity="end"/>
 
-    <TextView
-        android:id="@+id/tv_transaction_item_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_transaction_list_top"/>
-
-    <TextView
-        android:id="@+id/tv_transaction_item_confirmed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_transaction_item_amount"/>
+        <TextView
+            android:id="@+id/tv_transaction_item_confirmed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirmed 113"
+            android:layout_gravity="end"/>
+    </LinearLayout>
 
     <View
-        android:id="@+id/hr_transaction_list_bottom"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_transaction_item_profile"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:layout_height="0.1dp"
+        android:background="#cacaca"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
