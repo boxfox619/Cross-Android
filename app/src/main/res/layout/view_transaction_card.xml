@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="2018. 08. 01"
+        android:textColor="#555555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,12 +35,18 @@
             android:id="@+id/tv_transaction_item_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#555555"
+            android:textStyle="bold"
             android:text="boxfoxsg619@gmail.com" />
 
         <TextView
             android:id="@+id/tv_transaction_item_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="#555555"
+            android:alpha="0.5"
             android:text="0xasd1231fdva1231vas" />
     </LinearLayout>
 
@@ -57,7 +64,10 @@
             android:id="@+id/tv_transaction_item_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="- 2.51 ETH"
+            android:textSize="16sp"
+            android:textColor="#0088FF"
+            android:textStyle="bold"
+            android:text="+ 2.51 ETH"
             android:layout_gravity="end"/>
 
         <TextView
