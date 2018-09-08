@@ -1,6 +1,7 @@
 package com.linkbit.android.presentation.coin.list
 
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -27,8 +28,11 @@ class CoinListFragment : BaseFragment<CoinListPresenter>(), CoinListView {
         val view = inflater.inflate(R.layout.fragment_coin_list, container, false)
         this.presenter = CoinListPresenter(this, wallet, isValid)
         adapter = CoinListViewAdapter(this.coinList, { presenter.itemSeleced(it) }, selectionMode)
+
         if (view is RecyclerView) {
             view.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+            /*var decoration = DividerItemDecoration(view.context, LinearLayout.VERTICAL)
+            view.addItemDecoration(decoration)*/
             view.adapter = adapter
         }
         return view

@@ -20,13 +20,14 @@
 
     <Button
         android:id="@+id/btn_createwallet_next"
-        android:layout_width="81dp"
-        android:layout_height="30dp"
+        android:layout_width="108dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
         android:background="@drawable/btn_gradient_background"
-        android:layout_margin="10dp"
         android:text="다음"
+        android:textStyle="bold"
         android:textColor="@android:color/white"
-        android:textSize="12sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
