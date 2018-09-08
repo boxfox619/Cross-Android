@@ -50,6 +50,13 @@
                 <include layout="@layout/view_wallet_info_card" />
             </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2018.07.05 02:03:12"
+                android:textColor="#555555"
+                android:alpha="0.53"/>
+
         </LinearLayout>
 
     </LinearLayout>

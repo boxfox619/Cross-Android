@@ -129,5 +129,4 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/relativeLayout"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
-
 </android.support.constraint.ConstraintLayout>

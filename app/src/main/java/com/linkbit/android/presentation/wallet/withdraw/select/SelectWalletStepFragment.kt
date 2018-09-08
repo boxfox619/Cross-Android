@@ -17,7 +17,7 @@ class SelectWalletStepFragment : BaseFragment<SelectWalletStepPresenter>(), Sele
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_remittance_step1, container, false)
+        val view = inflater.inflate(R.layout.fragment_withdraw_step1, container, false)
         view.findViewById<RecyclerView>(R.id.recyclerView_withdraw_select_wallet).layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         view.findViewById<RecyclerView>(R.id.recyclerView_withdraw_select_wallet).adapter = walletListAdapter
         return view
