@@ -24,11 +24,10 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
 
     override fun destory() {}
 
-    //@TODO Refactoring facebook, google auth
     fun loadInitializeData() {
         view.let {
             view.showProgress()
-            Single.merge(authRepository.loadAuthData(), coinRepository.loadAllCoinList(), friendRepository.loadFriendList(), walletRepository.loadWalletList()).subscribe({
+            Single.concat(authRepository.loadAuthData(), coinRepository.loadAllCoinList(), friendRepository.loadFriendList(), walletRepository.loadWalletList()).last().subscribe({
                 view.hideProgress()
                 view.finishSplash()
             }, {
@@ -46,16 +45,22 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
         val user = firebaseAuth.currentUser
         if (user != null) {
             user.getIdToken(true).addOnCompleteListener { res ->
-                if(res.isSuccessful){
+                if (res.isSuccessful) {
+                    view.setVisibleLoginButtons(false)
                     this.loadInitializeData()
+                } else {
+                    view.setVisibleLoginButtons(true)
                 }
             }
+        } else {
+            view.setVisibleLoginButtons(true)
+            view.registFBLogin(this)
         }
-        view.registFBLogin(this)
     }
 
     override fun onSuccess(loginResult: LoginResult) {
         view.showProgress()
+        view.setVisibleLoginButtons(false)
         val firebaseAuth = FirebaseAuth.getInstance()
         val credential = FacebookAuthProvider.getCredential(loginResult.accessToken.token)
         firebaseAuth.signInWithCredential(credential)
@@ -72,15 +77,18 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
                                             FirebaseAuth.getInstance().signOut()
                                             Helper.showToast(ctx, ctx.getString(R.string.err_fail_login))
                                             view.hideProgress()
+                                            view.setVisibleLoginButtons(true)
                                         }
                                     }
                                 } else {
                                     view.hideProgress()
+                                    view.setVisibleLoginButtons(true)
                                 }
                             }
                         }
                     } else {
                         view.hideProgress()
+                        view.setVisibleLoginButtons(true)
                         Helper.showToast(ctx, ctx.getString(R.string.err_fail_login))
                     }
                 }

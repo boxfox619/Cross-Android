@@ -1,7 +1,8 @@
-package com.linkbit.android.presentation.wallet.list
+package com.linkbit.android.adapter.wallet
 
 import android.content.Context
 import android.view.ViewGroup
+import com.linkbit.android.adapter.SelectionMode
 import com.linkbit.android.data.repository.CoinRepository
 import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.ui.base.AbstractRecyclerAdapter
@@ -9,7 +10,9 @@ import java.util.*
 
 class WalletListAdapter(
         context: Context,
-                    private val repository: CoinRepository = CoinRepository(context)
+        private val onSelectListener: ((address: String?) -> Unit)?,
+        private val selectionMode: SelectionMode = SelectionMode.SINGLE,
+        private val repository: CoinRepository = CoinRepository(context)
 ) : AbstractRecyclerAdapter<WalletModel, WalletCardViewHolder>(context) {
     override fun onItemViewType(position: Int): Int = 0
 
@@ -19,13 +22,18 @@ class WalletListAdapter(
 
     override fun onBindViewHolder(holder: WalletCardViewHolder, position: Int) {
         var model = getItem(position)
-        val coinPrice = repository.getCoinPrice(model!!.coinSymbol, Locale.getDefault()).toBlocking().value()
-        val coinIcon = repository.getCoinIcon(model!!.coinSymbol).toBlocking().value()
         holder.setName(model!!.walletName)
         holder.setSymbol(model!!.coinSymbol)
-        holder.setMoney(coinPrice.unit)
         holder.setBalance(model!!.balance)
-        holder.setExchangeBalance(model!!.balance * coinPrice.amount)
-        holder.setCoinIcon(coinIcon)
+        holder.setCoinIcon(model!!.coinSymbol)
+
+        onSelectListener?.let { holder.setOnClickListener { it(model!!.accountAddress) }}
+        //@TODO Selection mode
+
+        repository.getCoinPrice(model!!.coinSymbol, Locale.getDefault()).subscribe {
+            val coinPrice = it
+            holder.setMoney(coinPrice.unit)
+            holder.setExchangeBalance(model!!.balance * coinPrice.amount)
+        }
     }
 }

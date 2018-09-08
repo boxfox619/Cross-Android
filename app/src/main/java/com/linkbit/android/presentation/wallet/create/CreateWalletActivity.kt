@@ -1,20 +1,23 @@
-package com.linkbit.android.presentation.wallet.manage
+package com.linkbit.android.presentation.wallet.create
 
 import android.app.Fragment
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import com.linkbit.android.R
-import com.linkbit.android.presentation.wallet.manage.coinlist.SelectionMode
+import com.linkbit.android.adapter.SelectionMode
 import com.linkbit.android.presentation.BaseActivity
-import com.linkbit.android.presentation.wallet.manage.coinlist.CoinListFragment
-import com.linkbit.android.presentation.wallet.manage.finish.CreateWalletFinishFragment
-import com.linkbit.android.presentation.wallet.manage.info.WalletInfoEditFragment
+import com.linkbit.android.presentation.coin.list.CoinListFragment
+import com.linkbit.android.presentation.wallet.create.finish.CreateWalletFinishFragment
+import com.linkbit.android.presentation.wallet.list.CreateWalletInfoStepFragment
+import com.linkbit.android.presentation.wallet.list.CreateWalletSecurityStepFragment
 import kotlinx.android.synthetic.main.activity_create_wallet.*
 
 class CreateWalletActivity : BaseActivity<CreateWalletPresenter>(), CreateWalletView {
     override val presenter: CreateWalletPresenter = CreateWalletPresenter(this)
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,13 +52,30 @@ class CreateWalletActivity : BaseActivity<CreateWalletPresenter>(), CreateWallet
         var fragment: Fragment? = null
         when (step) {
             0 -> fragment = CoinListFragment.newInstance (presenter.supportedCoins, presenter.wallet, { presenter.canNext(it) }, SelectionMode.SINGLE)
-            1 -> fragment = WalletInfoEditFragment.newInstance(presenter.wallet) { presenter.canNext(it) }
-            2 -> presenter.doCreate()
-            3 -> fragment = CreateWalletFinishFragment.newInstance(presenter.resultWallet)
+            1 -> fragment = CreateWalletInfoStepFragment.newInstance(presenter.wallet) { presenter.canNext(it) }
+            2 -> fragment = CreateWalletSecurityStepFragment.newInstance(presenter.wallet) { presenter.canNext(it) }
+            3 -> presenter.doCreate()
+            4 -> fragment = CreateWalletFinishFragment.newInstance(presenter.resultWallet)
         }
         if (fragment != null) {
             val ft = fragmentManager.beginTransaction()
-            ft.add(R.id.framelayout_content_view, fragment).commit()
+            ft.replace(R.id.framelayout_content_view, fragment).commit()
+        }
+    }
+
+    override fun setProgressDialogVisible(visible: Boolean) {
+        if(visible){
+            progressDialog = ProgressDialog(this)
+            progressDialog.setTitle("")
+            progressDialog.setMessage("지갑 생성중...")
+            progressDialog.setCancelable(false)
+            progressDialog.show()
+        }else{
+            progressDialog.dismiss()
         }
     }
 }
+
+
+
+

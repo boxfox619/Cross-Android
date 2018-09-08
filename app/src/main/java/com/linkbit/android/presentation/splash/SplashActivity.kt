@@ -3,6 +3,7 @@ package com.linkbit.android.presentation.splash
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import com.facebook.CallbackManager
@@ -32,10 +33,10 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashView {
         fbLoginButton.setReadPermissions("email", "public_profile")
         Picasso.get()
                 .load(R.drawable.ic_app_icon)
-                .resize(1000,1000)
+                .resize(1000, 1000)
                 .onlyScaleDown()
                 .into(iv_splash_logo)
-        btn_fb_login.setOnClickListener{fbLoginButton.performClick()}
+        btn_fb_login.setOnClickListener { fbLoginButton.performClick() }
         presenter.init()
     }
 
@@ -67,7 +68,16 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashView {
         super.onActivityResult(requestCode, resultCode, data)
         fbCallbackManager.onActivityResult(requestCode, resultCode, data)
     }
+
     override fun getContext(): Context {
         return this
+    }
+
+    override fun setVisibleLoginButtons(visible: Boolean) {
+        if (visible) {
+            layout_splash_buttons.visibility = View.VISIBLE
+        } else {
+            layout_splash_buttons.visibility = View.INVISIBLE
+        }
     }
 }

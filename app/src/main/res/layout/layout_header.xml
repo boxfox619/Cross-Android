@@ -24,7 +24,7 @@
         android:id="@+id/tv_main_linkbit_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:text="Linkbit user address"
         android:textSize="7pt"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,6 @@
         android:id="@+id/tv_main_total_exchange_balance"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:text="103,321,968.52"
         android:textColor="#555555"
         android:textSize="11pt"
@@ -50,6 +49,10 @@
         android:orientation="horizontal"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/tv_main_total_exchange_balance"
-        tools:listitem="@layout/view_header_statistic_card" />
+        tools:listitem="@layout/view_header_statistic_card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_main_total_exchange_balance" />
 
 </android.support.constraint.ConstraintLayout>

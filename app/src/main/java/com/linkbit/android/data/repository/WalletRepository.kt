@@ -6,9 +6,7 @@ import com.linkbit.android.data.model.coin.CoinRealmEntityMapper
 import com.linkbit.android.data.model.coin.CoinRealmObject
 import com.linkbit.android.data.model.coin.WalletNetworkEntityMapper
 import com.linkbit.android.data.model.coin.WalletRealmEntityMapper
-import com.linkbit.android.data.model.wallet.WalletCreateNetworkObject
-import com.linkbit.android.data.model.wallet.WalletNetworkObject
-import com.linkbit.android.data.model.wallet.WalletRealmObject
+import com.linkbit.android.data.model.wallet.*
 import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.domain.WalletUsecase
@@ -48,11 +46,22 @@ class WalletRepository(private val context: Context) : WalletUsecase {
         }
     }
 
-    override fun createWallet(symbol: String, name: String, description: String, password: String, major: Boolean, open: Boolean): Single<WalletModel> {
+    override fun createWallet(walletModel: WalletEditModel): Single<WalletModel> {
         return Single.create { subsrciber ->
-            context.retrofit.walletAPI.createWallet(symbol, name, description, password, major, open).enqueue(object : Response<WalletCreateNetworkObject>(context) {
+            context.retrofit.walletAPI.createWallet(walletModel.coin.symbol, walletModel.name, walletModel.description, walletModel.password, walletModel.major, walletModel.open).enqueue(object : Response<WalletCreateNetworkObject>(context) {
                 override fun setResponseData(code: Int, walletCreatedResult: WalletCreateNetworkObject?) {
-
+                    if (isSuccess(code) && walletCreatedResult != null) {
+                        val walletrealmModel = WalletRealmEntityMapper.fromWalletCreated(walletCreatedResult)
+                        val walletModel = WalletRealmEntityMapper.fromRealmObject(walletrealmModel)
+                        val walletRealmData = WalletDataRealmEntityMapper.fromWalletCreatedToRealm(walletCreatedResult)
+                        context.realm.beginTransaction()
+                        context.realm.copyToRealm(walletRealmData)
+                        context.realm.copyToRealm(walletrealmModel)
+                        context.realm.commitTransaction()
+                        subsrciber.onSuccess(walletModel)
+                    }else{
+                        subsrciber.onError(Throwable("Fail to create wallet"))
+                    }
                 }
             })
         }

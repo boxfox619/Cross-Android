@@ -6,13 +6,16 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.support.v7.widget.LinearLayoutManager
+import android.widget.LinearLayout
 import com.linkbit.android.R
+import com.linkbit.android.adapter.coin.CoinStatisticAdapter
 import com.linkbit.android.data.model.CoinStatistic
 import com.linkbit.android.presentation.BaseActivity
 import com.linkbit.android.presentation.friend.list.FriendListFragment
 import com.linkbit.android.presentation.trasnaction.list.TransactionListFragment
 import com.linkbit.android.presentation.wallet.list.WalletListFragment
-import com.linkbit.android.presentation.wallet.manage.CreateWalletActivity
+import com.linkbit.android.presentation.wallet.create.CreateWalletActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_header.*
 import com.linkbit.android.R.id.view
@@ -39,6 +42,7 @@ class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
         }
 
         this.coinStatisticAdapter = CoinStatisticAdapter(this)
+        recyclerview_main_coin_statistics.layoutManager = LinearLayoutManager(this, LinearLayout.HORIZONTAL, false)
         recyclerview_main_coin_statistics.adapter = coinStatisticAdapter
         btn_main_create_wallet.setOnClickListener{startActivity(Intent(this, CreateWalletActivity::class.java))}
         tab_host.setup()
@@ -55,6 +59,7 @@ class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
         spec.setContent(contentId)
         spec.setIndicator(indicator)
         tab_host.addTab(spec)
+        tab_host.tabWidget.getChildAt(tab_host.tabWidget.childCount-1).layoutParams.height /= 2
     }
 
     override fun getContext(): Context {
@@ -72,6 +77,7 @@ class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
     override fun setCoinCardItems(items: List<CoinStatistic>) {
         coinStatisticAdapter.clear()
         coinStatisticAdapter.addItems(items)
+        coinStatisticAdapter.notifyDataSetChanged()
     }
 
 }

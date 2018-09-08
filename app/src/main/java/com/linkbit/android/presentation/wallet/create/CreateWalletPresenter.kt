@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.wallet.manage
+package com.linkbit.android.presentation.wallet.create
 
 import android.util.Log
 import com.linkbit.android.data.model.wallet.WalletEditModel
@@ -29,6 +29,7 @@ class CreateWalletPresenter(
     fun onNext() {
         step += 1
         view.setStep(step)
+        this.canNext(false)
     }
 
     fun init() {
@@ -41,6 +42,15 @@ class CreateWalletPresenter(
     }
 
     fun doCreate(){
+        this.view.setProgressDialogVisible(true)
+        this.walletRepository.createWallet(this.wallet).subscribe({
+            this.resultWallet = it
+            this.view.setProgressDialogVisible(false)
+            this.onNext()
+        }, {
+            this.view.setProgressDialogVisible(false)
+            //@TODO error
+        })
     }
 }
 

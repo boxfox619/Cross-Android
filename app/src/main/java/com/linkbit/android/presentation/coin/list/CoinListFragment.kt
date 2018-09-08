@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.wallet.manage.coinlist
+package com.linkbit.android.presentation.coin.list
 
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.linkbit.android.R
+import com.linkbit.android.adapter.SelectionMode
+import com.linkbit.android.adapter.coin.CoinListViewAdapter
 import com.linkbit.android.entity.CoinModel
 import com.linkbit.android.data.model.wallet.WalletEditModel
 import com.linkbit.android.presentation.BaseFragment

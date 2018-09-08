@@ -11,4 +11,5 @@ interface SplashView : View {
     fun hideProgress(): Unit
     fun showErrorMessage(msg: String): Unit
     fun finishSplash(): Unit
+    fun setVisibleLoginButtons(visible: Boolean): Unit
 }

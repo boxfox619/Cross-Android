@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.main;
+package com.linkbit.android.adapter.coin;
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
