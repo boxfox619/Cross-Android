@@ -8,7 +8,7 @@ import com.linkbit.android.R
 import com.linkbit.android.entity.CoinModel
 import com.linkbit.android.data.model.wallet.WalletEditModel
 import com.linkbit.android.presentation.BaseActivity
-import com.linkbit.android.presentation.coin.list.CoinListViewHolder
+import com.linkbit.android.adapter.coin.CoinListViewHolder
 import com.linkbit.android.ui.base.SimpleTextChangeListener
 import kotlinx.android.synthetic.main.activity_wallet_info_edit.*
 import kotlinx.android.synthetic.main.fragment_create_wallet_step2.*

@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.coin.list
+package com.linkbit.android.adapter
 
 
 enum class SelectionMode {

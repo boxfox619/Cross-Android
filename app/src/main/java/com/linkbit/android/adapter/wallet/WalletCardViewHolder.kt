@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.wallet.list;
+package com.linkbit.android.adapter.wallet;
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.linkbit.android.R
 import com.linkbit.android.helper.URLHelper
+import kotlinx.android.synthetic.main.view_wallet_card.view.*
 import java.text.DecimalFormat
 
 class WalletCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -38,5 +39,12 @@ class WalletCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun setCoinIcon(symbol: String){
         val url = URLHelper.createAssetUrl(itemView.context, symbol)
         Glide.with(itemView.context).load(url).into(itemView.findViewById(R.id.iv_wallet_icon))
+    }
+
+    fun setOnClickListener(listener: () -> Unit){
+        itemView.view_wallet_card_root.setOnClickListener{listener()}
+        for (i in 0 until itemView.view_wallet_card_root.childCount - 3 ) {
+            itemView.view_wallet_card_root.getChildAt(i).setOnClickListener{listener()}
+        }
     }
 }

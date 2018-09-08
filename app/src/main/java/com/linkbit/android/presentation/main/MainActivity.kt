@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.LinearLayout
 import com.linkbit.android.R
+import com.linkbit.android.adapter.coin.CoinStatisticAdapter
 import com.linkbit.android.data.model.CoinStatistic
 import com.linkbit.android.presentation.BaseActivity
 import com.linkbit.android.presentation.friend.list.FriendListFragment

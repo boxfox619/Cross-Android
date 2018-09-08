@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import com.linkbit.android.R
-import com.linkbit.android.presentation.coin.list.SelectionMode
+import com.linkbit.android.adapter.SelectionMode
 import com.linkbit.android.presentation.BaseActivity
 import com.linkbit.android.presentation.coin.list.CoinListFragment
 import com.linkbit.android.presentation.wallet.create.finish.CreateWalletFinishFragment

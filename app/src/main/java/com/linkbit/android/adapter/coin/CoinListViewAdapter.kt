@@ -1,10 +1,11 @@
-package com.linkbit.android.presentation.coin.list
+package com.linkbit.android.adapter.coin
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.linkbit.android.R
 import com.linkbit.android.entity.CoinModel
+import com.linkbit.android.adapter.SelectionMode
 import rx.subjects.BehaviorSubject
 
 class CoinListViewAdapter(

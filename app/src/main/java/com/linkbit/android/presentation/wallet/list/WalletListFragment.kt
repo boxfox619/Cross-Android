@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 
 import com.linkbit.android.R
+import com.linkbit.android.adapter.wallet.WalletListAdapter
 import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.presentation.BaseFragment
 
@@ -18,7 +19,7 @@ class WalletListFragment : BaseFragment<WalletListPresenter>(), WalletListView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_any_list, container, false)
-        this.walletListAdpater = WalletListAdapter(this.context)
+        this.walletListAdpater = WalletListAdapter(this.context, null)
         view.findViewById<RecyclerView>(R.id.recyclerview_any).layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         view.findViewById<RecyclerView>(R.id.recyclerview_any).adapter = walletListAdpater
         this.presenter = WalletListPresenter(this)
