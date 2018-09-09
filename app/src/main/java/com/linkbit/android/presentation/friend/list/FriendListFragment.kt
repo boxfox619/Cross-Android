@@ -18,7 +18,7 @@ class FriendListFragment : BaseFragment<FriendListPresenter>(), FriendListView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_any_list, container, false)
-        this.friendListAdapter = FriendListAdapter(this.context)
+        this.friendListAdapter = FriendListAdapter(this.context, null)
         view.findViewById<RecyclerView>(R.id.recyclerview_any).adapter = friendListAdapter
         this.presenter = FriendListPresenter(this)
         this.presenter.loadFriendList()

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_withdraw_step2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -38,8 +39,9 @@
         android:textStyle="bold" />
 
     <android.support.v4.app.FragmentTabHost
+        android:id="@+id/tabhost_withdraw_step2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,6 +73,7 @@
                         android:textColor="@color/colorAccentDark"
                         android:textStyle="bold" />
                     <EditText
+                        android:id="@+id/et_withdraw_step2_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/border_edittext_background"
@@ -89,17 +92,7 @@
                     android:orientation="vertical">
 
                     <android.support.v7.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:listitem="@layout/view_friend_item"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/tab3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerview_withdraw_friend_list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:listitem="@layout/view_friend_item"/>

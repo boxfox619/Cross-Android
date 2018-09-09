@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.linkbit.android.entity.UserModel
 import com.linkbit.android.ui.base.AbstractRecyclerAdapter
 
-class FriendListAdapter(context: Context) : AbstractRecyclerAdapter<UserModel, FriendCardViewHolder>(context) {
+class FriendListAdapter(context: Context, private val onSelectListener: ((uid: String) -> Unit)?) : AbstractRecyclerAdapter<UserModel, FriendCardViewHolder>(context) {
     override fun onItemViewType(position: Int): Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendCardViewHolder {
@@ -17,5 +17,7 @@ class FriendListAdapter(context: Context) : AbstractRecyclerAdapter<UserModel, F
         holder.setProfile(model!!.profileUrl)
         holder.setName(model!!.name)
         holder.setAddress(model!!.linkbitAddress)
+        onSelectListener?.let { holder.setOnClickListener { it(model.linkbitAddress)  }}
+        //@TODO Selection mode
     }
 }

@@ -1,20 +1,17 @@
 package com.linkbit.android.presentation.friend.list;
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.linkbit.android.R
+import com.linkbit.android.presentation.wallet.BaseViewHolder
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_splash.*
-import java.text.DecimalFormat
+import kotlinx.android.synthetic.main.fragment_withdraw_step2.view.*
 
-class FriendCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+class FriendCardViewHolder(itemView: View) : BaseViewHolder(itemView) {
     constructor(context: Context, parent: ViewGroup) : this(LayoutInflater.from(context).inflate(R.layout.view_wallet_card, parent, false))
 
     fun setProfile(url: String){
@@ -32,4 +29,8 @@ class FriendCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun setAddress(address: String){
         itemView.findViewById<TextView>(R.id.tv_friend_item_address).text = address
     }
+    override fun setOnClickListener(listener: () -> Unit) {
+        itemView.root_withdraw_step2.setOnClickListener{listener()}
+    }
+
 }

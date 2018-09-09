@@ -14,4 +14,5 @@ open class SimpleTextChangeListener constructor(listener: (txt: String) -> Unit)
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
+
 }
