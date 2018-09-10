@@ -66,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ll_remittance_step3_wallet_deposit" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/et_withdraw_step3_amount"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="35dp"
@@ -79,6 +79,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_remittance_step3_input_coin" />
 
     <TextView
+        android:id="@+id/tv_withdraw_step3_symbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -86,6 +87,6 @@
         android:layout_marginStart="4dp"
         android:text="SYM"
         android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@+id/editText"
-        app:layout_constraintStart_toStartOf="@+id/editText" />
+        app:layout_constraintBottom_toBottomOf="@+id/et_withdraw_step3_amount"
+        app:layout_constraintStart_toStartOf="@+id/et_withdraw_step3_amount" />
 </android.support.constraint.ConstraintLayout>
