@@ -1,7 +1,6 @@
 package com.linkbit.android.presentation.wallet.list
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +11,13 @@ import com.linkbit.android.ui.base.SimpleTextChangeListener
 import kotlinx.android.synthetic.main.fragment_withdraw_step3.view.*
 import android.widget.TextView
 import android.widget.TabHost
+import com.bumptech.glide.Glide
 import com.linkbit.android.adapter.wallet.WalletCardViewHolder
 import com.linkbit.android.entity.WalletModel
+import com.linkbit.android.helper.URLHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_withdraw_step2.view.*
+import kotlinx.android.synthetic.main.view_simple_wallet_card.view.*
 
 
 class AmountStepFragment : BaseFragment<AmountStepPresenter>(), AmountStepView {
@@ -36,7 +38,17 @@ class AmountStepFragment : BaseFragment<AmountStepPresenter>(), AmountStepView {
         holder.init(wallet)
         this.rootView.tv_withdraw_step3_balance_symbol.text = wallet.coinSymbol
         this.rootView.tv_withdraw_step3_balance.text = wallet.balance.toString()
+    }
 
+    override fun setTargetWalletInfo(wallet: WalletModel) {
+        this.rootView.tv_simple_wallet_label.text = wallet.walletName
+        if (wallet.linkbitAddress != null && !wallet.linkbitAddress.isEmpty()) {
+            this.rootView.tv_simple_wallet_address.text = wallet.linkbitAddress
+        } else {
+            this.rootView.tv_simple_wallet_address.text = wallet.accountAddress
+        }
+        val url = URLHelper.createAssetUrl(context, wallet.coinSymbol)
+        Glide.with(context).load(url).into(this.rootView.iv_simple_wallet_icon)
     }
 
     override fun addTabSpec(tabName: String, label: String, iconId: Int) {
@@ -50,9 +62,9 @@ class AmountStepFragment : BaseFragment<AmountStepPresenter>(), AmountStepView {
 
     companion object {
         @JvmStatic
-        fun newInstance(sourceAddress: String, onEnter: (amount: Double) -> Unit) =
+        fun newInstance(sourceWallet: WalletModel, targetWallet: WalletModel, onEnter: (amount: Double) -> Unit) =
                 AmountStepFragment().apply {
-                    this.presenter = AmountStepPresenter(this, sourceAddress, onEnter)
+                    this.presenter = AmountStepPresenter(this, sourceWallet, targetWallet, onEnter)
                 }
     }
 }

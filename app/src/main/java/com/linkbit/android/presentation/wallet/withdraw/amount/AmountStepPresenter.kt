@@ -2,11 +2,13 @@ package com.linkbit.android.presentation.wallet.list
 
 import com.linkbit.android.R
 import com.linkbit.android.data.repository.WalletRepository
+import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.presentation.Presenter
 
 class AmountStepPresenter(
         view: AmountStepView,
-        private val sourceAddress: String,
+        private val sourceWallet: WalletModel,
+        private val targetWallet: WalletModel,
         private val onAmountEntered: (amount: Double) -> Unit,
         private val walletRepository: WalletRepository = WalletRepository(view.getContext())
 ) : Presenter<AmountStepView>(view) {
@@ -21,7 +23,8 @@ class AmountStepPresenter(
     fun init() {
         view.addTabSpec("tab1", "address", R.drawable.ic_wallet_white_24dp)
         view.addTabSpec("tab2", "friend", R.drawable.ic_wallet_white_24dp)
-        this.walletRepository.getWalletByAddress(this.sourceAddress).subscribe { it.let { view.setSoruceWalletInfo(it) } }
+        view.setSoruceWalletInfo(sourceWallet)
+        view.setTargetWalletInfo(targetWallet)
     }
 
 }

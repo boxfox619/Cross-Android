@@ -7,5 +7,7 @@ interface AmountStepView : View {
 
     fun setSoruceWalletInfo(wallet: WalletModel)
 
+    fun setTargetWalletInfo(wallet: WalletModel)
+
     fun addTabSpec(tabName: String, label: String, iconId: Int)
 }

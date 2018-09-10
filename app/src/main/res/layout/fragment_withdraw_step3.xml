@@ -9,7 +9,7 @@
         android:id="@+id/tv_remittance_step3_wallet_withdraw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="출금할 지갑"
+        android:text="@string/withdraw_source_wallet"
         android:textColor="@color/colorAccentDark"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="입금할 지갑"
+        android:text="@string/withdraw_target_wallet"
         android:textColor="@color/colorAccentDark"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/tv_remittance_step3_wallet_deposit">
 
-        <include layout="@layout/view_wallet_card" />
+        <include layout="@layout/view_simple_wallet_card" />
     </LinearLayout>
 
     <TextView
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="보낼 코인 개수를 입력해주세요"
+        android:text="@string/withdraw_please_enter_amount"
         android:textColor="@color/colorAccentDark"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="2dp"
         android:layout_marginTop="5dp"
-        android:text="@string/current_balance"
+        android:text="@string/withdraw_current_balance"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_withdraw_step3_balance"
         app:layout_constraintRight_toLeftOf="@id/tv_withdraw_step3_balance_symbol" />

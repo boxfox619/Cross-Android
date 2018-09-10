@@ -67,6 +67,21 @@ class WalletRepository(private val context: Context) : WalletUsecase {
         }
     }
 
+    override fun loadWalletByAddress(address: String): Single<WalletModel> {
+        return Single.create { subscriber ->
+            context.retrofit.walletAPI.getWalletInfo(address).enqueue(object : Response<WalletNetworkObject>(context) {
+                override fun setResponseData(code: Int, wallet: WalletNetworkObject?) {
+                    if (isSuccess(code) && wallet != null) {
+                        subscriber.onSuccess(WalletNetworkEntityMapper.fromNetworkObject(wallet))
+                    } else {
+                        Log.d("Networking", "Fail the wallet load")
+                        subscriber.onError(Throwable("Fail the wallet load"))
+                    }
+                }
+            })
+        }
+    }
+
     override fun getWalletByAddress(address: String): Single<WalletModel> {
         return Single.create { subsrciber ->
             val wallet = context.realm.where(WalletRealmObject::class.java).equalTo("accountAddress", address).or().equalTo("linkbitAddress", address).findFirstAsync()

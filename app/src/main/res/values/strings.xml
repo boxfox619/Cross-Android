@@ -13,7 +13,10 @@
     <string name="transaction">트렌젝션</string>
     <string name="friend_list">주소록</string>
 
-    <string name="current_balance">현재 잔액</string>
+    <string name="withdraw_please_enter_amount">보낼 코인 개수를 입력해주세요</string>
+    <string name="withdraw_source_wallet">출금할 지갑</string>
+    <string name="withdraw_target_wallet">입금할 지갑</string>
+    <string name="withdraw_current_balance">현재 잔액</string>
 
     <string name="err_fail_login">로그인 실패</string>
     <string name="err_fail_load_init_data">초기 데이터 로드 실패</string>
