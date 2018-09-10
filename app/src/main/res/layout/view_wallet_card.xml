@@ -20,7 +20,6 @@
             android:id="@+id/iv_wallet_icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="#000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
