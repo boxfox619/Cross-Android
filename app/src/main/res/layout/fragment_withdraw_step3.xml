@@ -2,15 +2,13 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/tv_remittance_step3_wallet_withdraw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
         android:text="출금할 지갑"
         android:textColor="@color/colorAccentDark"
         android:textStyle="bold"
@@ -21,7 +19,6 @@
         android:id="@+id/ll_remittance_step3_wallet_withdraw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/tv_remittance_step3_wallet_withdraw">
 
@@ -32,8 +29,6 @@
         android:id="@+id/tv_remittance_step3_wallet_deposit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:text="입금할 지갑"
         android:textColor="@color/colorAccentDark"
@@ -45,7 +40,6 @@
         android:id="@+id/ll_remittance_step3_wallet_deposit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/tv_remittance_step3_wallet_deposit">
 
@@ -56,8 +50,6 @@
         android:id="@+id/tv_remittance_step3_input_coin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:text="보낼 코인 개수를 입력해주세요"
         android:textColor="@color/colorAccentDark"
@@ -67,26 +59,68 @@
 
     <EditText
         android:id="@+id/et_withdraw_step3_amount"
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingLeft="35dp"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:inputType="numberDecimal"
         android:paddingRight="10dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="10dp"
         android:text="2.51"
-        android:textSize="25sp"
         android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toRightOf="@id/tv_withdraw_step3_symbol"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_remittance_step3_input_coin" />
 
     <TextView
         android:id="@+id/tv_withdraw_step3_symbol"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_height="0dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginStart="4dp"
+        android:gravity="center"
         android:text="SYM"
         android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@+id/et_withdraw_step3_amount"
-        app:layout_constraintStart_toStartOf="@+id/et_withdraw_step3_amount" />
+        app:layout_constraintBottom_toTopOf="@id/view_withdraw_amount_border"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/et_withdraw_step3_amount" />
+
+    <View
+        android:id="@+id/view_withdraw_amount_border"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="3dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/et_withdraw_step3_amount" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="2dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/current_balance"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_withdraw_step3_balance"
+        app:layout_constraintRight_toLeftOf="@id/tv_withdraw_step3_balance_symbol" />
+
+    <TextView
+        android:id="@+id/tv_withdraw_step3_balance_symbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="2dp"
+        android:layout_marginTop="5dp"
+        android:text="SYM"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_withdraw_step3_balance"
+        app:layout_constraintRight_toLeftOf="@id/tv_withdraw_step3_balance" />
+
+    <TextView
+        android:id="@+id/tv_withdraw_step3_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="0.0"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_withdraw_amount_border" />
 </android.support.constraint.ConstraintLayout>

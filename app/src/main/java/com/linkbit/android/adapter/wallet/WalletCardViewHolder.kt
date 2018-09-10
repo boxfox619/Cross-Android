@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.linkbit.android.R
+import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.helper.URLHelper
 import kotlinx.android.synthetic.main.view_wallet_card.view.*
 import java.text.DecimalFormat
@@ -15,6 +16,13 @@ import java.text.DecimalFormat
 class WalletCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     constructor(context: Context, parent: ViewGroup) : this(LayoutInflater.from(context).inflate(R.layout.view_wallet_card, parent, false))
+
+    fun init(wallet: WalletModel){
+        this.setName(wallet.walletName)
+        this.setSymbol(wallet.coinSymbol)
+        this.setBalance(wallet.balance)
+        this.setCoinIcon(wallet.coinSymbol)
+    }
 
     fun setName(name : String){
         itemView.findViewById<TextView>(R.id.tv_wallet_name).text = name

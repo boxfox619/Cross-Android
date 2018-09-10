@@ -12,21 +12,30 @@ import com.linkbit.android.ui.base.SimpleTextChangeListener
 import kotlinx.android.synthetic.main.fragment_withdraw_step3.view.*
 import android.widget.TextView
 import android.widget.TabHost
+import com.linkbit.android.adapter.wallet.WalletCardViewHolder
+import com.linkbit.android.entity.WalletModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_withdraw_step2.view.*
 
 
 class AmountStepFragment : BaseFragment<AmountStepPresenter>(), AmountStepView {
-    private var currentBalance: Double = 0.toDouble()
+    private lateinit var rootView: View
     private lateinit var tabHost: TabHost
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_withdraw_step3, container, false)
-        view.et_withdraw_step3_amount.addTextChangedListener(SimpleTextChangeListener { presenter.setAmount(it) })
-        //view.et_withdraw_step3_amount.setText(currentBalance.toString())
-        this.tabHost = view.tabhost_withdraw_step2
-        return view
+        this.rootView = inflater.inflate(R.layout.fragment_withdraw_step3, container, false)
+        this.rootView.et_withdraw_step3_amount.addTextChangedListener(SimpleTextChangeListener { presenter.setAmount(it) })
+        this.tabHost = this.rootView.tabhost_withdraw_step2
+        this.presenter.init()
+        return this.rootView
+    }
+
+    override fun setSoruceWalletInfo(wallet: WalletModel) {
+        val holder = WalletCardViewHolder(this.rootView)
+        holder.init(wallet)
+        this.rootView.tv_withdraw_step3_balance_symbol.text = wallet.coinSymbol
+        this.rootView.tv_withdraw_step3_balance.text = wallet.balance.toString()
 
     }
 
@@ -41,10 +50,9 @@ class AmountStepFragment : BaseFragment<AmountStepPresenter>(), AmountStepView {
 
     companion object {
         @JvmStatic
-        fun newInstance(currentBalance: Double, onEnter: (amount: Double) -> Unit) =
+        fun newInstance(sourceAddress: String, onEnter: (amount: Double) -> Unit) =
                 AmountStepFragment().apply {
-                    this.currentBalance = currentBalance
-                    this.presenter = AmountStepPresenter(this, onEnter)
+                    this.presenter = AmountStepPresenter(this, sourceAddress, onEnter)
                 }
     }
 }

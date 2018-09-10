@@ -22,10 +22,7 @@ class WalletListAdapter(
 
     override fun onBindViewHolder(holder: WalletCardViewHolder, position: Int) {
         var model = getItem(position)
-        holder.setName(model!!.walletName)
-        holder.setSymbol(model!!.coinSymbol)
-        holder.setBalance(model!!.balance)
-        holder.setCoinIcon(model!!.coinSymbol)
+        holder.init(model!!)
 
         onSelectListener?.let { holder.setOnClickListener { it(model!!.accountAddress) }}
         //@TODO Selection mode

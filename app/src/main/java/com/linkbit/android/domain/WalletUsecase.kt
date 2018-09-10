@@ -6,8 +6,9 @@ import rx.Single
 import rx.Observable
 
 interface WalletUsecase : Usecase {
-    fun loadWalletList() : Single<List<WalletModel>>
-    fun getWalletList() : Observable<List<WalletModel>>
-    fun createWallet(walletModel: WalletEditModel) : Single<WalletModel>
+    fun loadWalletList(): Single<List<WalletModel>>
+    fun getWalletList(): Observable<List<WalletModel>>
+    fun createWallet(walletModel: WalletEditModel): Single<WalletModel>
+    fun getWalletByAddress(address: String): Single<WalletModel>
     fun updateWallet(address: String, name: String, description: String, major: Boolean, open: Boolean): Single<Boolean>
 }

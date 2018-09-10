@@ -59,11 +59,22 @@ class WalletRepository(private val context: Context) : WalletUsecase {
                         context.realm.copyToRealm(walletrealmModel)
                         context.realm.commitTransaction()
                         subsrciber.onSuccess(walletModel)
-                    }else{
+                    } else {
                         subsrciber.onError(Throwable("Fail to create wallet"))
                     }
                 }
             })
+        }
+    }
+
+    override fun getWalletByAddress(address: String): Single<WalletModel> {
+        return Single.create { subsrciber ->
+            val wallet = context.realm.where(WalletRealmObject::class.java).equalTo("accountAddress", address).or().equalTo("linkbitAddress", address).findFirstAsync()
+            if(wallet!=null){
+                subsrciber.onSuccess(WalletRealmEntityMapper.fromRealmObject(wallet))
+            }else{
+                subsrciber.onError(Throwable("Wallet not found : by account address"))
+            }
         }
     }
 
