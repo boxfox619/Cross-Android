@@ -1,14 +1,14 @@
 package com.linkbit.android.data.network
 
 import android.content.*
-import com.linkbit.android.helper.Helper
+import com.linkbit.android.helper.ToastHelper
 import retrofit2.*
 import retrofit2.Response
 
 abstract class Response<T>(private val context: Context) : Callback<T> {
 
     override fun onFailure(call: Call<T>?, t: Throwable?) {
-        Helper.showToast(context, "네트워크 오류")
+        ToastHelper.showToast(context, "네트워크 오류")
         setResponseData(400, null)
     }
 

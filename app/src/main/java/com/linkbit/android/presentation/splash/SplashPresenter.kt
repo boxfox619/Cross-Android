@@ -11,7 +11,7 @@ import com.linkbit.android.data.repository.AuthRepository
 import com.linkbit.android.data.repository.CoinRepository
 import com.linkbit.android.data.repository.FriendRepository
 import com.linkbit.android.data.repository.WalletRepository
-import com.linkbit.android.helper.Helper
+import com.linkbit.android.helper.ToastHelper
 import com.linkbit.android.presentation.Presenter
 import io.realm.Realm
 import rx.Single
@@ -75,7 +75,7 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
                                         } else {
                                             Log.d("Splash", "Fail to login")
                                             FirebaseAuth.getInstance().signOut()
-                                            Helper.showToast(ctx, ctx.getString(R.string.err_fail_login))
+                                            ToastHelper.showToast(ctx, ctx.getString(R.string.err_fail_login))
                                             view.hideProgress()
                                             view.setVisibleLoginButtons(true)
                                         }
@@ -89,7 +89,7 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
                     } else {
                         view.hideProgress()
                         view.setVisibleLoginButtons(true)
-                        Helper.showToast(ctx, ctx.getString(R.string.err_fail_login))
+                        ToastHelper.showToast(ctx, ctx.getString(R.string.err_fail_login))
                     }
                 }
     }

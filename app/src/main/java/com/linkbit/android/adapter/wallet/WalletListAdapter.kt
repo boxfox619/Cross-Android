@@ -10,7 +10,7 @@ import java.util.*
 
 class WalletListAdapter(
         context: Context,
-        private val onSelectListener: ((address: String?) -> Unit)?,
+        private val onSelectListener: ((wallet: WalletModel?) -> Unit)?,
         private val selectionMode: SelectionMode = SelectionMode.SINGLE,
         private val repository: CoinRepository = CoinRepository(context)
 ) : AbstractRecyclerAdapter<WalletModel, WalletCardViewHolder>(context) {
@@ -24,7 +24,7 @@ class WalletListAdapter(
         var model = getItem(position)
         holder.init(model!!)
 
-        onSelectListener?.let { holder.setOnClickListener { it(model!!.accountAddress) }}
+        onSelectListener?.let { holder.setOnClickListener { it(model) }}
         //@TODO Selection mode
 
         repository.getCoinPrice(model!!.coinSymbol, Locale.getDefault()).subscribe {

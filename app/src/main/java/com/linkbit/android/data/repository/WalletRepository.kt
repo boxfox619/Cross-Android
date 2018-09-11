@@ -75,7 +75,7 @@ class WalletRepository(private val context: Context) : WalletUsecase {
                         subscriber.onSuccess(WalletNetworkEntityMapper.fromNetworkObject(wallet))
                     } else {
                         Log.d("Networking", "Fail the wallet load")
-                        subscriber.onError(Throwable("Fail the wallet load"))
+                        subscriber.onError(Throwable("Fail the wallet list load"))
                     }
                 }
             })

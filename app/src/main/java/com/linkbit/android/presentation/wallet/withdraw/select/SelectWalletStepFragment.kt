@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 
 import com.linkbit.android.R
 import com.linkbit.android.adapter.wallet.WalletListAdapter
+import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.presentation.BaseFragment
 import kotlinx.android.synthetic.main.fragment_withdraw_step1.view.*
 
@@ -27,7 +28,7 @@ class SelectWalletStepFragment : BaseFragment<SelectWalletStepPresenter>(), Sele
 
     companion object {
         @JvmStatic
-        fun newInstance(onSelect : (address: String?) -> Unit ) =
+        fun newInstance(onSelect : (wallet: WalletModel?) -> Unit ) =
                 SelectWalletStepFragment().apply {
                     this.walletListAdapter = WalletListAdapter(this.context, onSelect)
                 }

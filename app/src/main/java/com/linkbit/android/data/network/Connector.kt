@@ -21,6 +21,7 @@ class Connector(context: Context) {
     val coinAPI: CoinApi
     val transactionAPI: TransactionApi
     val authAPI: AuthApi
+    val withdrawAPI: WithdrawApi
 
     init {
         val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -49,6 +50,7 @@ class Connector(context: Context) {
         coinAPI = retrofit.create(CoinApi::class.java)
         transactionAPI = retrofit.create(TransactionApi::class.java)
         authAPI = retrofit.create(AuthApi::class.java)
+        withdrawAPI = retrofit.create(WithdrawApi::class.java)
     }
 
 }

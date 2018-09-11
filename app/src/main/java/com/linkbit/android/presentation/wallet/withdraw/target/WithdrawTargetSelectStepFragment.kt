@@ -7,6 +7,7 @@ import android.view.ViewGroup
 
 import com.linkbit.android.R
 import com.linkbit.android.entity.UserModel
+import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.presentation.BaseFragment
 import com.linkbit.android.presentation.friend.list.FriendListAdapter
 import com.linkbit.android.ui.base.SimpleTextChangeListener
@@ -37,7 +38,7 @@ class WithdrawTargetSelectStepFragment : BaseFragment<WithdrawTargetSelectStepPr
 
     companion object {
         @JvmStatic
-        fun newInstance(onSelect: (address: String?) -> Unit) =
+        fun newInstance(onSelect: (wallet: WalletModel?) -> Unit) =
                 WithdrawTargetSelectStepFragment().apply {
                     this.presenter = WithdrawTargetSelectStepPresenter(this, onSelect)
                 }
