@@ -3,6 +3,7 @@ package com.linkbit.android.data.model.transaction
 import com.google.gson.annotations.SerializedName
 
 class TransactionNetworkObject {
+    @SerializedName("symbol") lateinit var symbol: String
     @SerializedName("transactionHash") lateinit var transactionHash: String
     @SerializedName("sourceAddress") lateinit var sourceAddress: String
     @SerializedName("targetAddress") lateinit var targetAddress: String

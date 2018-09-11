@@ -1,8 +1,7 @@
 package com.linkbit.android.entity
 
-import java.math.BigInteger
-
 class TransactionModel {
+    lateinit var symbol: String
     lateinit var transactionHash: String
     lateinit var sourceAddress: String
     lateinit var targetAddress: String

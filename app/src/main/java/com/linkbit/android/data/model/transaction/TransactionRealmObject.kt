@@ -5,6 +5,7 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
 open class TransactionRealmObject : RealmObject(){
+    @SerializedName("symbol") lateinit var symbol: String
     @PrimaryKey
     @SerializedName("transactionHash") lateinit var transactionHash: String
     @SerializedName("sourceAddress") lateinit var sourceAddress: String
