@@ -59,7 +59,7 @@ class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
         spec.setContent(contentId)
         spec.setIndicator(indicator)
         tab_host.addTab(spec)
-        tab_host.tabWidget.getChildAt(tab_host.tabWidget.childCount-1).layoutParams.height /= 2
+        tab_host.tabWidget.getChildAt(tab_host.tabWidget.childCount-1).layoutParams.height = (tab_host.tabWidget.getChildAt(tab_host.tabWidget.childCount-1).layoutParams.height / 1.5).toInt()
     }
 
     override fun getContext(): Context {

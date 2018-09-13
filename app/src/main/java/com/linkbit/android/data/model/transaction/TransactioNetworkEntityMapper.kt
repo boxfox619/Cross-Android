@@ -1,9 +1,7 @@
 package com.linkbit.android.data.model.transaction
 
 import com.linkbit.android.data.model.NetworkEntityMapper
-import com.linkbit.android.data.model.RealmEntityMapper
 import com.linkbit.android.entity.TransactionModel
-import java.math.BigInteger
 
 object TransactioNetworkEntityMapper : NetworkEntityMapper<TransactionModel, TransactionNetworkObject> {
     override fun fromNetworkObject(obj: TransactionNetworkObject): TransactionModel {
@@ -15,6 +13,7 @@ object TransactioNetworkEntityMapper : NetworkEntityMapper<TransactionModel, Tra
             amount = obj.amount
             targetProfile = obj.targetProfile
             date = obj.date
+            symbol= obj.symbol
             blockNumber = obj.blockNumber
             confirmation = obj.confirmation
         }
@@ -29,6 +28,7 @@ object TransactioNetworkEntityMapper : NetworkEntityMapper<TransactionModel, Tra
             amount = model.amount
             targetProfile = model.targetProfile
             date = model.date
+            symbol= model.symbol
             blockNumber = model.blockNumber
             confirmation = model.confirmation
         }

@@ -13,6 +13,7 @@ import com.linkbit.android.data.repository.FriendRepository
 import com.linkbit.android.data.repository.WalletRepository
 import com.linkbit.android.helper.ToastHelper
 import com.linkbit.android.presentation.Presenter
+import com.linkbit.android.util.realm
 import io.realm.Realm
 import rx.Single
 

@@ -12,6 +12,7 @@ object TransactioRealmEntityMapper : RealmEntityMapper<TransactionModel, Transac
             targetAddress = obj.targetAddress
             status = obj.status
             amount = obj.amount
+            symbol = obj.symbol
             targetProfile = obj.targetProfile
             date = obj.date
             blockNumber = obj.blockNumber
@@ -26,6 +27,7 @@ object TransactioRealmEntityMapper : RealmEntityMapper<TransactionModel, Transac
             targetAddress = model.targetAddress
             status = model.status
             amount = model.amount
+            symbol = model.symbol
             targetProfile = model.targetProfile
             date = model.date
             blockNumber = model.blockNumber
