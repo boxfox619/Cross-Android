@@ -51,6 +51,12 @@ class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
         manager.beginTransaction().replace(R.id.tab_wallet_content, WalletListFragment.newInstance()).commit()
         manager.beginTransaction().replace(R.id.tab_friend_content, FriendListFragment.newInstance()).commit()
         manager.beginTransaction().replace(R.id.tab_transaction_content, TransactionListFragment.newInstance()).commit()
+        setSupportActionBar(toolbar_main)
+        supportActionBar!!.let {
+            it.title = ""
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
+        }
         presenter.init()
     }
 
