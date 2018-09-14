@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.linkbit.android.R
-import com.linkbit.android.presentation.wallet.BaseViewHolder
+import com.linkbit.android.presentation.BaseViewHolder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_withdraw_step2.view.*
 

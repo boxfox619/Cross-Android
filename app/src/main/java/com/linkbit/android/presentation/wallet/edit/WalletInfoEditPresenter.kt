@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.wallet.manage.info
+package com.linkbit.android.presentation.wallet.edit
 
 import com.linkbit.android.data.model.wallet.WalletEditModel
 import com.linkbit.android.presentation.Presenter

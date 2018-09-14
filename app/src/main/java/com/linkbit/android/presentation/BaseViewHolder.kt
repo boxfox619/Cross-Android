@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.wallet
+package com.linkbit.android.presentation
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

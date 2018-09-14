@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.wallet.manage.info
+package com.linkbit.android.presentation.wallet.edit
 
 import android.os.Bundle
 import android.view.LayoutInflater

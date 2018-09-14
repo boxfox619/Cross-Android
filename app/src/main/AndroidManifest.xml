@@ -23,9 +23,10 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".presentation.main.MainActivity"></activity>
-        <activity android:name=".presentation.wallet.create.CreateWalletActivity"></activity>
-        <activity android:name=".presentation.wallet.manage.info.WalletInfoEditActivity"></activity>
+        <activity android:name=".presentation.main.MainActivity" />
+        <activity android:name=".presentation.wallet.create.CreateWalletActivity" />
+        <activity android:name="com.linkbit.android.presentation.wallet.edit.WalletInfoEditActivity" />
+        <activity android:name=".presentation.wallet.detail.WalletDetailActivity"></activity>
     </application>
 
 </manifest>

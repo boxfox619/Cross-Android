@@ -11,7 +11,7 @@ import rx.Single
 
 class TransactionRepository(private val context: Context) : TransactionUsecase {
 
-    override fun getIntegralTransactionList(page: Int, count: Int): Single<List<TransactionModel>> {
+    override fun loadIntegralTransactionList(page: Int, count: Int): Single<List<TransactionModel>> {
         return Single.create { subscriber ->
             context.retrofit.transactionAPI.getIntegralTransactionList(page, count).enqueue((object : Response<List<TransactionNetworkObject>>(context) {
                 override fun setResponseData(code: Int, transactionList: List<TransactionNetworkObject>?) {
@@ -26,7 +26,7 @@ class TransactionRepository(private val context: Context) : TransactionUsecase {
         }
     }
 
-    override fun getTransactionsByAddress(address: String, page: Int, count: Int): Single<List<TransactionModel>> {
+    override fun loadTransactionsByAddress(address: String, page: Int, count: Int): Single<List<TransactionModel>> {
         return Single.create { subscriber ->
             context.retrofit.transactionAPI.getTransactionList(address, page, count).enqueue((object : Response<List<TransactionNetworkObject>>(context) {
                 override fun setResponseData(code: Int, transactionList: List<TransactionNetworkObject>?) {

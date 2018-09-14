@@ -16,7 +16,7 @@ class TransactionListPresenter(
 
     fun loadTransaction() {
         if (address == null) {
-            transactionRepository.getIntegralTransactionList(page, count).subscribe ({
+            transactionRepository.loadIntegralTransactionList(page, count).subscribe ({
                 page += 1
                 view.addTransationItems(it)
             },{
@@ -24,7 +24,7 @@ class TransactionListPresenter(
                 Log.d(this.javaClass.`package`.name, it.message)
             })
         } else {
-            transactionRepository.getTransactionsByAddress(address, page, count).subscribe {
+            transactionRepository.loadTransactionsByAddress(address, page, count).subscribe {
                 page += 1
                 view.addTransationItems(it)
             }

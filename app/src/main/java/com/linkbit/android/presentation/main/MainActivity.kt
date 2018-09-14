@@ -73,11 +73,11 @@ class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
     }
 
     override fun setLinkbitAddress(address: String) {
-        tv_main_linkbit_address.text = address
+        tv_header_linkbit_address.text = address
     }
 
     override fun setTotalExchangeBalance(balance: String) {
-        tv_main_total_exchange_balance.text = balance
+        tv_header_total_exchange_balance.text = balance
     }
 
     override fun setCoinCardItems(items: List<CoinStatistic>) {

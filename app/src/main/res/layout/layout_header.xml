@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
@@ -22,7 +21,7 @@
         app:layout_constraintGuide_percent="0.03" />
 
     <TextView
-        android:id="@+id/tv_main_linkbit_address"
+        android:id="@+id/tv_header_linkbit_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Linkbit user address"
@@ -31,7 +30,7 @@
         app:layout_constraintStart_toStartOf="@id/vertical_guideline"/>
 
     <TextView
-        android:id="@+id/tv_main_total_exchange_balance"
+        android:id="@+id/tv_header_total_exchange_balance"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="103,321,968.52"
@@ -39,19 +38,6 @@
         android:textSize="11pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/vertical_guideline"
-        app:layout_constraintTop_toBottomOf="@id/tv_main_linkbit_address" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_main_coin_statistics"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:listitem="@layout/view_header_statistic_card"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_main_total_exchange_balance" />
+        app:layout_constraintTop_toBottomOf="@id/tv_header_linkbit_address" />
 
 </android.support.constraint.ConstraintLayout>
