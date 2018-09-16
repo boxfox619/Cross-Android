@@ -11,7 +11,7 @@ import java.util.*
 class WalletListAdapter(
         context: Context,
         private val onSelectListener: ((wallet: WalletModel?) -> Unit)?,
-        private val selectionMode: SelectionMode = SelectionMode.SINGLE,
+        private val selectionMode: SelectionMode = SelectionMode.NONE,
         private val repository: CoinRepository = CoinRepository(context)
 ) : AbstractRecyclerAdapter<WalletModel, WalletCardViewHolder>(context) {
     override fun onItemViewType(position: Int): Int = 0
@@ -22,15 +22,25 @@ class WalletListAdapter(
 
     override fun onBindViewHolder(holder: WalletCardViewHolder, position: Int) {
         var model = getItem(position)
-        holder.init(model!!)
+            model!!.let { model ->
+                holder.init(model)
+                if (this.selectionMode != SelectionMode.NONE) {
+                    onSelectListener?.let { listener ->
+                        holder.setOnClickListener {
+                            if (this.selectionMode == SelectionMode.SINGLE) {
+                                this.clearSelectedItems()
+                            }
+                            this.addItem(model)
+                            listener(model)
+                        }
+                    }
+                }
 
-        onSelectListener?.let { holder.setOnClickListener { it(model) }}
-        //@TODO Selection mode
-
-        repository.getCoinPrice(model!!.coinSymbol, Locale.getDefault()).subscribe {
-            val coinPrice = it
-            holder.setMoney(coinPrice.unit)
-            holder.setExchangeBalance(model!!.balance * coinPrice.amount)
+            repository.getCoinPrice(model.coinSymbol, Locale.getDefault()).subscribe {
+                val coinPrice = it
+                holder.setMoney(coinPrice.unit)
+                holder.setExchangeBalance(model.balance * coinPrice.amount)
+            }
         }
     }
 }
