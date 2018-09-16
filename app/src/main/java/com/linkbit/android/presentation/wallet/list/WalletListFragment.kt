@@ -1,5 +1,6 @@
 package com.linkbit.android.presentation.wallet.list
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -36,13 +37,13 @@ class WalletListFragment : BaseFragment<WalletListPresenter>(), WalletListView {
 
     companion object {
         @JvmStatic
-        fun newInstance() = WalletListFragment().apply {
-            this.walletListAdpater = WalletListAdapter(this.context)
+        fun newInstance(context: Context) = WalletListFragment().apply {
+            this.walletListAdpater = WalletListAdapter(context)
         }
 
         @JvmStatic
-        fun newInstance(listener: (wallet: WalletModel) -> Unit) = WalletListFragment().apply {
-            this.walletListAdpater = WalletListAdapter(this.context, listener, SelectionMode.SINGLE)
+        fun newInstance(context: Context, listener: (wallet: WalletModel) -> Unit) = WalletListFragment().apply {
+            this.walletListAdpater = WalletListAdapter(context, listener, SelectionMode.SINGLE)
         }
     }
 }

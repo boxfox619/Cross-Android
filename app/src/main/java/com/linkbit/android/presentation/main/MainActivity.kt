@@ -49,7 +49,7 @@ class MainActivity : BaseActivity<MainActivityPresenter>(), MainActivityView {
         tab_host.setup()
 
         val manager = fragmentManager
-        manager.beginTransaction().replace(R.id.tab_wallet_content, WalletListFragment.newInstance { startWalletDetail(it) }).commit()
+        manager.beginTransaction().replace(R.id.tab_wallet_content, WalletListFragment.newInstance(this) { startWalletDetail(it) }).commit()
         manager.beginTransaction().replace(R.id.tab_friend_content, FriendListFragment.newInstance()).commit()
         manager.beginTransaction().replace(R.id.tab_transaction_content, TransactionListFragment.newInstance()).commit()
         setSupportActionBar(toolbar_main)
