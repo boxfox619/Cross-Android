@@ -10,7 +10,7 @@ import java.util.*
 
 class WalletListAdapter(
         context: Context,
-        private val onSelectListener: ((wallet: WalletModel?) -> Unit)?,
+        private val onSelectListener: ((wallet: WalletModel) -> Unit)? = null,
         private val selectionMode: SelectionMode = SelectionMode.NONE,
         private val repository: CoinRepository = CoinRepository(context)
 ) : AbstractRecyclerAdapter<WalletModel, WalletCardViewHolder>(context) {
