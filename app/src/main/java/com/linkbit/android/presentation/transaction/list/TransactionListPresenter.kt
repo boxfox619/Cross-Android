@@ -24,10 +24,13 @@ class TransactionListPresenter(
                 Log.d(this.javaClass.`package`.name, it.message)
             })
         } else {
-            transactionRepository.loadTransactionsByAddress(address, page, count).subscribe {
+            transactionRepository.loadTransactionsByAddress(address, page, count).subscribe ({
                 page += 1
                 view.addTransationItems(it)
-            }
+            },{
+                ToastHelper.showToast(view.getContext(), R.string.msg_fail_load_transaction)
+                Log.d(this.javaClass.`package`.name, it.message)
+            })
         }
     }
 }

@@ -34,7 +34,7 @@ class TransactionRepository(private val context: Context) : TransactionUsecase {
                         val transactionList: List<TransactionModel> = transactionList.map { it -> TransactioNetworkEntityMapper.fromNetworkObject(it) }
                         subscriber.onSuccess(transactionList)
                     } else {
-                        subscriber.onError(Throwable())
+                        subscriber.onError(Throwable("transaction load fail"))
                     }
                 }
             }))

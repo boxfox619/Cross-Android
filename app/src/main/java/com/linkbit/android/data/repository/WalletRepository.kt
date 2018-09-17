@@ -84,7 +84,7 @@ class WalletRepository(private val context: Context) : WalletUsecase {
 
     override fun getWalletByAddress(address: String): Single<WalletModel> {
         return Single.create { subsrciber ->
-            val wallet = context.realm.where(WalletRealmObject::class.java).equalTo("accountAddress", address).or().equalTo("linkbitAddress", address).findFirstAsync()
+            val wallet = context.realm.where(WalletRealmObject::class.java).equalTo("accountAddress", address).or().equalTo("linkbitAddress", address).findFirst()
             if(wallet!=null){
                 subsrciber.onSuccess(WalletRealmEntityMapper.fromRealmObject(wallet))
             }else{
