@@ -5,6 +5,7 @@ import com.linkbit.android.R
 import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.presentation.BaseActivity
 import com.linkbit.android.presentation.trasnaction.list.TransactionListFragment
+import kotlinx.android.synthetic.main.activity_wallet_detail.*
 import kotlinx.android.synthetic.main.layout_header.*
 
 class WalletDetailActivity : BaseActivity<WalletDetailPresenter>(), WalletDetailView {
@@ -17,6 +18,11 @@ class WalletDetailActivity : BaseActivity<WalletDetailPresenter>(), WalletDetail
         val address = intent.getStringExtra("address")
         val fragmentManager = fragmentManager
         fragmentManager.beginTransaction().replace(R.id.layout_transaction_list_content, TransactionListFragment.newInstance(address)).commit()
+        setSupportActionBar(toolbar_wallet_detail)
+        supportActionBar!!.title = ""
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+        toolbar_wallet_detail.setNavigationOnClickListener{finish()}
         this.presenter.init(address)
     }
     override fun initWalletInfo(walletModel: WalletModel) {
