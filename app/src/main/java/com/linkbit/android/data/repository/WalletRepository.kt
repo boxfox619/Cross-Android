@@ -96,4 +96,8 @@ class WalletRepository(private val context: Context) : WalletUsecase {
     override fun updateWallet(address: String, name: String, description: String, major: Boolean, open: Boolean): Single<Boolean> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    override fun createQRCode(address: String): Single<String> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }
