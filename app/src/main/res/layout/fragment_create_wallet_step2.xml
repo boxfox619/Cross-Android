@@ -9,15 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginEnd="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="10dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            android:layout_marginStart="17dp"
             android:layout_marginTop="20dp"
             android:text="지갑 정보"
             android:textColor="@color/colorAccentDark"
@@ -27,8 +28,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            android:layout_marginStart="17dp"
             android:layout_marginTop="10dp"
             android:text="지갑 이름을 입력해주세요"
             android:textSize="13sp" />
@@ -52,8 +51,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            android:layout_marginStart="17dp"
             android:layout_marginTop="20dp"
             android:text="지갑에 대한 설명을 입력해주세요"
             android:textSize="13sp" />
@@ -62,10 +59,6 @@
             android:id="@+id/et_wallet_info_edit_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            android:layout_marginStart="17dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginEnd="17dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/border_edittext_background"
             android:padding="10dp"
