@@ -1,21 +1,23 @@
 package com.linkbit.android.presentation.wallet.create
 
+import android.app.Activity
 import android.app.Fragment
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import com.linkbit.android.R
-import com.linkbit.android.adapter.SelectionMode
+import com.linkbit.android.entity.TransactionModel
 import com.linkbit.android.helper.ProgressDialogHelper
 import com.linkbit.android.presentation.BaseActivity
-import com.linkbit.android.presentation.coin.list.CoinListFragment
-import com.linkbit.android.presentation.wallet.create.finish.CreateWalletFinishFragment
 import com.linkbit.android.presentation.wallet.list.*
 import kotlinx.android.synthetic.main.activity_create_wallet.*
 
+
 class WithdrawActivity : BaseActivity<WithdrawPresenter>(), WithdrawView {
+
     override val presenter: WithdrawPresenter = WithdrawPresenter(this)
     private lateinit var progressDialog: ProgressDialog
 
@@ -41,9 +43,9 @@ class WithdrawActivity : BaseActivity<WithdrawPresenter>(), WithdrawView {
     }
 
     override fun nextButtonEnabled(state: Boolean) {
-        if(state){
+        if (state) {
             btn_createwallet_next.visibility = View.VISIBLE
-        }else{
+        } else {
             btn_createwallet_next.visibility = View.INVISIBLE
         }
     }
@@ -55,7 +57,7 @@ class WithdrawActivity : BaseActivity<WithdrawPresenter>(), WithdrawView {
             1 -> fragment = WithdrawTargetSelectStepFragment.newInstance { presenter.targetWalletSelected(it) }
             2 -> fragment = AmountStepFragment.newInstance(presenter.sourceWallet!!, presenter.targetWallet!!) { presenter.amountSelected(it) }
             3 -> presenter.doWithdraw()
-            4 -> fragment =WithdrawResultStepFragment.newInstance(presenter.remainBalance, presenter.transactionResult)
+            4 -> fragment = WithdrawResultStepFragment.newInstance(presenter.remainBalance, presenter.transactionResult, {this.finishWithdraw(this.presenter.transactionResult)})
         }
         if (fragment != null) {
             val ft = fragmentManager.beginTransaction()
@@ -63,10 +65,21 @@ class WithdrawActivity : BaseActivity<WithdrawPresenter>(), WithdrawView {
         }
     }
 
-    override fun setProgressDialogVisible(visible: Boolean) {
-        if(visible){
-            progressDialog = ProgressDialogHelper.show(this, "", "송금 요청중...", false)
+    override fun finishWithdraw(transaction: TransactionModel?) {
+        val returnIntent = Intent()
+        if (transaction != null) {
+            returnIntent.putExtra("sourceWalletAddress", transaction)
+            setResult(Activity.RESULT_OK, returnIntent)
         }else{
+            setResult(Activity.RESULT_CANCELED, returnIntent)
+        }
+        finish()
+    }
+
+    override fun setProgressDialogVisible(visible: Boolean) {
+        if (visible) {
+            progressDialog = ProgressDialogHelper.show(this, "", "송금 요청중...", false)
+        } else {
             progressDialog.dismiss()
         }
     }

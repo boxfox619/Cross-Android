@@ -30,15 +30,16 @@ class WithdrawResultStepFragment : BaseFragment<WithdrawResultStepPresenter>(), 
         this.view.tv_withdraw_step4_date.text = result.date
         this.view.tv_simple_wallet_label.text = result.targetProfile
         this.view.tv_simple_wallet_address.text = result.targetAddress
+        //@TODO Register finish button listener
         val url = URLHelper.createAssetUrl(context, result.symbol)
         Glide.with(context).load(url).into(this.view.iv_simple_wallet_icon)
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(remainBalance: Double, result: TransactionModel) =
+        fun newInstance(remainBalance: Double, result: TransactionModel, finishListener: () -> Unit) =
                 WithdrawResultStepFragment().apply {
-                    this.presenter = WithdrawResultStepPresenter(this, remainBalance, result)
+                    this.presenter = WithdrawResultStepPresenter(this, remainBalance, result, finishListener)
                 }
     }
 }

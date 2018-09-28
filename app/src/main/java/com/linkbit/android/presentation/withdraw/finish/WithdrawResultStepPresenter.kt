@@ -6,7 +6,8 @@ import com.linkbit.android.presentation.Presenter
 class WithdrawResultStepPresenter(
         view: WithdrawResultStepView,
         private val remainBalance: Double,
-        private val transactionResult: TransactionModel
+        private val transactionResult: TransactionModel,
+        private val finishListener: () -> Unit
 ) : Presenter<WithdrawResultStepView>(view) {
     fun init(){
         view.initWithdrawResult(transactionResult, remainBalance)

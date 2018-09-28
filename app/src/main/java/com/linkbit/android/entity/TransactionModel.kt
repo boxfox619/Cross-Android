@@ -1,6 +1,8 @@
 package com.linkbit.android.entity
 
-class TransactionModel {
+import java.io.Serializable
+
+class TransactionModel : Serializable{
     lateinit var symbol: String
     lateinit var transactionHash: String
     lateinit var sourceAddress: String
