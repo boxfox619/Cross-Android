@@ -1,5 +1,6 @@
 package com.linkbit.android.presentation.wallet.create
 
+import com.linkbit.android.data.repository.WalletRepository
 import com.linkbit.android.data.repository.WithdrawRepository
 import com.linkbit.android.entity.TransactionModel
 import com.linkbit.android.entity.WalletModel
@@ -9,6 +10,7 @@ import com.linkbit.android.presentation.Presenter
 
 class WithdrawPresenter(
         view: WithdrawView,
+        private val walletRepository: WalletRepository = WalletRepository(view.getContext()),
         private val withdrawRepository: WithdrawRepository = WithdrawRepository(view.getContext())
 ) : Presenter<WithdrawView>(view) {
     var sourceWallet: WalletModel? = null
@@ -46,6 +48,7 @@ class WithdrawPresenter(
         this.canNext(false)
     }
 
+
     fun init() {
     }
 
@@ -53,10 +56,11 @@ class WithdrawPresenter(
         this.view.setProgressDialogVisible(true)
         this.withdrawRepository.withdraw(this.sourceWallet!!.coinSymbol, this.sourceWallet!!.accountAddress, this.password, this.targetWallet!!.accountAddress, this.amount).subscribe({
             this.transactionResult = it
-            // this.remainBalance
-            // @TODO cal remain balance and binding this.remainBalance
-            this.view.setProgressDialogVisible(false)
-            onNext()
+            this.walletRepository.getBalanceByAddress(this.sourceWallet!!.accountAddress).subscribe {
+                this.remainBalance = it
+                this.view.setProgressDialogVisible(false)
+                onNext()
+            }
         }, {
             this.view.setProgressDialogVisible(false)
             ToastHelper.showToast(ctx, it.message!!)

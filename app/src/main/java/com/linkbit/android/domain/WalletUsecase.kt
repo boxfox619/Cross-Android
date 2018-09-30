@@ -11,6 +11,7 @@ interface WalletUsecase : Usecase {
     fun createWallet(walletModel: WalletEditModel): Single<WalletModel>
     fun loadWalletByAddress(address: String): Single<WalletModel>
     fun getWalletByAddress(address: String): Single<WalletModel>
+    fun getBalanceByAddress(address: String): Single<Double>
     fun updateWallet(address: String, name: String, description: String, major: Boolean, open: Boolean): Single<Boolean>
 
     fun createQRCode(address: String): Single<String>

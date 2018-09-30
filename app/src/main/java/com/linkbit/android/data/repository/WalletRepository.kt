@@ -82,16 +82,32 @@ class WalletRepository(private val context: Context) : WalletUsecase {
         }
     }
 
+    override fun getBalanceByAddress(address: String): Single<Double> {
+        return Single.create { subscriber ->
+            Log.d("Networking", "Try loading wallet list")
+            context.retrofit.walletAPI.getBalance(address).enqueue(object : Response<String>(context) {
+                override fun setResponseData(code: Int, balance: String?) {
+                    if (isSuccess(code) && balance != null) {
+                        subscriber.onSuccess(balance.toDouble())
+                    } else {
+                        subscriber.onError(Throwable("Get balance fail"))
+                    }
+                }
+            })
+        }
+    }
+
     override fun getWalletByAddress(address: String): Single<WalletModel> {
         return Single.create { subsrciber ->
             val wallet = context.realm.where(WalletRealmObject::class.java).equalTo("accountAddress", address).or().equalTo("linkbitAddress", address).findFirst()
-            if(wallet!=null){
+            if (wallet != null) {
                 subsrciber.onSuccess(WalletRealmEntityMapper.fromRealmObject(wallet))
-            }else{
+            } else {
                 subsrciber.onError(Throwable("Wallet not found : by account address"))
             }
         }
     }
+
 
     override fun updateWallet(address: String, name: String, description: String, major: Boolean, open: Boolean): Single<Boolean> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
