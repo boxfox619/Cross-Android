@@ -10,7 +10,7 @@ import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.domain.AuthUsecase
 import com.linkbit.android.entity.UserModel
-import com.linkbit.android.util.realm
+import com.linkbit.android.helper.realm
 import rx.Single
 
 class AuthRepository(private val context: Context) : AuthUsecase {

@@ -11,7 +11,7 @@ import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.domain.FriendUsecase
 import com.linkbit.android.entity.UserModel
-import com.linkbit.android.util.realm
+import com.linkbit.android.helper.realm
 import rx.Observable
 import rx.Single
 

@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.splash.SplashActivity">
+        <activity android:name="com.linkbit.android.presentation.view.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,10 +23,10 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".presentation.main.MainActivity" />
-        <activity android:name=".presentation.wallet.create.CreateWalletActivity" />
-        <activity android:name="com.linkbit.android.presentation.wallet.edit.WalletInfoEditActivity" />
-        <activity android:name=".presentation.wallet.detail.WalletDetailActivity"></activity>
+        <activity android:name="com.linkbit.android.presentation.view.main.MainActivity" />
+        <activity android:name="com.linkbit.android.presentation.view.wallet.create.CreateWalletActivity" />
+        <activity android:name="com.linkbit.android.presentation.view.wallet.edit.WalletInfoEditActivity" />
+        <activity android:name="com.linkbit.android.presentation.view.wallet.detail.WalletDetailActivity"></activity>
     </application>
 
 </manifest>

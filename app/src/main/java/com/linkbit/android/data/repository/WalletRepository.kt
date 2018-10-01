@@ -2,8 +2,6 @@ package com.linkbit.android.data.repository
 
 import android.content.Context
 import android.util.Log
-import com.linkbit.android.data.model.coin.CoinRealmEntityMapper
-import com.linkbit.android.data.model.coin.CoinRealmObject
 import com.linkbit.android.data.model.coin.WalletNetworkEntityMapper
 import com.linkbit.android.data.model.coin.WalletRealmEntityMapper
 import com.linkbit.android.data.model.wallet.*
@@ -11,7 +9,7 @@ import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.domain.WalletUsecase
 import com.linkbit.android.entity.WalletModel
-import com.linkbit.android.util.realm
+import com.linkbit.android.helper.realm
 import rx.Single
 import rx.Observable
 

@@ -7,7 +7,7 @@ import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.domain.WithdrawUsecase
 import com.linkbit.android.entity.TransactionModel
-import com.linkbit.android.util.realm
+import com.linkbit.android.helper.realm
 import rx.Single
 
 class WithdrawRepository(private val context: Context,
