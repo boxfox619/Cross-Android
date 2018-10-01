@@ -21,7 +21,7 @@ class WalletListFragment : BaseFragment<WalletListPresenter>(), WalletListView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_any_list, container, false)
-        view.findViewById<RecyclerView>(R.id.recyclerview_any).layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+        view.findViewById<RecyclerView>(R.id.recyclerview_any).layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
         view.findViewById<RecyclerView>(R.id.recyclerview_any).adapter = walletListAdpater
         this.presenter = WalletListPresenter(this)
         presenter.init()
