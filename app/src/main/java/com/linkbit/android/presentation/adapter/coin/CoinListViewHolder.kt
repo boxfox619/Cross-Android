@@ -1,20 +1,23 @@
 package com.linkbit.android.presentation.adapter.coin
 
+import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import com.bumptech.glide.Glide
+import com.linkbit.android.R
 import com.linkbit.android.helper.URLHelper
 import kotlinx.android.synthetic.main.view_coin_item.view.*
 
-class CoinListViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-    val iconView: ImageView = mView.iv_coin_icon
-    val mContentView: TextView = mView.tv_coin_name
-    val checkbox: CheckBox = mView.checkbox_coin_select
-    val radioButton: RadioButton = mView.radio_coin_select
-    val root: ConstraintLayout = mView.view_coin_item_root
+class CoinListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    constructor(context: Context, parent: ViewGroup) : this(LayoutInflater.from(context).inflate(R.layout.view_coin_item, parent, false))
+
     init {
+        val root: ConstraintLayout = itemView.view_coin_item_root
         root.setOnClickListener(createClickListener())
         for (i in 0 until root.childCount - 3 ) {
             root.getChildAt(i).setOnClickListener(createClickListener())
@@ -24,54 +27,54 @@ class CoinListViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
     fun createClickListener(): View.OnClickListener {
         return object : View.OnClickListener {
             override fun onClick(v: View?) {
-                radioButton.isChecked = !radioButton.isChecked
-                checkbox.isChecked = !checkbox.isChecked
+                itemView.radio_coin_select.isChecked = !itemView.radio_coin_select.isChecked
+                itemView.checkbox_coin_select.isChecked = !itemView.checkbox_coin_select.isChecked
             }
         }
     }
 
     override fun toString(): String {
-        return super.toString() + " '" + mContentView.text + "'"
+        return super.toString() + " '" + itemView.tv_coin_name.text + "'"
     }
 
     fun setSelected(state: Boolean) {
-        checkbox.isChecked = state
-        radioButton.isChecked = state
+        itemView.checkbox_coin_select.isChecked = state
+        itemView.radio_coin_select.isChecked = state
     }
 
     fun setIcon(symbol: String) {
         val url = URLHelper.createAssetUrl(itemView.context, symbol)
-        Glide.with(mView).load(url).into(iconView)
+        Glide.with(itemView).load(url).into(itemView.iv_coin_icon)
     }
 
     fun setCoinText(symbol: String, name: String) {
-        mContentView.text = String.format("%s - %s", symbol, name)
+        itemView.tv_coin_name.text = String.format("%s - %s", symbol, name)
     }
 
     fun setVisibleCheckbox(visible: Boolean){
         if(visible){
-            checkbox.visibility = View.VISIBLE
+            itemView.checkbox_coin_select.visibility = View.VISIBLE
         }else{
-            checkbox.visibility = View.INVISIBLE
+            itemView.checkbox_coin_select.visibility = View.INVISIBLE
         }
     }
 
     fun setVisibleRadioButton(visible: Boolean){
         if(visible){
-            radioButton.visibility = View.VISIBLE
+            itemView.radio_coin_select.visibility = View.VISIBLE
         } else {
-            radioButton.visibility = View.INVISIBLE
+            itemView.radio_coin_select.visibility = View.INVISIBLE
         }
     }
 
     fun setOnSelectListener(listener: (checked: Boolean, referesh: Boolean) -> Unit) {
-        this.radioButton.setOnCheckedChangeListener { v, c ->
-            if (this.radioButton.visibility == View.VISIBLE) {
+        this.itemView.radio_coin_select.setOnCheckedChangeListener { v, c ->
+            if (this.itemView.radio_coin_select.visibility == View.VISIBLE) {
                 listener(c, true)
             }
         }
-        this.checkbox.setOnCheckedChangeListener { v, c ->
-            if (checkbox.visibility == View.VISIBLE) {
+        this.itemView.checkbox_coin_select.setOnCheckedChangeListener { v, c ->
+            if (itemView.checkbox_coin_select.visibility == View.VISIBLE) {
                 listener(c, false)
             }
         }

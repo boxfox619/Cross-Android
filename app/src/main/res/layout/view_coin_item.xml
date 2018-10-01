@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/view_coin_item_root"
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:background="?attr/selectableItemBackground"
-    android:paddingLeft="17dp"
-    android:paddingStart="17dp"
-    android:paddingRight="17dp"
-    android:paddingEnd="17dp">
+    android:padding="17dp">
 
     <ImageView
         android:id="@+id/iv_coin_icon"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_eth"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

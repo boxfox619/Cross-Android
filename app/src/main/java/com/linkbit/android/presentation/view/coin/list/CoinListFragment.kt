@@ -26,7 +26,8 @@ class CoinListFragment : BaseFragment<CoinListPresenter>(), CoinListView {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_coin_list, container, false)
         this.presenter = CoinListPresenter(this, wallet, isValid)
-        adapter = CoinListViewAdapter(this.coinList, { presenter.itemSeleced(it) }, selectionMode)
+        adapter = CoinListViewAdapter(context, { presenter.itemSeleced(it) }, selectionMode)
+        adapter.addItems(this.coinList)
 
         if (view is RecyclerView) {
             view.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
