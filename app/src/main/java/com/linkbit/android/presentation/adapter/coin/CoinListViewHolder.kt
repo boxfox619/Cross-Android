@@ -17,7 +17,7 @@ class CoinListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     constructor(context: Context, parent: ViewGroup) : this(LayoutInflater.from(context).inflate(R.layout.view_coin_item, parent, false))
 
     init {
-        val root: ConstraintLayout = itemView.view_coin_item_root
+        val root: ViewGroup = itemView.view_coin_item_root
         root.setOnClickListener(createClickListener())
         for (i in 0 until root.childCount - 3 ) {
             root.getChildAt(i).setOnClickListener(createClickListener())
