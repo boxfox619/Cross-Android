@@ -9,4 +9,8 @@
 
     </style>
 
+    <style name="AppTheme.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+    </style>
+
 </resources>

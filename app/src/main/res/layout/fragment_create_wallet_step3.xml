@@ -22,84 +22,89 @@
             android:textColor="@color/colorAccentDark"
             android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="10dp"
-            android:text="비밀번호"
-            android:textSize="13sp" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/et_layout_info_edit_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/et_wallet_info_edit_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border_edittext_background"
-                android:textSize="13sp"
-                android:padding="10dp"
-                android:inputType="textPassword"/>
-
-        </android.support.design.widget.TextInputLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="비밀번호 확인"
-            android:textSize="13sp" />
-
-
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/et_layout_info_edit_password_confirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/et_wallet_info_edit_password_confirm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border_edittext_background"
-                android:textSize="13sp"
-                android:padding="10dp"
-                android:inputType="textPassword"/>
-
-        </android.support.design.widget.TextInputLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="17dp">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="비밀번호"
+                android:textSize="13sp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/et_layout_info_edit_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/AppTheme.TextInputLayout">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_wallet_info_edit_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_edittext_background"
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    android:textSize="13sp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="비밀번호 확인"
+                android:textSize="13sp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/et_layout_info_edit_password_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/AppTheme.TextInputLayout">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_wallet_info_edit_password_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_edittext_background"
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    android:textSize="13sp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
                 android:orientation="vertical">
 
-                <CheckBox
-                    android:id="@+id/checkbox_wallet_info_edit_wallet_info"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="지갑 정보 공개"
-                    android:textSize="13dp" />
+                    android:orientation="vertical">
 
-                <CheckBox
-                    android:id="@+id/checkbox_wallet_info_edit_owner_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="소유자 정보 공개"
-                    android:textSize="13dp" />
+                    <CheckBox
+                        android:id="@+id/checkbox_wallet_info_edit_wallet_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="지갑 정보 공개"
+                        android:textSize="13dp" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_wallet_info_edit_owner_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="소유자 정보 공개"
+                        android:textSize="13dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 
