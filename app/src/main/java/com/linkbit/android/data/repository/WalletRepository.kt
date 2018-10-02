@@ -14,7 +14,6 @@ import rx.Single
 import rx.Observable
 
 class WalletRepository(private val context: Context) : WalletUsecase {
-
     override fun loadWalletList(): Single<List<WalletModel>> {
         return Single.create { subscriber ->
             Log.d("Networking", "Try loading wallet list")
@@ -63,6 +62,10 @@ class WalletRepository(private val context: Context) : WalletUsecase {
                 }
             })
         }
+    }
+
+    override fun addWallet(address: String): Single<WalletModel> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun loadWalletByAddress(address: String): Single<WalletModel> {

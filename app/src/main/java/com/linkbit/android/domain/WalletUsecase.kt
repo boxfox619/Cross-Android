@@ -9,6 +9,7 @@ interface WalletUsecase : Usecase {
     fun loadWalletList(): Single<List<WalletModel>>
     fun getWalletList(): Observable<List<WalletModel>>
     fun createWallet(walletModel: WalletEditModel): Single<WalletModel>
+    fun addWallet(address: String): Single<WalletModel>
     fun loadWalletByAddress(address: String): Single<WalletModel>
     fun getWalletByAddress(address: String): Single<WalletModel>
     fun getBalanceByAddress(address: String): Single<Double>
