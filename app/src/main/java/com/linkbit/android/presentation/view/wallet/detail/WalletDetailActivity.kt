@@ -6,7 +6,7 @@ import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.presentation.base.BaseActivity
 import com.linkbit.android.presentation.trasnaction.list.TransactionListFragment
 import kotlinx.android.synthetic.main.activity_wallet_detail.*
-import kotlinx.android.synthetic.main.layout_header.*
+import kotlinx.android.synthetic.main.view_wallet_info_card.*
 
 class WalletDetailActivity : BaseActivity<WalletDetailPresenter>(), WalletDetailView {
 
@@ -26,7 +26,8 @@ class WalletDetailActivity : BaseActivity<WalletDetailPresenter>(), WalletDetail
         this.presenter.init(address)
     }
     override fun initWalletInfo(walletModel: WalletModel) {
-        tv_header_linkbit_address.text = walletModel.linkbitAddress
-        tv_header_total_exchange_balance.text = walletModel.balance.toString()
+        tv_wallet_info_address.text = walletModel.accountAddress
+        tv_wallet_info_linked_address.text = walletModel.linkbitAddress
+        tv_wallet_info_balance.text = walletModel.balance.toString()
     }
 }
