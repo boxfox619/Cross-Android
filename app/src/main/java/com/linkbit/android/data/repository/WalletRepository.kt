@@ -8,6 +8,7 @@ import com.linkbit.android.data.model.wallet.*
 import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.domain.WalletUsecase
+import com.linkbit.android.entity.WalletDataModel
 import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.helper.realm
 import rx.Single
@@ -44,7 +45,7 @@ class WalletRepository(private val context: Context) : WalletUsecase {
     }
 
     override fun createWallet(walletModel: WalletEditModel): Single<WalletModel> {
-        return Single.create { subsrciber ->
+        return Single.create { subscriber ->
             context.retrofit.walletAPI.createWallet(walletModel.coin.symbol, walletModel.name, walletModel.description, walletModel.password, walletModel.major, walletModel.open).enqueue(object : Response<WalletCreateNetworkObject>(context) {
                 override fun setResponseData(code: Int, walletCreatedResult: WalletCreateNetworkObject?) {
                     if (isSuccess(code) && walletCreatedResult != null) {
@@ -55,17 +56,34 @@ class WalletRepository(private val context: Context) : WalletUsecase {
                         context.realm.copyToRealm(walletRealmData)
                         context.realm.copyToRealm(walletrealmModel)
                         context.realm.commitTransaction()
-                        subsrciber.onSuccess(walletModel)
+                        subscriber.onSuccess(walletModel)
                     } else {
-                        subsrciber.onError(Throwable("Fail to create wallet"))
+                        subscriber.onError(Throwable("Fail to create wallet"))
                     }
                 }
             })
         }
     }
 
-    override fun addWallet(address: String): Single<WalletModel> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun addWallet(walletModel: WalletEditModel, walletDataModel: WalletDataModel): Single<WalletModel> {
+        return Single.create { subscriber ->
+            context.retrofit.walletAPI.addWallet(walletModel.coin.symbol, walletDataModel.accountAddress, walletModel.name, walletModel.description, walletModel.major, walletModel.open).enqueue(object : Response<WalletNetworkObject>(context) {
+                override fun setResponseData(code: Int, walletModel: WalletNetworkObject?) {
+                    if (isSuccess(code) && walletModel != null) {
+                        val realWalletModel = WalletNetworkEntityMapper.fromNetworkObject(walletModel)
+                        val walletRealmObject = WalletRealmEntityMapper.toRealmObject(realWalletModel)
+                        val walletDataRealmObject = WalletDataRealmEntityMapper.toRealmObject(walletDataModel)
+                        context.realm.beginTransaction()
+                        context.realm.copyToRealm(walletRealmObject)
+                        context.realm.copyToRealm(walletDataRealmObject)
+                        context.realm.commitTransaction()
+                        subscriber.onSuccess(realWalletModel)
+                    } else {
+                        subscriber.onError(Throwable("Fail to create wallet"))
+                    }
+                }
+            })
+        }
     }
 
     override fun loadWalletByAddress(address: String): Single<WalletModel> {
