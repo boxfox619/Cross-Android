@@ -23,9 +23,9 @@ class MainActivityPresenter(
     var totalExchangeBalace: Double = 0.toDouble()
 
     fun init() {
-        val wallet = ctx.getString(R.string.wallet)
-        val transaction = ctx.getString(R.string.transaction)
-        val friendList = ctx.getString(R.string.friend_list)
+        val wallet = getContext().getString(R.string.wallet)
+        val transaction = getContext().getString(R.string.transaction)
+        val friendList = getContext().getString(R.string.friend_list)
         this.view.addTabSpec(wallet, R.id.tab_wallet, wallet)
         this.view.addTabSpec(transaction, R.id.tab_transaction, transaction)
         this.view.addTabSpec(friendList, R.id.tab_friend, friendList)

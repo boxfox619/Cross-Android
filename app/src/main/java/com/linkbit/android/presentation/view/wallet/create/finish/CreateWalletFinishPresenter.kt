@@ -25,7 +25,7 @@ class CreateWalletFinishPresenter(
     }
 
     fun copyAddress() {
-        val clipboard = ctx.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipboard = getContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("address", this.wallet.accountAddress)
         clipboard.primaryClip = clip
     }

@@ -63,7 +63,7 @@ class WithdrawPresenter(
             }
         }, {
             this.view.setProgressDialogVisible(false)
-            ToastHelper.showToast(ctx, it.message!!)
+            ToastHelper.showToast(getContext(), it.message!!)
             this.view.finishWithdraw(null)
         })
     }

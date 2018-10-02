@@ -34,13 +34,13 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
                 Log.d("Splash", "Fail to load initalize data")
                 Log.d("Splash", it.message)
                 view.hideProgress()
-                view.showErrorMessage(ctx.getString(R.string.err_fail_load_init_data))
+                view.showErrorMessage(getContext().getString(R.string.err_fail_load_init_data))
             })
         }
     }
 
     fun init() {
-        Realm.init(this.ctx)
+        Realm.init(this.getContext())
         val firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth.currentUser
         if (user != null) {
@@ -75,7 +75,7 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
                                         } else {
                                             Log.d("Splash", "Fail to login")
                                             FirebaseAuth.getInstance().signOut()
-                                            ToastHelper.showToast(ctx, ctx.getString(R.string.err_fail_login))
+                                            ToastHelper.showToast(getContext(), getContext().getString(R.string.err_fail_login))
                                             view.hideProgress()
                                             view.setVisibleLoginButtons(true)
                                         }
@@ -89,7 +89,7 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
                     } else {
                         view.hideProgress()
                         view.setVisibleLoginButtons(true)
-                        ToastHelper.showToast(ctx, ctx.getString(R.string.err_fail_login))
+                        ToastHelper.showToast(getContext(), getContext().getString(R.string.err_fail_login))
                     }
                 }
     }
