@@ -1,11 +1,13 @@
 package com.linkbit.android.presentation.view.wallet.create
 
 import android.util.Log
+import com.linkbit.android.R
 import com.linkbit.android.data.model.wallet.WalletEditModel
 import com.linkbit.android.data.repository.CoinRepository
 import com.linkbit.android.data.repository.WalletRepository
 import com.linkbit.android.entity.CoinModel
 import com.linkbit.android.entity.WalletModel
+import com.linkbit.android.helper.ToastHelper
 import com.linkbit.android.presentation.base.Presenter
 
 
@@ -50,10 +52,12 @@ class CreateWalletPresenter(
                 this.onNext()
             },{
                 this.view.setProgressDialogVisible(false)
+                ToastHelper.showToast(this.view.getContext(), R.string.err_create_wallet_fail)
                 //@TODO Implement create wallet error handling
             })
         }, {
             this.view.setProgressDialogVisible(false)
+            ToastHelper.showToast(this.view.getContext(), R.string.err_create_wallet_fail)
             //@TODO Implement create wallet error handling
         })
     }

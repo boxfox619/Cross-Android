@@ -7,6 +7,7 @@ import com.linkbit.android.data.repository.AuthRepository
 import com.linkbit.android.data.repository.CoinRepository
 import com.linkbit.android.data.repository.WalletRepository
 import com.linkbit.android.entity.WalletModel
+import com.linkbit.android.helper.ToastHelper
 import com.linkbit.android.presentation.base.Presenter
 import java.util.*
 
@@ -29,8 +30,14 @@ class MainActivityPresenter(
         this.view.addTabSpec(wallet, R.id.tab_wallet, wallet)
         this.view.addTabSpec(transaction, R.id.tab_transaction, transaction)
         this.view.addTabSpec(friendList, R.id.tab_friend, friendList)
-        authRepository.getAuthData().subscribe({ view.setLinkbitAddress(it.linkbitAddress) }, { /*@TODO Implement auth data error handling*/ })
-        walletRepository.getWalletList().subscribe({ walletListLoad(it) }, { /*@TODO Implement wallet list load fail handling*/ }).apply { disposables.add(this) }
+        authRepository.getAuthData().subscribe({ view.setLinkbitAddress(it.linkbitAddress) }, {
+            ToastHelper.showToast(view.getContext(), R.string.err_auth_data_load_fail)
+            failLoading()
+        })
+        walletRepository.getWalletList().subscribe({ walletListLoad(it) }, {
+            ToastHelper.showToast(view.getContext(), R.string.err_wallet_list_load_fail)
+            failLoading()
+        }).apply { disposables.add(this) }
     }
 
     fun walletListLoad(walletModelList: List<WalletModel>) {
@@ -54,14 +61,18 @@ class MainActivityPresenter(
                             view.setCoinCardItems(coinMap.values.toList())
                             view.setTotalExchangeBalance(totalExchangeBalace.toString())
                         }, {
-                            //@TODO Implement wallet list load error handling
+                            ToastHelper.showToast(view.getContext(), R.string.err_wallet_list_load_fail)
+                            failLoading()
                         })
                     }
                 }
                 return Object()
             }
-
         }.execute()
+    }
+
+    private fun failLoading(){
+        //@TODO Implement main activity loading fail
     }
 }
 

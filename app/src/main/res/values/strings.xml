@@ -25,5 +25,9 @@
     <string name="err_create_wallet_et_name">지갑 이름을 입력해 주세요</string>
     <string name="err_create_wallet_et_password">4자리 이상 비밀번호를 입력해주세요</string>
     <string name="err_create_wallet_et_password_confirm">비밀번호가 일치하지 않습니다</string>
+    <string name="err_wallet_list_load_fail">지갑 목록 가져오기 실패</string>
+    <string name="err_auth_data_load_fail">계정 정보 가져오기 실패</string>
+    <string name="err_create_wallet_fail">지갑 생성 실패</string>
+    <string name="err_wallet_detail_load_fail">지갑 정보 가져오기 실패</string>
 
 </resources>
