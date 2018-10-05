@@ -9,6 +9,7 @@ import com.linkbit.android.R
 import okhttp3.*
 import okhttp3.logging.*
 import retrofit2.*
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.*
 
 /**
@@ -43,6 +44,7 @@ class Connector(context: Context) {
                 }.build()
         val retrofit = Retrofit.Builder().client(client)
                 .baseUrl(context.getString(R.string.server_host))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         walletAPI = retrofit.create(WalletApi::class.java)

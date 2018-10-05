@@ -11,57 +11,49 @@ import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.domain.AuthUsecase
 import com.linkbit.android.entity.UserModel
 import com.linkbit.android.helper.realm
+import io.reactivex.Completable
 import rx.Single
 
 class AuthRepository(private val context: Context) : AuthUsecase {
 
-    override fun login(token: String): Single<Boolean> {
-        return Single.create { subscriber ->
-            Log.d("Networking", "try singin")
-            context.retrofit.authAPI.signin(token).enqueue(object : Response<Void>(context) {
-                override fun setResponseData(code: Int, data: Void?) {
-                    Log.d("Networking", "result : "+code)
-                    if (isSuccess(code)) {
-                        subscriber.onSuccess(true)
-                    } else {
-                        subscriber.onSuccess(false)
-                    }
-                }
-            })
-        }
+    override fun login(token: String): Completable {
+        Log.d("Networking", "try singin")
+        val completable = context.retrofit.authAPI.signin(token)
+        completable.subscribe({
+            Log.d("Networking", "signin success")
+        }, {
+            Log.d("Networking", "signin fail")
+            Log.d("Networking", it.message)
+        })
+        return completable
     }
 
-    override fun logout(): Single<Boolean> {
-        return Single.create { subscriber ->
-            Log.d("Networking", "try signout")
-            context.retrofit.authAPI.logout().enqueue(object : Response<Void>(context) {
-                override fun setResponseData(code: Int, void: Void?) {
-                    if (isSuccess(code)) {
-                        subscriber.onSuccess(true)
-                    } else {
-                        subscriber.onSuccess(false)
-                    }
-                }
-            })
-        }
+    override fun logout(): Completable {
+        Log.d("Networking", "try signout")
+        val completable = context.retrofit.authAPI.logout()
+        completable.subscribe({
+            Log.d("Networking", "logout success")
+        }, {
+            Log.d("Networking", "logout fail")
+            Log.d("Networking", it.message)
+        })
+        return completable
     }
     override fun loadAuthData(): Single<UserModel> {
-        return Single.create { subscriber ->
+        return Single.create{ subscriber ->
             Log.d("Networking", "try getting auth info")
-            context.retrofit.authAPI.info().enqueue(object : Response<UserNetworkObject>(context) {
-                override fun setResponseData(code: Int, data: UserNetworkObject?) {
-                    if (isSuccess(code) && data !=null) {
-                        val userModel = UserNetworkEntityMapper.fromNetworkObject(data)
-                        context.realm.beginTransaction()
-                        context.realm.where(UserRealmObject::class.java).findAll().deleteAllFromRealm()
-                        context.realm.copyToRealm(UserRealmEntityMapper.toRealmObject(userModel))
-                        context.realm.commitTransaction()
-                        subscriber.onSuccess(userModel)
-                    } else {
-                        Log.d("Networking", "Auth data load fail")
-                        subscriber.onError(Throwable("Auth data load fail"))
-                    }
-                }
+            val single = context.retrofit.authAPI.info()
+            single.subscribe({
+                val userModel = UserNetworkEntityMapper.fromNetworkObject(it)
+                context.realm.beginTransaction()
+                context.realm.where(UserRealmObject::class.java).findAll().deleteAllFromRealm()
+                context.realm.copyToRealm(UserRealmEntityMapper.toRealmObject(userModel))
+                context.realm.commitTransaction()
+                subscriber.onSuccess(userModel)
+            }, {
+                Log.d("Networking", "Auth data load fail")
+                Log.d("Networking", it.message)
+                subscriber.onError(it)
             })
         }
     }
