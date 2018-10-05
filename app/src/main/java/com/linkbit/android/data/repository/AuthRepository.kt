@@ -4,15 +4,13 @@ import android.content.Context
 import android.util.Log
 import com.linkbit.android.data.model.coin.UserNetworkEntityMapper
 import com.linkbit.android.data.model.coin.UserRealmEntityMapper
-import com.linkbit.android.data.model.user.UserNetworkObject
 import com.linkbit.android.data.model.user.UserRealmObject
-import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.domain.AuthUsecase
 import com.linkbit.android.entity.UserModel
 import com.linkbit.android.helper.realm
 import io.reactivex.Completable
-import rx.Single
+import io.reactivex.Single
 
 class AuthRepository(private val context: Context) : AuthUsecase {
 

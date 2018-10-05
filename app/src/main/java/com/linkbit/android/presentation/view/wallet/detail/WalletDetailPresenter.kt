@@ -8,9 +8,11 @@ class WalletDetailPresenter(view: WalletDetailView,
 ) : Presenter<WalletDetailView>(view) {
 
     fun init(address: String) {
-        this.walletRepository.getWalletByAddress(address).subscribe{
+        this.walletRepository.getWalletByAddress(address).subscribe({
             this.view.initWalletInfo(it)
-        }
+        },{
+            //@TODO implement the wallet detail load error handler
+        })
     }
 
 }

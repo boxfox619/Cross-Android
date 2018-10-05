@@ -56,11 +56,15 @@ class WithdrawPresenter(
         this.view.setProgressDialogVisible(true)
         this.withdrawRepository.withdraw(this.sourceWallet!!.coinSymbol, this.sourceWallet!!.accountAddress, this.password, this.targetWallet!!.accountAddress, this.amount).subscribe({
             this.transactionResult = it
-            this.walletRepository.getBalanceByAddress(this.sourceWallet!!.accountAddress).subscribe {
+            this.walletRepository.getBalanceByAddress(this.sourceWallet!!.accountAddress).subscribe({
                 this.remainBalance = it
                 this.view.setProgressDialogVisible(false)
                 onNext()
-            }
+            }, {
+                this.view.setProgressDialogVisible(false)
+                ToastHelper.showToast(getContext(), it.message!!)
+                this.view.finishWithdraw(null)
+            })
         }, {
             this.view.setProgressDialogVisible(false)
             ToastHelper.showToast(getContext(), it.message!!)

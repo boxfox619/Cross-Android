@@ -2,7 +2,7 @@ package com.linkbit.android.domain
 
 import com.linkbit.android.entity.UserModel
 import io.reactivex.Completable
-import rx.Single
+import io.reactivex.Single
 
 interface AuthUsecase : Usecase{
     fun login(token: String): Completable

@@ -8,7 +8,7 @@ class WalletListPresenter(
         private val walletRepository: WalletRepository = WalletRepository(view.getContext())
 ) : Presenter<WalletListView>(view) {
 
-    fun init(){
-        disposables.add(walletRepository.getWalletList().subscribe{view.setWalletItems(it)})
+    fun init() {
+        disposables.add(walletRepository.getWalletList().subscribe({ view.setWalletItems(it) }, { /* @TODO Implement wallet list load error handling*/ }))
     }
 }

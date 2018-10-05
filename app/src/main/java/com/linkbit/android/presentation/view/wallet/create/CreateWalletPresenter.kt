@@ -45,13 +45,16 @@ class CreateWalletPresenter(
         this.view.setProgressDialogVisible(true)
         this.walletRepository.createWallet(this.wallet).subscribe({
             this.resultWallet = it
-            this.walletRepository.loadWalletList().subscribe{
+            this.walletRepository.loadWalletList().subscribe({
                 this.view.setProgressDialogVisible(false)
                 this.onNext()
-            }
+            },{
+                this.view.setProgressDialogVisible(false)
+                //@TODO Implement create wallet error handling
+            })
         }, {
             this.view.setProgressDialogVisible(false)
-            //@TODO error
+            //@TODO Implement create wallet error handling
         })
     }
 }

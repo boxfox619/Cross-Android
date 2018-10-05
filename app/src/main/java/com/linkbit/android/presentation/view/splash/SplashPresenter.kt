@@ -13,8 +13,9 @@ import com.linkbit.android.data.repository.FriendRepository
 import com.linkbit.android.data.repository.WalletRepository
 import com.linkbit.android.helper.ToastHelper
 import com.linkbit.android.presentation.base.Presenter
+import io.reactivex.Observable
+import io.reactivex.Single
 import io.realm.Realm
-import rx.Single
 
 class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookCallback<LoginResult> {
     val authRepository = AuthRepository(view.getContext())
@@ -27,7 +28,12 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
     fun loadInitializeData() {
         view.let {
             view.showProgress()
-            Single.concat(authRepository.loadAuthData(), coinRepository.loadAllCoinList(), friendRepository.loadFriendList(), walletRepository.loadWalletList()).last().subscribe({
+            Single.concat(
+                    authRepository.loadAuthData(),
+                    coinRepository.loadAllCoinList(),
+                    friendRepository.loadFriendList(),
+                    walletRepository.loadWalletList()
+            ).last(null).subscribe({
                 view.hideProgress()
                 view.finishSplash()
             }, {
@@ -69,17 +75,15 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
                         res.result.user.getIdToken(true).addOnCompleteListener { res ->
                             run {
                                 if (res.isSuccessful()) {
-                                    authRepository.login(res.result.token!!).subscribe {
-                                        if (it) {
-                                            loadInitializeData()
-                                        } else {
-                                            Log.d("Splash", "Fail to login")
-                                            FirebaseAuth.getInstance().signOut()
-                                            ToastHelper.showToast(getContext(), getContext().getString(R.string.err_fail_login))
-                                            view.hideProgress()
-                                            view.setVisibleLoginButtons(true)
-                                        }
-                                    }
+                                    authRepository.login(res.result.token!!).subscribe({
+                                        loadInitializeData()
+                                    }, {
+                                        Log.d("Splash", "Fail to login")
+                                        FirebaseAuth.getInstance().signOut()
+                                        ToastHelper.showToast(getContext(), getContext().getString(R.string.err_fail_login))
+                                        view.hideProgress()
+                                        view.setVisibleLoginButtons(true)
+                                    })
                                 } else {
                                     view.hideProgress()
                                     view.setVisibleLoginButtons(true)

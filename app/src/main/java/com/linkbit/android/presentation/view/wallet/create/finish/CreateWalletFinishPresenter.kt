@@ -15,9 +15,11 @@ class CreateWalletFinishPresenter(
 ) : Presenter<CreateWalletFinishView>(view) {
 
     fun createQRCode(){
-        this.walletRepository.createQRCode(this.wallet.accountAddress).subscribe{
+        this.walletRepository.createQRCode(this.wallet.accountAddress).subscribe({
             //@TODO Somthing
-        }
+        }, {
+            //@TODO Implement the qr code create error handling
+        })
     }
 
     fun createUrl(){

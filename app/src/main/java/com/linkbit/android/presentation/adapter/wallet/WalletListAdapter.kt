@@ -36,11 +36,13 @@ class WalletListAdapter(
                     }
                 }
 
-            repository.getCoinPrice(model.coinSymbol, Locale.getDefault()).subscribe {
+            repository.getCoinPrice(model.coinSymbol, Locale.getDefault()).subscribe ({
                 val coinPrice = it
                 holder.setMoney(coinPrice.unit)
                 holder.setExchangeBalance(model.balance * coinPrice.amount)
-            }
+            }, {
+                //@TODO coin price load error handling
+            })
         }
     }
 }

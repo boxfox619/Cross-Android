@@ -29,8 +29,8 @@ class MainActivityPresenter(
         this.view.addTabSpec(wallet, R.id.tab_wallet, wallet)
         this.view.addTabSpec(transaction, R.id.tab_transaction, transaction)
         this.view.addTabSpec(friendList, R.id.tab_friend, friendList)
-        authRepository.getAuthData().subscribe { view.setLinkbitAddress(it.linkbitAddress) }
-        walletRepository.getWalletList().subscribe { walletListLoad(it) }.apply { disposables.add(this) }
+        authRepository.getAuthData().subscribe({ view.setLinkbitAddress(it.linkbitAddress) }, { /*@TODO Implement auth data error handling*/ })
+        walletRepository.getWalletList().subscribe({ walletListLoad(it) }, { /*@TODO Implement wallet list load fail handling*/ }).apply { disposables.add(this) }
     }
 
     fun walletListLoad(walletModelList: List<WalletModel>) {
@@ -38,8 +38,8 @@ class MainActivityPresenter(
             override fun doInBackground(vararg params: Void): Object {
                 view.let {
                     walletModelList!!.forEach { wallet ->
-                        val coin = coinRepository.getCoinBySymbol(wallet.coinSymbol).toBlocking().value()
-                        coinRepository.getCoinPrice(coin.symbol, Locale.getDefault()).subscribe {
+                        val coin = coinRepository.getCoinBySymbol(wallet.coinSymbol).blockingGet()
+                        coinRepository.getCoinPrice(coin.symbol, Locale.getDefault()).subscribe({
                             val price = it
                             val realBalance = wallet.balance * price.amount
                             totalExchangeBalace += realBalance
@@ -53,7 +53,9 @@ class MainActivityPresenter(
                             }
                             view.setCoinCardItems(coinMap.values.toList())
                             view.setTotalExchangeBalance(totalExchangeBalace.toString())
-                        }
+                        }, {
+                            //@TODO Implement wallet list load error handling
+                        })
                     }
                 }
                 return Object()
