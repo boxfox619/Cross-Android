@@ -4,36 +4,33 @@ import android.content.Context
 import android.util.Log
 import com.linkbit.android.R
 import com.linkbit.android.data.model.coin.*
-import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.entity.CoinModel
 import com.linkbit.android.domain.CoinUsecase
 import com.linkbit.android.entity.CoinPriceModel
 import com.linkbit.android.helper.realm
-import rx.Single
+import io.reactivex.Single
 import java.util.*
 
 class CoinRepository(private val context: Context) : CoinUsecase {
 
     override fun loadAllCoinList(): Single<List<CoinModel>> {
-        return Single.create { subscriber ->
-            Log.d("Networking", "try getting supported coin list")
-            context.retrofit.coinAPI.getSupportedCoins().enqueue((object : Response<List<CoinNetworkObject>>(context) {
-                override fun setResponseData(code: Int, supportedCoinList: List<CoinNetworkObject>?) {
-                    if (isSuccess(code) && supportedCoinList != null) {
-                        val loadedCoinList: List<CoinModel> = supportedCoinList.map { it -> CoinNetworkEntityMapper.fromNetworkObject(it) }
-                        context.realm.beginTransaction()
-                        context.realm.where(CoinRealmObject::class.java).findAll().deleteAllFromRealm()
-                        context.realm.copyToRealm(loadedCoinList.map { CoinRealmEntityMapper.toRealmObject(it) })
-                        context.realm.commitTransaction()
-                        subscriber.onSuccess(loadedCoinList)
-                    } else {
-                        Log.d("Networking", "Supported coin list load fail")
-                        subscriber.onError(Throwable("Supported coin list load fail"))
-                    }
-                }
-            }))
-        }
+        Log.d("Networking", "try getting supported coin list")
+        val single: Single<List<CoinModel>> = context.retrofit.coinAPI
+                .getSupportedCoins()
+                .map<List<CoinModel>> { it.map { CoinNetworkEntityMapper.fromNetworkObject(it) } }
+        single.subscribe({ supportedCoinList ->
+            if (supportedCoinList != null) {
+                context.realm.beginTransaction()
+                context.realm.where(CoinRealmObject::class.java).findAll().deleteAllFromRealm()
+                context.realm.copyToRealm(supportedCoinList.map { CoinRealmEntityMapper.toRealmObject(it) })
+                context.realm.commitTransaction()
+            }
+        }, {
+            Log.d("Networking", "Supported coin list load fail")
+            Log.d("Networking", it.message)
+        })
+        return single
     }
 
     override fun getSupportCoins(): Single<List<CoinModel>> {
@@ -70,20 +67,13 @@ class CoinRepository(private val context: Context) : CoinUsecase {
     }
 
     override fun getCoinPrice(symbol: String, locale: Locale): Single<CoinPriceModel> {
-        return Single.create { subscriber ->
-            context.retrofit.coinAPI.getPrice(symbol, locale.displayName).enqueue((object : Response<CoinPriceNetworkObject>(context) {
-                override fun setResponseData(code: Int, price: CoinPriceNetworkObject?) {
-                    if (isSuccess(code) && price != null) {
-                        subscriber.onSuccess(CoinPriceModel().apply {
-                            this.symbol = symbol
-                            this.amount = price.amount
-                            this.unit = price.unit
-                        })
-                    } else {
-                        subscriber.onError(Throwable())
+        return context.retrofit.coinAPI.getPrice(symbol, locale.displayName)
+                .map<CoinPriceModel> { price ->
+                    CoinPriceModel().apply {
+                        this.symbol = symbol
+                        this.amount = price.amount
+                        this.unit = price.unit
                     }
                 }
-            }))
-        }
     }
 }

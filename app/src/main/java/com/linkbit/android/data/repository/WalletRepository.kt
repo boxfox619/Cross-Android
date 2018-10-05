@@ -5,35 +5,29 @@ import android.util.Log
 import com.linkbit.android.data.model.coin.WalletNetworkEntityMapper
 import com.linkbit.android.data.model.coin.WalletRealmEntityMapper
 import com.linkbit.android.data.model.wallet.*
-import com.linkbit.android.data.network.Response
 import com.linkbit.android.data.network.retrofit
 import com.linkbit.android.domain.WalletUsecase
 import com.linkbit.android.entity.WalletDataModel
 import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.helper.realm
-import rx.Single
-import rx.Observable
+import io.reactivex.Completable
+import io.reactivex.Single
+import io.reactivex.Observable
 
 class WalletRepository(private val context: Context) : WalletUsecase {
     override fun loadWalletList(): Single<List<WalletModel>> {
-        return Single.create { subscriber ->
-            Log.d("Networking", "Try loading wallet list")
-            context.retrofit.walletAPI.getWalletList().enqueue(object : Response<List<WalletNetworkObject>>(context) {
-                override fun setResponseData(code: Int, newWalletList: List<WalletNetworkObject>?) {
-                    if (isSuccess(code) && newWalletList != null) {
-                        val loadedWalletList: List<WalletModel> = newWalletList.map { it -> WalletNetworkEntityMapper.fromNetworkObject(it) }
-                        context.realm.beginTransaction()
-                        context.realm.where(WalletRealmObject::class.java).findAll().deleteAllFromRealm()
-                        context.realm.copyToRealm(loadedWalletList.map { WalletRealmEntityMapper.toRealmObject(it) })
-                        context.realm.commitTransaction()
-                        subscriber.onSuccess(loadedWalletList)
-                    } else {
-                        Log.d("Networking", "Fail the wallet list load")
-                        subscriber.onError(Throwable("Fail the wallet list load"))
-                    }
-                }
-            })
-        }
+        val single = context.retrofit.walletAPI.getWalletList()
+                .map<List<WalletModel>> { it.map { WalletNetworkEntityMapper.fromNetworkObject(it) } }
+        single.subscribe({
+            context.realm.beginTransaction()
+            context.realm.where(WalletRealmObject::class.java).findAll().deleteAllFromRealm()
+            context.realm.copyToRealm(it.map { WalletRealmEntityMapper.toRealmObject(it) })
+            context.realm.commitTransaction()
+        }, {
+            Log.d("Networking", "Fail the wallet list load")
+            Log.d("Networking", it.message)
+        })
+        return single
     }
 
     override fun getWalletList(): Observable<List<WalletModel>> {
@@ -45,75 +39,43 @@ class WalletRepository(private val context: Context) : WalletUsecase {
     }
 
     override fun createWallet(walletModel: WalletEditModel): Single<WalletModel> {
-        return Single.create { subscriber ->
-            context.retrofit.walletAPI.createWallet(walletModel.coin.symbol, walletModel.name, walletModel.description, walletModel.password, walletModel.major, walletModel.open).enqueue(object : Response<WalletCreateNetworkObject>(context) {
-                override fun setResponseData(code: Int, walletCreatedResult: WalletCreateNetworkObject?) {
-                    if (isSuccess(code) && walletCreatedResult != null) {
-                        val walletrealmModel = WalletRealmEntityMapper.fromWalletCreated(walletCreatedResult)
-                        val walletModel = WalletRealmEntityMapper.fromRealmObject(walletrealmModel)
-                        val walletRealmData = WalletDataRealmEntityMapper.fromWalletCreatedToRealm(walletCreatedResult)
-                        context.realm.beginTransaction()
-                        context.realm.copyToRealm(walletRealmData)
-                        context.realm.copyToRealm(walletrealmModel)
-                        context.realm.commitTransaction()
-                        subscriber.onSuccess(walletModel)
-                    } else {
-                        subscriber.onError(Throwable("Fail to create wallet"))
-                    }
+        return context.retrofit.walletAPI
+                .createWallet(walletModel.coin.symbol, walletModel.name, walletModel.description, walletModel.password, walletModel.major, walletModel.open)
+                .map<WalletModel> {
+                    val walletrealmModel = WalletRealmEntityMapper.fromWalletCreated(it)
+                    val walletModel = WalletRealmEntityMapper.fromRealmObject(walletrealmModel)
+                    val walletRealmData = WalletDataRealmEntityMapper.fromWalletCreatedToRealm(it)
+                    context.realm.beginTransaction()
+                    context.realm.copyToRealm(walletRealmData)
+                    context.realm.copyToRealm(walletrealmModel)
+                    context.realm.commitTransaction()
+                    walletModel
                 }
-            })
-        }
     }
 
     override fun addWallet(walletModel: WalletEditModel, walletDataModel: WalletDataModel): Single<WalletModel> {
-        return Single.create { subscriber ->
-            context.retrofit.walletAPI.addWallet(walletModel.coin.symbol, walletDataModel.accountAddress, walletModel.name, walletModel.description, walletModel.major, walletModel.open).enqueue(object : Response<WalletNetworkObject>(context) {
-                override fun setResponseData(code: Int, walletModel: WalletNetworkObject?) {
-                    if (isSuccess(code) && walletModel != null) {
-                        val realWalletModel = WalletNetworkEntityMapper.fromNetworkObject(walletModel)
-                        val walletRealmObject = WalletRealmEntityMapper.toRealmObject(realWalletModel)
-                        val walletDataRealmObject = WalletDataRealmEntityMapper.toRealmObject(walletDataModel)
-                        context.realm.beginTransaction()
-                        context.realm.copyToRealm(walletRealmObject)
-                        context.realm.copyToRealm(walletDataRealmObject)
-                        context.realm.commitTransaction()
-                        subscriber.onSuccess(realWalletModel)
-                    } else {
-                        subscriber.onError(Throwable("Fail to create wallet"))
-                    }
+        return context.retrofit.walletAPI
+                .addWallet(walletModel.coin.symbol, walletDataModel.accountAddress, walletModel.name, walletModel.description, walletModel.major, walletModel.open)
+                .map<WalletModel> {
+                    val realWalletModel = WalletNetworkEntityMapper.fromNetworkObject(it)
+                    val walletRealmObject = WalletRealmEntityMapper.toRealmObject(realWalletModel)
+                    val walletDataRealmObject = WalletDataRealmEntityMapper.toRealmObject(walletDataModel)
+                    context.realm.beginTransaction()
+                    context.realm.copyToRealm(walletRealmObject)
+                    context.realm.copyToRealm(walletDataRealmObject)
+                    context.realm.commitTransaction()
+                    realWalletModel
                 }
-            })
-        }
     }
 
     override fun loadWalletByAddress(address: String): Single<WalletModel> {
-        return Single.create { subscriber ->
-            context.retrofit.walletAPI.getWalletInfo(address).enqueue(object : Response<WalletNetworkObject>(context) {
-                override fun setResponseData(code: Int, wallet: WalletNetworkObject?) {
-                    if (isSuccess(code) && wallet != null) {
-                        subscriber.onSuccess(WalletNetworkEntityMapper.fromNetworkObject(wallet))
-                    } else {
-                        Log.d("Networking", "Fail the wallet load")
-                        subscriber.onError(Throwable("Fail the wallet list load"))
-                    }
-                }
-            })
-        }
+        return context.retrofit.walletAPI.getWalletInfo(address)
+                .map<WalletModel> { WalletNetworkEntityMapper.fromNetworkObject(it) }
     }
 
     override fun getBalanceByAddress(address: String): Single<Double> {
-        return Single.create { subscriber ->
-            Log.d("Networking", "Try loading wallet list")
-            context.retrofit.walletAPI.getBalance(address).enqueue(object : Response<String>(context) {
-                override fun setResponseData(code: Int, balance: String?) {
-                    if (isSuccess(code) && balance != null) {
-                        subscriber.onSuccess(balance.toDouble())
-                    } else {
-                        subscriber.onError(Throwable("Get balance fail"))
-                    }
-                }
-            })
-        }
+        Log.d("Networking", "Try loading wallet list")
+        return context.retrofit.walletAPI.getBalance(address).map { it.toDouble() }
     }
 
     override fun getWalletByAddress(address: String): Single<WalletModel> {
@@ -127,19 +89,8 @@ class WalletRepository(private val context: Context) : WalletUsecase {
         }
     }
 
-
-    override fun updateWallet(address: String, name: String, description: String, major: Boolean, open: Boolean): Single<Void> {
-        return Single.create { subscriber ->
-            context.retrofit.walletAPI.updateWallet(address, name, description, major, open).enqueue(object : Response<Void>(context){
-                override fun setResponseData(code: Int, void: Void?) {
-                    if (isSuccess(code)) {
-                        subscriber.onSuccess(void)
-                    } else {
-                        subscriber.onError(Throwable("Wallet update fail"))
-                    }
-                }
-            })
-        }
+    override fun updateWallet(address: String, name: String, description: String, major: Boolean, open: Boolean): Completable {
+        return context.retrofit.walletAPI.updateWallet(address, name, description, major, open)
     }
 
     override fun createQRCode(address: String): Single<String> {

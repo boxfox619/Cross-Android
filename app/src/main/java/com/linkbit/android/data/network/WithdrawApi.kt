@@ -1,7 +1,7 @@
 package com.linkbit.android.data.network
 
 import com.linkbit.android.data.model.transaction.TransactionResult
-import retrofit2.Call
+import io.reactivex.Single
 import retrofit2.http.Field
 import retrofit2.http.POST
 
@@ -13,5 +13,5 @@ interface WithdrawApi{
                  @Field("walletData") walletData: String,
                  @Field("password") password: String,
                  @Field("targetAddress") targetAddress: String,
-                 @Field("amount") amount: String): Call<TransactionResult>
+                 @Field("amount") amount: String): Single<TransactionResult>
 }
