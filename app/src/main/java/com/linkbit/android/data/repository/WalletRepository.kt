@@ -128,8 +128,18 @@ class WalletRepository(private val context: Context) : WalletUsecase {
     }
 
 
-    override fun updateWallet(address: String, name: String, description: String, major: Boolean, open: Boolean): Single<Boolean> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun updateWallet(address: String, name: String, description: String, major: Boolean, open: Boolean): Single<Void> {
+        return Single.create { subscriber ->
+            context.retrofit.walletAPI.updateWallet(address, name, description, major, open).enqueue(object : Response<Void>(context){
+                override fun setResponseData(code: Int, void: Void?) {
+                    if (isSuccess(code)) {
+                        subscriber.onSuccess(void)
+                    } else {
+                        subscriber.onError(Throwable("Wallet update fail"))
+                    }
+                }
+            })
+        }
     }
 
     override fun createQRCode(address: String): Single<String> {
