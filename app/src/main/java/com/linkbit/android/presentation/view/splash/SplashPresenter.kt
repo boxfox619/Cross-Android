@@ -33,7 +33,7 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
                     coinRepository.loadAllCoinList(),
                     friendRepository.loadFriendList(),
                     walletRepository.loadWalletList()
-            ).last(null).subscribe({
+            ).lastElement().subscribe({
                 view.hideProgress()
                 view.finishSplash()
             }, {

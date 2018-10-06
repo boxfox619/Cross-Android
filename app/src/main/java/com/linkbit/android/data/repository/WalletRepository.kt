@@ -94,6 +94,6 @@ class WalletRepository(private val context: Context) : WalletUsecase {
     }
 
     override fun createQRCode(address: String): Single<String> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return context.retrofit.shareAPI.createWalletQrCode(address)
     }
 }
