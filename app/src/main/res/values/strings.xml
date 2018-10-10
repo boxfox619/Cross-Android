@@ -32,6 +32,7 @@
     <string name="err_auth_data_load_fail">계정 정보 가져오기 실패</string>
     <string name="err_create_wallet_fail">지갑 생성 실패</string>
     <string name="err_wallet_detail_load_fail">지갑 정보 가져오기 실패</string>
+    <string name="err_fail_invalid_password">비밀번호가 틀렸습니다</string>
     <string name="title_activity_anonymous_login">익명으로 로그인</string>
 
     <!-- Strings related to login -->

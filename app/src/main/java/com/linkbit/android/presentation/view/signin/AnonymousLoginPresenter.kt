@@ -2,6 +2,7 @@ package com.linkbit.android.presentation.view.signin
 
 import android.app.Activity
 import android.text.TextUtils
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.linkbit.android.R
 import com.linkbit.android.data.repository.AuthRepository
 import com.linkbit.android.helper.ToastHelper
@@ -39,9 +40,16 @@ class AnonymousLoginPresenter(
         view.showProgress(true)
         this.authRepository.firebaseSignin(email, password).subscribe({
             view.finish(Activity.RESULT_OK)
-        },{
-            ToastHelper.showToast(view.getContext(), R.string.err_fail_anonymous_login)
+        }, {
             view.showProgress(false)
+            try {
+                throw it
+            } catch (e: FirebaseAuthInvalidCredentialsException) {
+                view.setPasswordInputError(view.getContext().getString(R.string.err_fail_invalid_password))
+                ToastHelper.showToast(view.getContext(), R.string.err_fail_invalid_password)
+            } catch (e: Exception) {
+                ToastHelper.showToast(view.getContext(), R.string.err_fail_anonymous_login)
+            }
         })
     }
 

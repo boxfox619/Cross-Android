@@ -5,6 +5,7 @@ import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.linkbit.android.data.model.coin.UserNetworkEntityMapper
 import com.linkbit.android.data.model.coin.UserRealmEntityMapper
 import com.linkbit.android.data.model.user.UserRealmObject
@@ -30,16 +31,27 @@ class AuthRepository(private val context: Context) : AuthUsecase {
     }
 
     override fun firebaseSignin(email: String, password: String): Completable {
-        //@TODO already registered email check
-        return Completable.create{subscriber ->
-           val mAuth = FirebaseAuth.getInstance()
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                if (task.isSuccessful()) {
-                    Log.d("Networking", "createUserWithEmail:success")
+        return Completable.create { subscriber ->
+            val mAuth = FirebaseAuth.getInstance()
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { signinTask ->
+                if (signinTask.isSuccessful) {
                     subscriber.onComplete()
                 } else {
-                    Log.w("Networking", "createUserWithEmail:failure", task.exception)
-                    subscriber.onError(task.exception)
+                    try {
+                        throw signinTask.exception!!
+                    } catch (e: FirebaseAuthInvalidUserException) {
+                        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { signupTask ->
+                            if (signupTask.isSuccessful) {
+                                Log.d("Networking", "createUserWithEmail:success")
+                                subscriber.onComplete()
+                            } else {
+                                Log.w("Networking", "createUserWithEmail:failure", signupTask.exception)
+                                subscriber.onError(signupTask.exception)
+                            }
+                        }
+                    } catch (e: Exception){
+                        subscriber.onError(signinTask.exception)
+                    }
                 }
             }
         }
@@ -56,8 +68,9 @@ class AuthRepository(private val context: Context) : AuthUsecase {
         })
         return completable
     }
+
     override fun loadAuthData(): Single<UserModel> {
-        return Single.create{ subscriber ->
+        return Single.create { subscriber ->
             Log.d("Networking", "try getting auth info")
             val single = context.retrofit.authAPI.info()
             single.subscribe({
@@ -78,9 +91,9 @@ class AuthRepository(private val context: Context) : AuthUsecase {
     override fun getAuthData(): Single<UserModel> {
         return Single.create { subscriber ->
             val userModel = context.realm.where(UserRealmObject::class.java).findFirst()
-            if(userModel!=null){
+            if (userModel != null) {
                 subscriber.onSuccess(UserRealmEntityMapper.fromRealmObject(userModel))
-            }else{
+            } else {
                 subscriber.onError(Throwable("Failt to get auth data"))
             }
 
