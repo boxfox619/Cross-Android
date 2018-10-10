@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.annotation.TargetApi
 import android.os.Build
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
@@ -21,6 +22,9 @@ class AnonymousLoginActivity : BaseActivity<AnonymousLoginPresenter>(), Anonymou
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_anonymous_login)
+        setSupportActionBar(toolbar_anonymous_login)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
         tv_anonymous_login_password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
                 var emailStr = tv_anonymous_login_email.text.toString()
@@ -77,6 +81,14 @@ class AnonymousLoginActivity : BaseActivity<AnonymousLoginPresenter>(), Anonymou
             login_form.visibility = if (show) View.GONE else View.VISIBLE
         }
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.getItemId() === android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun finish(result: Int) {
         setResult(result)
         finish()
