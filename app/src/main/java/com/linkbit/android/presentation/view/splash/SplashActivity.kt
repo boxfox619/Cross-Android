@@ -1,6 +1,7 @@
 package com.linkbit.android.presentation.view.splash
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -42,8 +43,13 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashView {
                 .onlyScaleDown()
                 .into(iv_splash_logo)
         btn_fb_login.setOnClickListener { fbLoginButton.performClick() }
-        btn_anonymous_login.setOnClickListener { startActivityForResult(Intent(this, AnonymousLoginActivity::class.java), ANONYMOUS_LOGIN_RESULT) }
+        btn_anonymous_login.setOnClickListener { signinWithAnonymous()  }
         presenter.init()
+    }
+
+    private fun signinWithAnonymous(){
+        //@TODO check signin or direct start (계정 없이 시작하기 / 백업등의 기능을 사용하기 위한 가입)
+        startActivityForResult(Intent(this, AnonymousLoginActivity::class.java), ANONYMOUS_LOGIN_RESULT)
     }
 
     override fun showProgress() {
