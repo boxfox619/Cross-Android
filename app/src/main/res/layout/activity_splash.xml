@@ -83,6 +83,14 @@
             android:background="@color/colorFacebook"
             android:text="@string/facebook_signin_button_text"
             android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_anonymous_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorFacebook"
+            android:text="@string/anonymous_signin_button_text"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
