@@ -7,6 +7,7 @@ import io.reactivex.Single
 interface AuthUsecase : Usecase{
     fun login(token: String): Completable
     fun logout(): Completable
+    fun firebaseSignin(email: String, password: String): Completable
     fun loadAuthData(): Single<UserModel>
     fun getAuthData(): Single<UserModel>
 }

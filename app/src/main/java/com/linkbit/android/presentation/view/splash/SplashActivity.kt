@@ -1,5 +1,6 @@
 package com.linkbit.android.presentation.view.splash
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -15,8 +16,12 @@ import com.facebook.login.widget.LoginButton
 import com.linkbit.android.R
 import com.linkbit.android.presentation.base.BaseActivity
 import com.linkbit.android.presentation.view.main.MainActivity
+import com.linkbit.android.presentation.view.signin.AnonymousLoginActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_splash.*
+
+const val ANONYMOUS_LOGIN_RESULT = 100
+const val FACEBOOK_LOGIN_RESULT = 101
 
 class SplashActivity : BaseActivity<SplashPresenter>(), SplashView {
     override var presenter = SplashPresenter(this)
@@ -26,7 +31,7 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        FacebookSdk.sdkInitialize(this)
+        FacebookSdk.sdkInitialize(this, FACEBOOK_LOGIN_RESULT)
         AppEventsLogger.activateApp(this)
         fbCallbackManager = CallbackManager.Factory.create()
         fbLoginButton = LoginButton(this)
@@ -37,6 +42,7 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashView {
                 .onlyScaleDown()
                 .into(iv_splash_logo)
         btn_fb_login.setOnClickListener { fbLoginButton.performClick() }
+        btn_anonymous_login.setOnClickListener { startActivityForResult(Intent(this, AnonymousLoginActivity::class.java), ANONYMOUS_LOGIN_RESULT) }
         presenter.init()
     }
 
@@ -66,7 +72,14 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashView {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
-        fbCallbackManager.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == FACEBOOK_LOGIN_RESULT){
+            fbCallbackManager.onActivityResult(requestCode, resultCode, data)
+        }else if (requestCode == ANONYMOUS_LOGIN_RESULT) {
+            if (resultCode == Activity.RESULT_OK) {
+                this.presenter.init()
+            }
+        }
     }
 
     override fun getContext(): Context {

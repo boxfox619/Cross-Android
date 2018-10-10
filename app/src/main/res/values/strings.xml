@@ -23,6 +23,7 @@
     <string name="err_fail_login">로그인 실패</string>
     <string name="err_fail_load_init_data">초기 데이터 로드 실패</string>
     <string name="msg_fail_load_transaction">트랜젝션 로드 실패</string>
+    <string name="err_fail_anonymous_login">익명 로그인 실패</string>
 
     <string name="err_create_wallet_et_name">지갑 이름을 입력해 주세요</string>
     <string name="err_create_wallet_et_password">4자리 이상 비밀번호를 입력해주세요</string>

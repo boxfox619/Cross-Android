@@ -2,6 +2,9 @@ package com.linkbit.android.data.repository
 
 import android.content.Context
 import android.util.Log
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import com.linkbit.android.data.model.coin.UserNetworkEntityMapper
 import com.linkbit.android.data.model.coin.UserRealmEntityMapper
 import com.linkbit.android.data.model.user.UserRealmObject
@@ -24,6 +27,22 @@ class AuthRepository(private val context: Context) : AuthUsecase {
             Log.d("Networking", it.message)
         })
         return completable
+    }
+
+    override fun firebaseSignin(email: String, password: String): Completable {
+        //@TODO already registered email check
+        return Completable.create{subscriber ->
+           val mAuth = FirebaseAuth.getInstance()
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if (task.isSuccessful()) {
+                    Log.d("Networking", "createUserWithEmail:success")
+                    subscriber.onComplete()
+                } else {
+                    Log.w("Networking", "createUserWithEmail:failure", task.exception)
+                    subscriber.onError(task.exception)
+                }
+            }
+        }
     }
 
     override fun logout(): Completable {

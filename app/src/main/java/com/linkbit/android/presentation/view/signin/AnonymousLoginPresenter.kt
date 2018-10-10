@@ -1,10 +1,16 @@
 package com.linkbit.android.presentation.view.signin
 
+import android.app.Activity
 import android.text.TextUtils
 import com.linkbit.android.R
+import com.linkbit.android.data.repository.AuthRepository
+import com.linkbit.android.helper.ToastHelper
 import com.linkbit.android.presentation.base.Presenter
 
-class AnonymousLoginPresenter(view: AnonymousLoginView) : Presenter<AnonymousLoginView>(view) {
+class AnonymousLoginPresenter(
+        view: AnonymousLoginView,
+        private val authRepository: AuthRepository = AuthRepository(view.getContext())
+) : Presenter<AnonymousLoginView>(view) {
 
     fun attemptLogin(email: String, password: String) {
         view.setEmailInputError(null)
@@ -25,9 +31,18 @@ class AnonymousLoginPresenter(view: AnonymousLoginView) : Presenter<AnonymousLog
         }
 
         if (!cancel) {
-            view.showProgress(true)
-            //@TODO Implement the  copiedEmail, password
+            firebaseSingin(copiedEmail, password)
         }
+    }
+
+    private fun firebaseSingin(email: String, password: String) {
+        view.showProgress(true)
+        this.authRepository.firebaseSignin(email, password).subscribe({
+            view.finish(Activity.RESULT_OK)
+        },{
+            ToastHelper.showToast(view.getContext(), R.string.err_fail_anonymous_login)
+            view.showProgress(false)
+        })
     }
 
     private fun isEmailValid(email: String): Boolean {

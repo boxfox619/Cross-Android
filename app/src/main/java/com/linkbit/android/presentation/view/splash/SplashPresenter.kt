@@ -71,7 +71,7 @@ class SplashPresenter(view: SplashView) : Presenter<SplashView>(view), FacebookC
         val credential = FacebookAuthProvider.getCredential(loginResult.accessToken.token)
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener { res ->
-                    if (res.isSuccessful()) {
+                    if (res.isSuccessful) {
                         res.result.user.getIdToken(true).addOnCompleteListener { res ->
                             run {
                                 if (res.isSuccessful()) {

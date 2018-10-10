@@ -6,5 +6,6 @@ interface AnonymousLoginView : View {
     fun showProgress(status: Boolean)
     fun setEmailInputError(error: String?)
     fun setPasswordInputError(error: String?)
+    fun finish(result: Int)
 
 }
