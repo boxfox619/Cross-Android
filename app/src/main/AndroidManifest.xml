@@ -29,7 +29,10 @@
         <activity android:name=".presentation.view.wallet.detail.WalletDetailActivity" />
         <activity
             android:name=".presentation.view.signin.AnonymousLoginActivity"
-            android:label="@string/title_activity_anonymous_login"></activity>
+            android:label="@string/title_activity_anonymous_login" />
+        <activity
+            android:name=".presentation.view.setting.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>
