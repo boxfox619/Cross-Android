@@ -45,6 +45,7 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashView {
         btn_fb_login.setOnClickListener { fbLoginButton.performClick() }
         btn_anonymous_login.setOnClickListener { signinWithAnonymous()  }
         presenter.init()
+        startActivity(Intent(this, SettingsActivity::class.java))
     }
 
     private fun signinWithAnonymous(){

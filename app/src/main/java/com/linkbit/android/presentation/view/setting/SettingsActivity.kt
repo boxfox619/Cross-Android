@@ -18,9 +18,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         addPreferencesFromResource(R.xml.pref_general)
-        bindPreferenceSummaryToValue(findPreference("example_text"))
-        bindPreferenceSummaryToValue(findPreference("example_list"))
-        bindPreferenceSummaryToValue(findPreference("sync_frequency"))
+        //  `   bindPreferenceSummaryToValue(findPreference("secure_switch"))
+        bindPreferenceSummaryToValue(findPreference("pin_number"))
     }
 
     override fun onIsMultiPane(): Boolean {
@@ -41,7 +40,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
                             null)
             } else if (preference is RingtonePreference) {
                 if (TextUtils.isEmpty(stringValue)) {
-                    preference.setSummary(R.string.pref_ringtone_silent)
+                    preference.setSummary(R.string.pref_text_is_empty)
                 } else {
                     val ringtone = RingtoneManager.getRingtone(
                             preference.getContext(), Uri.parse(stringValue))
