@@ -17,12 +17,12 @@ import com.facebook.login.widget.LoginButton
 import com.linkbit.android.R
 import com.linkbit.android.presentation.base.BaseActivity
 import com.linkbit.android.presentation.view.main.MainActivity
+import com.linkbit.android.presentation.view.setting.SettingsActivity
 import com.linkbit.android.presentation.view.signin.AnonymousLoginActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_splash.*
 
 const val ANONYMOUS_LOGIN_RESULT = 100
-const val FACEBOOK_LOGIN_RESULT = 101
 
 class SplashActivity : BaseActivity<SplashPresenter>(), SplashView {
     override var presenter = SplashPresenter(this)
@@ -32,7 +32,7 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        FacebookSdk.sdkInitialize(this, FACEBOOK_LOGIN_RESULT)
+        FacebookSdk.sdkInitialize(this)
         AppEventsLogger.activateApp(this)
         fbCallbackManager = CallbackManager.Factory.create()
         fbLoginButton = LoginButton(this)
@@ -79,7 +79,7 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == FACEBOOK_LOGIN_RESULT){
+        if (FacebookSdk.isFacebookRequestCode(requestCode)) {
             fbCallbackManager.onActivityResult(requestCode, resultCode, data)
         }else if (requestCode == ANONYMOUS_LOGIN_RESULT) {
             if (resultCode == Activity.RESULT_OK) {
