@@ -69,6 +69,8 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.android.support:design:27.1.1'
 
+    compile 'com.ssomai:android.scalablelayout:2.1.1'
+
     //FingurPrint library
     compile 'com.github.ajalt.reprint:core:3.2.1@aar'
     compile 'com.github.ajalt.reprint:reprint_spass:3.2.1@aar'

@@ -27,11 +27,11 @@
 
     </com.ssomai.android.scalablelayout.ScalableLayout>
 
-    <com.hellochain.paperoutapplication.view.pinnumber.PinInputView
+    <com.linkbit.android.presentation.view.pin.PinInputView
         android:id="@+id/pin_input_view"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:pinLength="6"/>
+        app:pinLength="4"/>
 
 </LinearLayout>

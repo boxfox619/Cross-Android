@@ -17,6 +17,7 @@ import com.facebook.login.widget.LoginButton
 import com.linkbit.android.R
 import com.linkbit.android.presentation.base.BaseActivity
 import com.linkbit.android.presentation.view.main.MainActivity
+import com.linkbit.android.presentation.view.pin.PinActivity
 import com.linkbit.android.presentation.view.setting.SettingsActivity
 import com.linkbit.android.presentation.view.signin.AnonymousLoginActivity
 import com.squareup.picasso.Picasso
@@ -45,7 +46,6 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashView {
         btn_fb_login.setOnClickListener { fbLoginButton.performClick() }
         btn_anonymous_login.setOnClickListener { signinWithAnonymous()  }
         presenter.init()
-        startActivity(Intent(this, SettingsActivity::class.java))
     }
 
     private fun signinWithAnonymous(){

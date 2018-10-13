@@ -33,6 +33,8 @@
         <activity android:name=".presentation.view.wallet.create.CreateWalletActivity" />
         <activity android:name=".presentation.view.wallet.edit.WalletInfoEditActivity" />
         <activity android:name=".presentation.view.wallet.detail.WalletDetailActivity" />
+        <activity android:name=".presentation.view.pin.PinActivity" />
+        <activity android:name=".presentation.view.pin.SetPinActivity" />
         <activity
             android:name=".presentation.view.signin.AnonymousLoginActivity"
             android:label="@string/title_activity_anonymous_login" />

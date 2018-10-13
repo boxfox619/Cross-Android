@@ -15,15 +15,16 @@ class PinActivity : AppCompatActivity() {
         setContentView(R.layout.activity_set_pin)
         val correctPin = intent.getStringExtra("pin")
         val pinInputView = (pin_input_view as PinInputView)
+        val resultIntent = Intent()
         pinInputView.asObservable().subscribe { pinNumbers ->
-            if (correctPin == pinNumbers.toString()) {
+            if (correctPin != pinNumbers.toArray().joinToString("")) {
                 pinInputView.setErrorMessage(getString(R.string.err_pin_not_match))
                 pinInputView.reset()
             } else {
-                setResult(Activity.RESULT_OK)
+                setResult(Activity.RESULT_OK, resultIntent)
                 finish()
             }
         }
-        setResult(Activity.RESULT_CANCELED)
+        setResult(Activity.RESULT_CANCELED, resultIntent)
     }
 }

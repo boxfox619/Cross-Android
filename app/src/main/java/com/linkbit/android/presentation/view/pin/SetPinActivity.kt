@@ -19,7 +19,7 @@ class SetPinActivity : AppCompatActivity() {
                 pin = pinNumbers
                 pinInputView.setMessage(getString(R.string.msg_request_password_confirm))
                 pinInputView.reset()
-            } else if (pin.toString() != pinNumbers.toString()) {
+            } else if (pin.toString() != pinNumbers.toArray().joinToString("")) {
                 pin = null
                 pinInputView.setErrorMessage(getString(R.string.err_pin_not_match))
                 pinInputView.reset()
