@@ -18,8 +18,6 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         addPreferencesFromResource(R.xml.pref_general)
-        //  `   bindPreferenceSummaryToValue(findPreference("secure_switch"))
-        bindPreferenceSummaryToValue(findPreference("pin_number"))
     }
 
     override fun onIsMultiPane(): Boolean {

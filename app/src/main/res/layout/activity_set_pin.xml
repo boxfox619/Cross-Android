@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:scale_base_height="40"
+        app:scale_base_width="100">
+
+        <TextView
+            android:id="@+id/tv_guide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/signup_set_pin"
+            android:textColor="@color/colorAccent"
+            android:textAlignment="center"
+            app:scale_top="20"
+            app:scale_width="100"
+            app:scale_height="20"
+            app:scale_left="0"
+            app:scale_textsize="5"/>
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+    <com.hellochain.paperoutapplication.view.pinnumber.PinInputView
+        android:id="@+id/pin_input_view"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:pinLength="6"/>
+
+</LinearLayout>

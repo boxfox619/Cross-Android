@@ -5,15 +5,10 @@
             android:key="secure_switch"
             android:summary="@string/pref_description_touch_id" />
 
-        <EditTextPreference
-            android:capitalize="words"
-            android:inputType="number"
-            android:key="pin_number"
-            android:maxLength="4"
-            android:maxLines="1"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="@string/pref_description_pin_number" />
+        <Preference android:title="@string/pref_description_pin_number"
+            android:summary="●●●●">
+            <intent android:action="android.settings.SYNC_SETTINGS" />
+        </Preference>
 
         <Preference android:title="@string/pref_title_unregister_user">
             <intent android:action="android.settings.SYNC_SETTINGS" />

@@ -8,4 +8,8 @@
     <dimen name="tab_padding_bottom">16dp</dimen>
     <dimen name="tab_label">14sp</dimen>
     <dimen name="custom_tab_layout_height">72dp</dimen>
+
+    <dimen name="ripple_effect_padding">20dp</dimen>
+    <dimen name="padding_pin_checker">5dp</dimen>
+    <dimen name="pin_checker_size">30dp</dimen>
 </resources>

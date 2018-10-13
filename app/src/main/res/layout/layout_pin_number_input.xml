@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:scale_base_height="130"
+        app:scale_base_width="100">
+
+        <LinearLayout
+            android:id="@+id/layout_password_checker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:scale_height="20"
+            app:scale_left="0"
+            app:scale_top="5"
+            app:scale_width="100">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textColor="@android:color/darker_gray"
+            app:scale_height="15"
+            app:scale_left="0"
+            app:scale_top="30"
+            app:scale_width="100"
+            app:scale_textsize="4"/>
+
+        <TableLayout
+            android:id="@+id/layout_keyboard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="*"
+            app:scale_height="70"
+            app:scale_top="50"
+            app:scale_width="100">
+
+        </TableLayout>
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+</RelativeLayout>
