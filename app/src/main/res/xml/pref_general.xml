@@ -5,9 +5,12 @@
             android:key="secure_switch"
             android:summary="@string/pref_description_touch_id" />
 
-        <Preference android:title="@string/pref_description_pin_number"
-            android:summary="●●●●">
-            <intent android:action="android.settings.SYNC_SETTINGS" />
+        <Preference android:title="@string/pref_description_pin_number" android:summary="●●●●">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.linkbit.android.presentation.view.pin"
+                android:targetClass="com.linkbit.android.presentation.view.pin.SetPinActivity"
+                />
         </Preference>
 
         <Preference android:title="@string/pref_title_unregister_user">
