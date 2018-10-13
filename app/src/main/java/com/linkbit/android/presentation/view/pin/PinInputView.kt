@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.layout_pin_number_input.view.*
 
 
 class PinInputView @JvmOverloads constructor(private val mContext: Context, attrs: AttributeSet? = null) : RelativeLayout(mContext, attrs), View.OnClickListener {
-    private val subject: BehaviorSubject<Object>
+    private val subject: BehaviorSubject<List<Int>>
 
     private var tvMessage: TextView? = null
     private var pinCheckLayout: LinearLayout? = null
@@ -96,12 +96,11 @@ class PinInputView @JvmOverloads constructor(private val mContext: Context, attr
                     for (pinItem in pins!!)
                         pinStr += pinItem
                     this.subject.onNext(pins)
-                    this.subject.onNext(pinStr)
                 }
         }
     }
 
-    fun asObservable(): Observable<Object> {
+    fun asObservable(): Observable<List<Int>> {
         return this.subject
     }
 }
