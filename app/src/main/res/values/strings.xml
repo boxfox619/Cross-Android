@@ -36,7 +36,7 @@
     <string name="title_activity_anonymous_login">익명으로 로그인</string>
 
     <string name="msg_request_password_confirm">비밀번호를 다시 입력해 주세요</string>
-    <string name="err_password_not_match">비밀번호가 일치하지 않습니다.\n 다시 입력해 주세요</string>
+    <string name="err_pin_not_match">핀번호가 일치하지 않습니다.\n 다시 입력해 주세요</string>
 
 
     <!-- Strings related to login -->
