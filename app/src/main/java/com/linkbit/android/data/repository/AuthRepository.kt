@@ -17,7 +17,6 @@ import io.reactivex.Completable
 import io.reactivex.Single
 
 class AuthRepository(private val context: Context) : AuthUsecase {
-
     override fun login(token: String): Completable {
         Log.d("Networking", "try singin")
         val completable = context.retrofit.authAPI.signin(token)
@@ -49,7 +48,7 @@ class AuthRepository(private val context: Context) : AuthUsecase {
                                 subscriber.onError(signupTask.exception)
                             }
                         }
-                    } catch (e: Exception){
+                    } catch (e: Exception) {
                         subscriber.onError(signinTask.exception)
                     }
                 }
@@ -99,4 +98,17 @@ class AuthRepository(private val context: Context) : AuthUsecase {
 
         }
     }
+
+    override fun unRegister(): Completable {
+        val completable = context.retrofit.authAPI.unRegister()
+        completable.subscribe({
+            context.realm.where(UserRealmObject::class.java).findAll().deleteAllFromRealm()
+            Log.d("Networking", "unregister success")
+        }, {
+            Log.d("Networking", "unregister fail")
+            Log.d("Networking", it.message)
+        })
+        return completable
+    }
+
 }

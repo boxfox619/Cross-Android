@@ -2,7 +2,7 @@
     <PreferenceCategory android:title="보안설정">
         <SwitchPreference
             android:defaultValue="true"
-            android:key="secure_switch"
+            android:key="fingerPrint"
             android:summary="@string/pref_description_touch_id" />
 
         <Preference android:title="@string/pref_description_pin_number" android:summary="●●●●">

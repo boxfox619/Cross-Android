@@ -4,11 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Marshmallow fingerprint permission-->
-    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+    <!-- Marshmallow fingerprint permission -->
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <!-- Samsung fingerprint permission, only required if you include the Spass module -->
-    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY"/>
+    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
 
     <application
         android:allowBackup="true"
@@ -40,7 +40,8 @@
             android:label="@string/title_activity_anonymous_login" />
         <activity
             android:name=".presentation.view.setting.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
+        <activity android:name=".presentation.view.reset.UserDeleteActivity"></activity>
     </application>
 
 </manifest>

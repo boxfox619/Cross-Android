@@ -8,11 +8,9 @@ import android.support.v7.app.AppCompatActivity
 import com.github.ajalt.reprint.core.AuthenticationResult
 import com.github.ajalt.reprint.rxjava2.RxReprint
 import com.linkbit.android.R
-import kotlinx.android.synthetic.main.activity_set_pin.*
-import android.support.v4.content.ContextCompat
-import android.widget.Toast
 import com.github.ajalt.reprint.core.AuthenticationFailureReason
 import com.linkbit.android.helper.ToastHelper
+import kotlinx.android.synthetic.main.activity_set_pin.*
 
 
 class PinActivity : AppCompatActivity() {
@@ -21,7 +19,7 @@ class PinActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_pin)
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val useFingurePrint = prefs.getBoolean("fingurePrint", false)
+        val useFingurePrint = prefs.getBoolean("fingerPrint", false)
         val correctPin = intent.getStringExtra("pin")
         val pinInputView = (pin_input_view as PinInputView)
         val resultIntent = Intent()

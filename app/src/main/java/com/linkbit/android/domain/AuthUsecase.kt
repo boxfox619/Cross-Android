@@ -10,4 +10,5 @@ interface AuthUsecase : Usecase{
     fun firebaseSignin(email: String, password: String): Completable
     fun loadAuthData(): Single<UserModel>
     fun getAuthData(): Single<UserModel>
+    fun unRegister(): Completable
 }
