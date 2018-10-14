@@ -10,5 +10,6 @@ interface FriendUsecase : Usecase {
     fun getFriendList() : Flowable<List<UserModel>>
     fun addFriend(uid: String) : Completable
     fun removeFriend(uid: String) : Completable
-    fun searchUser(text: String): Single<List<UserModel>>
+    fun searchUserByUid(uid:String) : Single<UserModel>
+    fun searchUser(text: String, page: Int, count: Int): Single<List<UserModel>>
 }

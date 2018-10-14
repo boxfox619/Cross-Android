@@ -14,8 +14,4 @@ class FriendListPresenter(
         }
     }
 
-    override fun destory() {
-        super.destory()
-    }
-
 }

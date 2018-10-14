@@ -3,19 +3,17 @@ package com.linkbit.android.data.network
 import com.linkbit.android.data.model.user.UserNetworkObject
 import io.reactivex.Completable
 import io.reactivex.Single
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 
 interface AuthApi{
-    @GET("signin")
-    fun signin(@Query("token") token: String): Completable
+    @POST("auth")
+    fun signin(@Field("token") token: String): Completable
 
-    @GET("logout")
+    @GET("auth/logout")
     fun logout(): Completable
 
-    @GET("auth/info")
+    @GET("auth")
     fun info(): Single<UserNetworkObject>
 
     @DELETE("auth")

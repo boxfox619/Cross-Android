@@ -9,10 +9,10 @@ import retrofit2.http.GET
 import retrofit2.http.*
 
 
-interface FriendApi{
+interface FriendApi {
 
     @GET("search/account/list")
-    fun searchUsers(@Query("text") text: String): Single<List<UserNetworkObject>>
+    fun searchUsers(@Query("text") text: String, @Query("page") page: Int, @Query("count") count: Int): Single<List<UserNetworkObject>>
 
     @GET("search/account")
     fun searchUser(@Query("uid") uid: String): Single<UserNetworkObject>
@@ -21,8 +21,8 @@ interface FriendApi{
     fun friendList(): Single<List<UserNetworkObject>>
 
     @PUT("friend")
-    fun addFriend(@Body uid: String): Completable
+    fun addFriend(@Field("uid") uid: String): Completable
 
     @DELETE("friend")
-    fun deleteFriend(@Body uid: String): Completable
+    fun deleteFriend(@Field("uid") uid: String): Completable
 }

@@ -22,7 +22,6 @@ import io.realm.RealmResults
 
 
 class FriendRepository(private val context: Context) : FriendUsecase {
-
     override fun loadFriendList(): Single<List<UserModel>> {
         Log.d("Networking", "Try loading friend list")
         val single = context.retrofit.friendAPI.friendList()
@@ -59,13 +58,13 @@ class FriendRepository(private val context: Context) : FriendUsecase {
         return Completable.create{completable ->
             context.retrofit.friendAPI.addFriend(uid).subscribe({
                 //@TODO Implement search user by uid
-                searchUser(uid).subscribe({
-                    if (it.isNotEmpty()) {
+                searchUserByUid(uid).subscribe({
+                    if (it != null) {
                         context.realm.beginTransaction()
-                        context.realm.copyToRealm(UserRealmEntityMapper.toFriendObject(it.first()))
+                        context.realm.copyToRealm(UserRealmEntityMapper.toFriendObject(it))
                         context.realm.commitTransaction()
                         completable.onComplete()
-                    }else{
+                    } else {
                         completable.onError(Throwable("User not found"))
                     }
                 }, { completable.onError(it) })
@@ -84,7 +83,12 @@ class FriendRepository(private val context: Context) : FriendUsecase {
         }
     }
 
-    override fun searchUser(text: String): Single<List<UserModel>> {
-        return context.retrofit.friendAPI.searchUsers(text).map<List<UserModel>> { it.map { UserNetworkEntityMapper.fromNetworkObject(it) } }
+
+    override fun searchUserByUid(uid: String): Single<UserModel> {
+        return context.retrofit.friendAPI.searchUser(uid).map<UserModel> {UserNetworkEntityMapper.fromNetworkObject(it)}
+    }
+
+    override fun searchUser(text: String, page: Int, count: Int): Single<List<UserModel>> {
+        return context.retrofit.friendAPI.searchUsers(text, page, count).map<List<UserModel>> { it.map { UserNetworkEntityMapper.fromNetworkObject(it) } }
     }
 }
