@@ -11,13 +11,9 @@ class TransactionListPresenter(
         private val address: String?,
         private val transactionRepository: TransactionRepository = TransactionRepository(view.getContext())
 ) : Presenter<TransactionListView>(view) {
-    private var page: Int = 0
-    private val count: Int = 10
-
-    fun loadTransaction() {
+    fun loadTransaction(page: Int = 0, count: Int = 10) {
         if (address == null) {
             transactionRepository.loadIntegralTransactionList(page, count).subscribe ({
-                page += 1
                 view.addTransationItems(it)
             },{
                 ToastHelper.showToast(view.getContext(), R.string.msg_fail_load_transaction)
@@ -25,7 +21,6 @@ class TransactionListPresenter(
             })
         } else {
             transactionRepository.loadTransactionsByAddress(address, page, count).subscribe ({
-                page += 1
                 view.addTransationItems(it)
             },{
                 ToastHelper.showToast(view.getContext(), R.string.msg_fail_load_transaction)
