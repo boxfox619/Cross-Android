@@ -24,16 +24,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/msg_user_delete_confirm"
-        app:layout_constrainTop_toTopOf="@id/top_guideline"
-        app:layout_constrainStart_toStartOf="parent"
-        app:layout_constrainEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/top_guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btn_user_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constrainBottom_toBottomOf="@id/bottom_guideline"
-        app:layout_constrainStart_toStartOf="parent"
-        app:layout_constrainEnd_toEndOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

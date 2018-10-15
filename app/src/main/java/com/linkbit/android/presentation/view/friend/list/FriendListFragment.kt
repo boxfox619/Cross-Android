@@ -8,6 +8,7 @@ import android.view.ViewGroup
 
 import com.linkbit.android.R
 import com.linkbit.android.entity.UserModel
+import com.linkbit.android.presentation.adapter.friend.FriendListAdapter
 import com.linkbit.android.presentation.base.BaseFragment
 
 class FriendListFragment : BaseFragment<FriendListPresenter>(), FriendListView {

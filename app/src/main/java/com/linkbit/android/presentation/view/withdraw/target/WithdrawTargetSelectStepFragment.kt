@@ -9,7 +9,7 @@ import com.linkbit.android.R
 import com.linkbit.android.entity.UserModel
 import com.linkbit.android.entity.WalletModel
 import com.linkbit.android.presentation.base.BaseFragment
-import com.linkbit.android.presentation.view.friend.list.FriendListAdapter
+import com.linkbit.android.presentation.adapter.friend.FriendListAdapter
 import com.linkbit.android.presentation.SimpleTextChangeListener
 import kotlinx.android.synthetic.main.fragment_withdraw_step2.view.*
 

@@ -1,4 +1,4 @@
-package com.linkbit.android.presentation.view.friend.list
+package com.linkbit.android.presentation.adapter.friend
 
 import android.content.Context
 import android.view.ViewGroup
