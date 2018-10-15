@@ -41,7 +41,8 @@
         <activity
             android:name=".presentation.view.setting.SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".presentation.view.reset.UserDeleteActivity"></activity>
+        <activity android:name=".presentation.view.reset.UserDeleteActivity" />
+        <activity android:name=".presentation.view.friend.search.FriendSearchActivity"></activity>
     </application>
 
 </manifest>

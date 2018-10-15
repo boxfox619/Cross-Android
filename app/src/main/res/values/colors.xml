@@ -9,4 +9,6 @@
     <color name="colorFacebook">#4267B2</color>
 
     <color name="colorTabCircleActive">#97C6D1</color>
+
+    <color name="colorSearchBarIcon">#666666</color>
 </resources>
