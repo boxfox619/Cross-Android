@@ -7,7 +7,7 @@ import retrofit2.http.POST
 
 
 interface WithdrawApi{
-    @POST("remittance")
+    @POST("withdraw")
     fun withdraw(@Field("symbol") symbol: String,
                  @Field("walletName") walletName: String,
                  @Field("walletData") walletData: String,
