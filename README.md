@@ -3,6 +3,5 @@
 React Native로 마이그레이션 하여 현재 저장소는 사용되지 않습니다.
 
 # Screenshots
-![Alt text](screenshots/main_wallets.png?raw=true "Main")
-![Alt text](screenshots/main_friend.png?raw=true "Main2")
-![Alt text](screenshots/main_transactions.png?raw=true "Main3")
+<img src="screenshots/main_wallets.png" width="200"><img src="screenshots/main_friend.png" width="200"><img src="screenshots/main_transactions.png" width="200">
+<img src="screenshots/wallet_create_1.png" width="200"><img src="screenshots/wallet_create_2.png" width="200"><img src="screenshots/wallet_create_3.png" width="200"><img src="screenshots/wallet_create_4.png" width="200">
