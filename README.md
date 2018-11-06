@@ -19,3 +19,8 @@
 <img src="screenshots/main_wallets.png" width="200"><img src="screenshots/main_friend.png" width="200"><img src="screenshots/main_transactions.png" width="200">
 
 <img src="screenshots/wallet_create_1.png" width="200"><img src="screenshots/wallet_create_2.png" width="200"><img src="screenshots/wallet_create_3.png" width="200"><img src="screenshots/wallet_create_4.png" width="200">
+
+# Extras
+- 핀테크×블록체인 해커톤 참가
+- 2018 HDAC 해커톤 참가 (아이디어상)
+- BBR 청년학생 블록체인 해커톤 참가
