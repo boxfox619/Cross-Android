@@ -24,3 +24,4 @@
 - 핀테크×블록체인 해커톤 참가
 - 2018 HDAC 해커톤 참가 (아이디어상)
 - BBR 청년학생 블록체인 해커톤 참가
+- [Android-Clean-Architecture](https://academy.realm.io/kr/posts/clean-architecture-in-android/)
